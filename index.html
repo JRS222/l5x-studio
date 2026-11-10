@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L5X Studio &mdash; Dataflow, UDT &amp; I/O Mapping for RSLogix 5000 Exports</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div id="app"></div>
+<script>
+/* global `root` used by the UMD modules' browser fallback path */
+var root = typeof self !== "undefined" ? self : this;
+</script>
+<script src="js/util.js"></script>
+<script src="js/xml.js"></script>
+<script src="js/operands.js"></script>
+<script src="js/ir.js"></script>
+<script src="js/rll-parse.js"></script>
+<script src="js/rll-serialize.js"></script>
+<script src="js/st-parse.js"></script>
+<script src="js/st-serialize.js"></script>
+<script src="js/lang-convert.js"></script>
+<script src="js/fbd-parse.js"></script>
+<script src="js/fbd-serialize.js"></script>
+<script src="js/fbd-convert.js"></script>
+<script src="js/dataflow.js"></script>
+<script src="js/l5x-model.js"></script>
+<script src="js/resolve.js"></script>
+<script src="js/io-map.js"></script>
+<script src="js/graph-layout.js"></script>
+<script src="js/render/svg.js"></script>
+<script src="js/render/udt.js"></script>
+<script src="js/render/diagram.js"></script>
+<script src="js/render/ladder.js"></script>
+<script src="js/render/fbd.js"></script>
+<script src="js/ui/editor-st.js"></script>
+<script src="js/ui/iopanel.js"></script>
+<script src="js/ui/convert.js"></script>
+<script src="js/export.js"></script>
+<script src="js/schema-validate.js"></script>
+<script src="js/io-list.js"></script>
+<script src="js/l5k-data.js"></script>
+<script src="js/codegen-c.js"></script>
+<script src="js/health.js"></script>
+<script src="js/acd.js"></script>
+<script src="js/ui/validation-panel.js"></script>
+<script src="js/ui/iolist-panel.js"></script>
+<script src="js/ui/health-panel.js"></script>
+<script src="js/dnet.js"></script>
+  <script src="js/module-usage.js"></script>
+  <script src="js/mermaid-render.js"></script>
+  <script src="js/ui/aoi-panel.js"></script>
+<script src="js/ui/acd-panel.js"></script>
+<script src="js/data/schema-v32.js"></script>
+<script src="js/data/schema-v33.js"></script>
+<script src="js/data/schema-v34.js"></script>
+<script src="js/data/schema-v35.js"></script>
+<script src="js/data/schema-v36.js"></script>
+<script src="js/data/schema-v37.js"></script>
+<script src="js/data/schema-v38.js"></script>
+<script src="js/conveyor/model.js"></script>
+<script src="js/conveyor/designer2d.js"></script>
+<script src="js/conveyor/render3d.js"></script>
+<script src="js/conveyor/parts.js"></script>
+<script src="js/data/parts-catalog.js"></script>
+<script src="js/data/conveyor-templates.js"></script>
+<script src="js/conveyor/l5xgen.js"></script>
+<script src="js/conveyor/hmi.js"></script>
+<script src="js/ui/conveyor-panel.js"></script>
+<script src="js/ui/module-panel.js"></script>
+  <script src="js/dnet-html.js"></script>
+  <script src="js/ui/zoom-view.js"></script>
+  <script src="js/ui/dnet-panel.js"></script>
+  <script src="js/ui/app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  window.app = new L5XStudio.App(document.getElementById("app"));
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+name: tests
+on:
+  push:
+  pull_request:
+jobs:
+  node-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Run test suites
+        run: |
+          set -e
+          for f in test/lead-core.test.js test/acd-aoi.test.js test/t1-lang.test.js \
+                   test/t2-editors.test.js test/t3-schema.test.js test/t4-iolist.test.js \
+                   test/t5-codegen-health.test.js test/t6-conveyor-view.test.js \
+                   test/t7-conveyor-parts.test.js test/t8-conveyor-gen.test.js \
+                   test/module-usage.test.js test/convert-matrix.test.js \
+                   test/convert-if.test.js test/dnet.test.js test/dnet-html.test.js \
+                   test/integration.js test/integration2.js test/integration3.js ; do
+            echo "== $f"; node "$f" | tail -n 3
+          done
+          echo "== ui-smoke"; node test/ui-smoke.js | tail -n 3
+      - name: Verify the app entry point exists
+        run: node -e "const fs=require('fs');['index.html','js/ui/app.js','css/styles.css'].forEach(function(p){if(!fs.existsSync(p))throw new Error('missing '+p)});console.log('entry point ok')"

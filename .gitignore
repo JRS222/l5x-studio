@@ -1,0 +1,30 @@
+# OS / editor noise
+Thumbs.db
+.DS_Store
+*.swp
+
+# temporary harness + probe files
+_*
+*.tmp.L5X
+*.tmp
+
+# generated test artefacts
+test/out/
+node_modules/
+
+# Site-derived samples and internal documents are NOT redistributed.
+# Put your own copies in samples/ (ignored) or point the env vars at them:
+#   L5X_STUDIO_SAMPLE_RLL, L5X_STUDIO_SAMPLE_ST, L5X_STUDIO_DNT_DIR,
+#   L5X_STUDIO_DNET_HTML, L5X_STUDIO_ACD
+samples/
+docs/1756-rm014.txt
+docs/CONTRACT.md
+docs/IMPROVEMENTS.md
+docs/neutral-text-ladder.md
+demo/devicenet-html/
+demo/screenshots/
+
+# site-derived generated artefacts (only the generic demo package is kept)
+demo/*-modified.L5X
+demo/module-diagrams/*
+!demo/module-diagrams/CONVEYOR-DEMO-*

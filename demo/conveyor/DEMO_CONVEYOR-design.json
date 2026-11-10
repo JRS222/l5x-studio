@@ -1,0 +1,175 @@
+{
+  "version": 2,
+  "name": "DEMO_CONVEYOR",
+  "controller": {
+    "name": "CONVEYOR_PLC",
+    "processorType": "1756-L83E",
+    "majorRev": 32,
+    "minorRev": 14
+  },
+  "network": {
+    "name": "Network1",
+    "baseIp": "192.168.1.100",
+    "portId": 2
+  },
+  "conveyorType": "roller",
+  "defaults": {
+    "widthM": 0.6,
+    "zoneLengthM": 1,
+    "rollerPitchM": 0.1,
+    "motorSeries": "RD48",
+    "driverCard": "C100Z-35",
+    "driverFamily": "infinidrive",
+    "sensorType": "Photoeye PNP",
+    "sensorPn": "",
+    "ioBlockCatalog": "1799ER-IQ10XOQ10/A",
+    "jointRadiusM": null,
+    "belt": {
+      "type": "2-ply PVC cleated",
+      "widthM": 0.6,
+      "pulleyDiameterM": 0.12,
+      "motorKw": 0.75,
+      "drive": "PowerFlex 525",
+      "speedMps": 0.5,
+      "trackingSensors": 2
+    }
+  },
+  "segments": [
+    {
+      "id": "seg1",
+      "name": "SEG1",
+      "kind": "straight",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "rotationDeg": 0,
+      "turnDeg": 0,
+      "lengthM": 4,
+      "widthM": 0.6,
+      "zones": 4,
+      "zoneLengthM": 1,
+      "newChain": true,
+      "motorSeries": null,
+      "driverCard": null
+    },
+    {
+      "id": "seg2",
+      "name": "SEG2",
+      "kind": "curve",
+      "turnDeg": 0,
+      "curveDeg": 90,
+      "radiusM": 1.748,
+      "widthM": 0.6,
+      "zones": 2,
+      "zoneLengthM": 1,
+      "motorSeries": null,
+      "driverCard": null
+    },
+    {
+      "id": "seg3",
+      "name": "SEG3",
+      "kind": "straight",
+      "turnDeg": 0,
+      "lengthM": 3,
+      "widthM": 0.6,
+      "zones": 3,
+      "zoneLengthM": 1,
+      "motorSeries": null,
+      "driverCard": null
+    },
+    {
+      "id": "seg4",
+      "name": "SPIRAL1",
+      "kind": "spiral",
+      "turnDeg": 0,
+      "radiusM": 1.2,
+      "widthM": 0.6,
+      "zoneLengthM": 1,
+      "spiral": {
+        "pitchM": 0.8,
+        "heightM": 2.4,
+        "direction": "up"
+      },
+      "motorSeries": null,
+      "driverCard": null
+    },
+    {
+      "id": "spur1",
+      "name": "SPUR1",
+      "kind": "straight",
+      "x": 3.95,
+      "y": 3,
+      "z": 0,
+      "rotationDeg": 270,
+      "turnDeg": 0,
+      "lengthM": 2.72,
+      "widthM": 0.6,
+      "zones": 2,
+      "zoneLengthM": 1,
+      "newChain": true,
+      "motorSeries": null,
+      "driverCard": null
+    }
+  ],
+  "merges": [
+    {
+      "id": "merge1",
+      "name": "MERGE1",
+      "mainSegmentId": "seg2",
+      "offsetM": 1,
+      "spurEndSegmentId": "spur1",
+      "priority": "alternate"
+    }
+  ],
+  "transfers": [
+    {
+      "id": "xfer1",
+      "name": "PUSHER1",
+      "type": "pusher",
+      "segmentId": "seg3",
+      "offsetM": 1.5,
+      "side": "right",
+      "extendTimeS": 0.8
+    },
+    {
+      "id": "xfer2",
+      "name": "ROTARY1",
+      "type": "rotary_table",
+      "segmentId": "seg3",
+      "offsetM": 2.5,
+      "stepDeg": 90,
+      "homeAngleDeg": 0
+    },
+    {
+      "id": "xfer3",
+      "name": "POPUP1",
+      "type": "popup_transfer",
+      "segmentId": "seg1",
+      "offsetM": 3,
+      "directions": [
+        "left",
+        "right"
+      ],
+      "beltCount": 3
+    }
+  ],
+  "scanZones": [
+    {
+      "id": "scan1",
+      "name": "SCAN1",
+      "segmentId": "seg1",
+      "offsetM": 2.5,
+      "type": "barcode",
+      "side": "right",
+      "tagName": null
+    }
+  ],
+  "tracking": {
+    "enabled": true,
+    "maxTrays": 16,
+    "barcodeLen": 20,
+    "trayLengthM": 0.6,
+    "trayGapM": 0.3,
+    "tagPrefix": "TRACK"
+  }
+}

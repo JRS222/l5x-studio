@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="658" height="1386" viewBox="0 0 658 1386" font-family="Segoe UI, Arial, sans-serif">
+<style>.mm-label{font-size:12px;font-weight:600}.mm-edge-label{font-size:10px}</style>
+<rect width="658" height="1386" fill="#0e1319"/>
+<path d="M 142 77.5 C 177 77.5 182 100 212 100" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="177" y="84.75" text-anchor="middle" fill="#9fb6c9">EtherNet/IP · RPI 10000 us</text>
+<path d="M 363.6 100 C 398.6 100 403.6 63 433.6 63" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="398.6" y="77.5" text-anchor="middle" fill="#9fb6c9">I.Data</text>
+<path d="M 142 77.5 C 177 77.5 182 230 212 230" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="177" y="149.75" text-anchor="middle" fill="#9fb6c9">EtherNet/IP · RPI 10000 us</text>
+<path d="M 363.6 230 C 398.6 230 403.6 119 433.6 119" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="398.6" y="170.5" text-anchor="middle" fill="#9fb6c9">I.Data</text>
+<path d="M 142 77.5 C 177 77.5 182 360 212 360" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="177" y="214.75" text-anchor="middle" fill="#9fb6c9">EtherNet/IP · RPI 10000 us</text>
+<path d="M 363.6 360 C 398.6 360 403.6 175 433.6 175" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="398.6" y="263.5" text-anchor="middle" fill="#9fb6c9">I.Data</text>
+<path d="M 142 77.5 C 177 77.5 182 490 212 490" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="177" y="279.75" text-anchor="middle" fill="#9fb6c9">EtherNet/IP · RPI 10000 us</text>
+<path d="M 363.6 490 C 398.6 490 403.6 231 433.6 231" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="398.6" y="356.5" text-anchor="middle" fill="#9fb6c9">I.Data</text>
+<path d="M 142 77.5 C 177 77.5 182 620 212 620" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="177" y="344.75" text-anchor="middle" fill="#9fb6c9">EtherNet/IP · RPI 10000 us</text>
+<path d="M 363.6 620 C 398.6 620 403.6 231 433.6 231" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="398.6" y="421.5" text-anchor="middle" fill="#9fb6c9">I.Data</text>
+<path d="M 142 77.5 C 177 77.5 182 750 212 750" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="177" y="409.75" text-anchor="middle" fill="#9fb6c9">EtherNet/IP · RPI 10000 us</text>
+<path d="M 363.6 750 C 398.6 750 403.6 231 433.6 231" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="398.6" y="486.5" text-anchor="middle" fill="#9fb6c9">I.Data</text>
+<path d="M 142 77.5 C 177 77.5 182 880 212 880" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="177" y="474.75" text-anchor="middle" fill="#9fb6c9">EtherNet/IP · RPI 10000 us</text>
+<path d="M 363.6 880 C 398.6 880 403.6 231 433.6 231" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="398.6" y="551.5" text-anchor="middle" fill="#9fb6c9">I.Data</text>
+<path d="M 142 77.5 C 177 77.5 182 1010 212 1010" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="177" y="539.75" text-anchor="middle" fill="#9fb6c9">EtherNet/IP · RPI 10000 us</text>
+<path d="M 363.6 1010 C 398.6 1010 403.6 231 433.6 231" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="398.6" y="616.5" text-anchor="middle" fill="#9fb6c9">I.Data</text>
+<path d="M 142 77.5 C 177 77.5 182 1140 212 1140" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="177" y="604.75" text-anchor="middle" fill="#9fb6c9">EtherNet/IP · RPI 10000 us</text>
+<path d="M 363.6 1140 C 398.6 1140 403.6 231 433.6 231" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="398.6" y="681.5" text-anchor="middle" fill="#9fb6c9">I.Data</text>
+<path d="M 142 77.5 C 177 77.5 182 1270 212 1270" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="177" y="669.75" text-anchor="middle" fill="#9fb6c9">EtherNet/IP · RPI 10000 us</text>
+<path d="M 363.6 1270 C 398.6 1270 403.6 231 433.6 231" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="398.6" y="746.5" text-anchor="middle" fill="#9fb6c9">I.Data</text>
+<defs><marker id="mm-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#7fa8c9"/></marker></defs>
+<rect x="48" y="48" width="94" height="59" rx="6" fill="#311b92" stroke="#9575cd" stroke-width="1.4"/>
+<text class="mm-label" x="58" y="66.5" fill="#fff">Local</text>
+<text class="mm-label" x="58" y="81.5" fill="#fff">1756-L83E</text>
+<text class="mm-label" x="58" y="96.5" fill="#fff">controller</text>
+<rect x="212" y="48" width="151.6" height="104" rx="6" fill="#004d40" stroke="#26a96c" stroke-width="1.4"/>
+<text class="mm-label" x="222" y="66.5" fill="#fff">XFER01</text>
+<text class="mm-label" x="222" y="81.5" fill="#fff">1799ER-IQ10XOQ10/A</text>
+<text class="mm-label" x="222" y="96.5" fill="#fff">Network I/O</text>
+<text class="mm-label" x="222" y="111.5" fill="#fff">192.168.1.107</text>
+<text class="mm-label" x="222" y="126.5" fill="#fff">RPI 10000 us</text>
+<text class="mm-label" x="222" y="141.5" fill="#fff">2/9 points used</text>
+<rect x="433.6" y="48" width="115.60000000000001" height="30" rx="6" fill="#4a148c" stroke="#ba68c8" stroke-width="1.4"/>
+<text class="mm-label" x="443.6" y="67" fill="#fff">XFER01_INPUTS</text>
+<rect x="212" y="178" width="151.6" height="104" rx="6" fill="#004d40" stroke="#26a96c" stroke-width="1.4"/>
+<text class="mm-label" x="222" y="196.5" fill="#fff">XFER02</text>
+<text class="mm-label" x="222" y="211.5" fill="#fff">1799ER-IQ10XOQ10/A</text>
+<text class="mm-label" x="222" y="226.5" fill="#fff">Network I/O</text>
+<text class="mm-label" x="222" y="241.5" fill="#fff">192.168.1.108</text>
+<text class="mm-label" x="222" y="256.5" fill="#fff">RPI 10000 us</text>
+<text class="mm-label" x="222" y="271.5" fill="#fff">2/9 points used</text>
+<rect x="433.6" y="104" width="115.60000000000001" height="30" rx="6" fill="#4a148c" stroke="#ba68c8" stroke-width="1.4"/>
+<text class="mm-label" x="443.6" y="123" fill="#fff">XFER02_INPUTS</text>
+<rect x="212" y="308" width="151.6" height="104" rx="6" fill="#004d40" stroke="#26a96c" stroke-width="1.4"/>
+<text class="mm-label" x="222" y="326.5" fill="#fff">XFER03</text>
+<text class="mm-label" x="222" y="341.5" fill="#fff">1799ER-IQ10XOQ10/A</text>
+<text class="mm-label" x="222" y="356.5" fill="#fff">Network I/O</text>
+<text class="mm-label" x="222" y="371.5" fill="#fff">192.168.1.109</text>
+<text class="mm-label" x="222" y="386.5" fill="#fff">RPI 10000 us</text>
+<text class="mm-label" x="222" y="401.5" fill="#fff">2/9 points used</text>
+<rect x="433.6" y="160" width="115.60000000000001" height="30" rx="6" fill="#4a148c" stroke="#ba68c8" stroke-width="1.4"/>
+<text class="mm-label" x="443.6" y="179" fill="#fff">XFER03_INPUTS</text>
+<rect x="212" y="438" width="151.6" height="104" rx="6" fill="#004d40" stroke="#26a96c" stroke-width="1.4"/>
+<text class="mm-label" x="222" y="456.5" fill="#fff">ZPA01</text>
+<text class="mm-label" x="222" y="471.5" fill="#fff">1799ER-IQ10XOQ10/A</text>
+<text class="mm-label" x="222" y="486.5" fill="#fff">Network I/O</text>
+<text class="mm-label" x="222" y="501.5" fill="#fff">192.168.1.100</text>
+<text class="mm-label" x="222" y="516.5" fill="#fff">RPI 10000 us</text>
+<text class="mm-label" x="222" y="531.5" fill="#fff">2/9 points used</text>
+<rect x="433.6" y="216" width="101.2" height="30" rx="6" fill="#4a148c" stroke="#ba68c8" stroke-width="1.4"/>
+<text class="mm-label" x="443.6" y="235" fill="#fff">ENET_INPUTS</text>
+<rect x="212" y="568" width="151.6" height="104" rx="6" fill="#004d40" stroke="#26a96c" stroke-width="1.4"/>
+<text class="mm-label" x="222" y="586.5" fill="#fff">ZPA02</text>
+<text class="mm-label" x="222" y="601.5" fill="#fff">1799ER-IQ10XOQ10/A</text>
+<text class="mm-label" x="222" y="616.5" fill="#fff">Network I/O</text>
+<text class="mm-label" x="222" y="631.5" fill="#fff">192.168.1.101</text>
+<text class="mm-label" x="222" y="646.5" fill="#fff">RPI 10000 us</text>
+<text class="mm-label" x="222" y="661.5" fill="#fff">2/9 points used</text>
+<rect x="212" y="698" width="151.6" height="104" rx="6" fill="#004d40" stroke="#26a96c" stroke-width="1.4"/>
+<text class="mm-label" x="222" y="716.5" fill="#fff">ZPA03</text>
+<text class="mm-label" x="222" y="731.5" fill="#fff">1799ER-IQ10XOQ10/A</text>
+<text class="mm-label" x="222" y="746.5" fill="#fff">Network I/O</text>
+<text class="mm-label" x="222" y="761.5" fill="#fff">192.168.1.102</text>
+<text class="mm-label" x="222" y="776.5" fill="#fff">RPI 10000 us</text>
+<text class="mm-label" x="222" y="791.5" fill="#fff">2/9 points used</text>
+<rect x="212" y="828" width="151.6" height="104" rx="6" fill="#004d40" stroke="#26a96c" stroke-width="1.4"/>
+<text class="mm-label" x="222" y="846.5" fill="#fff">ZPA04</text>
+<text class="mm-label" x="222" y="861.5" fill="#fff">1799ER-IQ10XOQ10/A</text>
+<text class="mm-label" x="222" y="876.5" fill="#fff">Network I/O</text>
+<text class="mm-label" x="222" y="891.5" fill="#fff">192.168.1.103</text>
+<text class="mm-label" x="222" y="906.5" fill="#fff">RPI 10000 us</text>
+<text class="mm-label" x="222" y="921.5" fill="#fff">2/9 points used</text>
+<rect x="212" y="958" width="151.6" height="104" rx="6" fill="#004d40" stroke="#26a96c" stroke-width="1.4"/>
+<text class="mm-label" x="222" y="976.5" fill="#fff">ZPA05</text>
+<text class="mm-label" x="222" y="991.5" fill="#fff">1799ER-IQ10XOQ10/A</text>
+<text class="mm-label" x="222" y="1006.5" fill="#fff">Network I/O</text>
+<text class="mm-label" x="222" y="1021.5" fill="#fff">192.168.1.104</text>
+<text class="mm-label" x="222" y="1036.5" fill="#fff">RPI 10000 us</text>
+<text class="mm-label" x="222" y="1051.5" fill="#fff">2/9 points used</text>
+<rect x="212" y="1088" width="151.6" height="104" rx="6" fill="#004d40" stroke="#26a96c" stroke-width="1.4"/>
+<text class="mm-label" x="222" y="1106.5" fill="#fff">ZPA06</text>
+<text class="mm-label" x="222" y="1121.5" fill="#fff">1799ER-IQ10XOQ10/A</text>
+<text class="mm-label" x="222" y="1136.5" fill="#fff">Network I/O</text>
+<text class="mm-label" x="222" y="1151.5" fill="#fff">192.168.1.105</text>
+<text class="mm-label" x="222" y="1166.5" fill="#fff">RPI 10000 us</text>
+<text class="mm-label" x="222" y="1181.5" fill="#fff">2/9 points used</text>
+<rect x="212" y="1218" width="151.6" height="104" rx="6" fill="#004d40" stroke="#26a96c" stroke-width="1.4"/>
+<text class="mm-label" x="222" y="1236.5" fill="#fff">ZPA07</text>
+<text class="mm-label" x="222" y="1251.5" fill="#fff">1799ER-IQ10XOQ10/A</text>
+<text class="mm-label" x="222" y="1266.5" fill="#fff">Network I/O</text>
+<text class="mm-label" x="222" y="1281.5" fill="#fff">192.168.1.106</text>
+<text class="mm-label" x="222" y="1296.5" fill="#fff">RPI 10000 us</text>
+<text class="mm-label" x="222" y="1311.5" fill="#fff">2/9 points used</text>
+</svg>

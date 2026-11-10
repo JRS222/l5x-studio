@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="830" height="1626" viewBox="0 0 830 1626" font-family="Segoe UI, Arial, sans-serif">
+<style>.mm-label{font-size:12px;font-weight:600}.mm-edge-label{font-size:10px}</style>
+<rect width="830" height="1626" fill="#0e1319"/>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 70 269.6 70" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="77.25" text-anchor="middle" fill="#9fb6c9">I.Data</text>
+<path d="M 529.2 70 C 564.2 70 569.2 63 599.2 63" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="564.2" y="62.5" text-anchor="middle" fill="#9fb6c9">mapped</text>
+<path d="M 529.2 70 C 564.2 70 569.2 119 599.2 119" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="564.2" y="90.5" text-anchor="middle" fill="#9fb6c9">mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 140 269.6 140" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="112.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 210 269.6 210" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="147.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 280 269.6 280" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="182.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 350 269.6 350" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="217.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 420 269.6 420" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="252.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 490 269.6 490" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="287.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 560 269.6 560" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="322.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 630 269.6 630" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="357.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 700 269.6 700" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="392.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 770 269.6 770" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="427.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 840 269.6 840" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="462.25" text-anchor="middle" fill="#9fb6c9">O.Data</text>
+<path d="M 529.2 840 C 564.2 840 569.2 175 599.2 175" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="564.2" y="503.5" text-anchor="middle" fill="#9fb6c9">mapped</text>
+<path d="M 529.2 840 C 564.2 840 569.2 231 599.2 231" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="564.2" y="531.5" text-anchor="middle" fill="#9fb6c9">mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 910 269.6 910" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="497.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 980 269.6 980" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="532.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 1050 269.6 1050" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="567.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 1120 269.6 1120" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="602.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 1190 269.6 1190" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="637.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 1260 269.6 1260" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="672.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 1330 269.6 1330" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="707.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 1400 269.6 1400" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="742.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 1470 269.6 1470" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="777.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<path d="M 199.6 92.5 C 234.60000000000002 92.5 239.60000000000002 1540 269.6 1540" fill="none" stroke="#3f6c8f" stroke-width="1.4" marker-end="url(#mm-arrow)"/>
+<text class="mm-edge-label" x="234.60000000000002" y="812.25" text-anchor="middle" fill="#9fb6c9">word-mapped</text>
+<defs><marker id="mm-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#7fa8c9"/></marker></defs>
+<rect x="48" y="48" width="151.6" height="89" rx="6" fill="#004d40" stroke="#26a96c" stroke-width="1.4"/>
+<text class="mm-label" x="58" y="66.5" fill="#fff">XFER02</text>
+<text class="mm-label" x="58" y="81.5" fill="#fff">1799ER-IQ10XOQ10/A</text>
+<text class="mm-label" x="58" y="96.5" fill="#fff">Network I/O</text>
+<text class="mm-label" x="58" y="111.5" fill="#fff">192.168.1.108</text>
+<text class="mm-label" x="58" y="126.5" fill="#fff">RPI 10000 us</text>
+<rect x="269.6" y="48" width="259.6" height="44" rx="6" fill="#4a148c" stroke="#ba68c8" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="66.5" fill="#fff">I.Data word</text>
+<text class="mm-label" x="279.6" y="81.5" fill="#fff">10 bits · 0 used · 10 word-mapped</text>
+<rect x="599.2" y="48" width="115.60000000000001" height="30" rx="6" fill="#4a148c" stroke="#ba68c8" stroke-width="1.4"/>
+<text class="mm-label" x="609.2" y="67" fill="#fff">XFER02_INPUTS</text>
+<rect x="599.2" y="104" width="101.2" height="30" rx="6" fill="#4a148c" stroke="#ba68c8" stroke-width="1.4"/>
+<text class="mm-label" x="609.2" y="123" fill="#fff">ENET_INPUTS</text>
+<rect x="269.6" y="118" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="136.5" fill="#fff">I0</text>
+<text class="mm-label" x="279.6" y="151.5" fill="#fff">.Data.0</text>
+<rect x="269.6" y="188" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="206.5" fill="#fff">I1</text>
+<text class="mm-label" x="279.6" y="221.5" fill="#fff">.Data.1</text>
+<rect x="269.6" y="258" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="276.5" fill="#fff">I2</text>
+<text class="mm-label" x="279.6" y="291.5" fill="#fff">.Data.2</text>
+<rect x="269.6" y="328" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="346.5" fill="#fff">I3</text>
+<text class="mm-label" x="279.6" y="361.5" fill="#fff">.Data.3</text>
+<rect x="269.6" y="398" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="416.5" fill="#fff">I4</text>
+<text class="mm-label" x="279.6" y="431.5" fill="#fff">.Data.4</text>
+<rect x="269.6" y="468" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="486.5" fill="#fff">I5</text>
+<text class="mm-label" x="279.6" y="501.5" fill="#fff">.Data.5</text>
+<rect x="269.6" y="538" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="556.5" fill="#fff">I6</text>
+<text class="mm-label" x="279.6" y="571.5" fill="#fff">.Data.6</text>
+<rect x="269.6" y="608" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="626.5" fill="#fff">I7</text>
+<text class="mm-label" x="279.6" y="641.5" fill="#fff">.Data.7</text>
+<rect x="269.6" y="678" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="696.5" fill="#fff">I8</text>
+<text class="mm-label" x="279.6" y="711.5" fill="#fff">.Data.8</text>
+<rect x="269.6" y="748" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="766.5" fill="#fff">I9</text>
+<text class="mm-label" x="279.6" y="781.5" fill="#fff">.Data.9</text>
+<rect x="269.6" y="818" width="259.6" height="44" rx="6" fill="#4a148c" stroke="#ba68c8" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="836.5" fill="#fff">O.Data word</text>
+<text class="mm-label" x="279.6" y="851.5" fill="#fff">10 bits · 0 used · 10 word-mapped</text>
+<rect x="599.2" y="160" width="108.4" height="30" rx="6" fill="#4a148c" stroke="#ba68c8" stroke-width="1.4"/>
+<text class="mm-label" x="609.2" y="179" fill="#fff">ENET_OUTPUTS</text>
+<rect x="599.2" y="216" width="122.8" height="30" rx="6" fill="#4a148c" stroke="#ba68c8" stroke-width="1.4"/>
+<text class="mm-label" x="609.2" y="235" fill="#fff">XFER02_OUTPUTS</text>
+<rect x="269.6" y="888" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="906.5" fill="#fff">O0</text>
+<text class="mm-label" x="279.6" y="921.5" fill="#fff">.Data.0</text>
+<rect x="269.6" y="958" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="976.5" fill="#fff">O1</text>
+<text class="mm-label" x="279.6" y="991.5" fill="#fff">.Data.1</text>
+<rect x="269.6" y="1028" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="1046.5" fill="#fff">O2</text>
+<text class="mm-label" x="279.6" y="1061.5" fill="#fff">.Data.2</text>
+<rect x="269.6" y="1098" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="1116.5" fill="#fff">O3</text>
+<text class="mm-label" x="279.6" y="1131.5" fill="#fff">.Data.3</text>
+<rect x="269.6" y="1168" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="1186.5" fill="#fff">O4</text>
+<text class="mm-label" x="279.6" y="1201.5" fill="#fff">.Data.4</text>
+<rect x="269.6" y="1238" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="1256.5" fill="#fff">O5</text>
+<text class="mm-label" x="279.6" y="1271.5" fill="#fff">.Data.5</text>
+<rect x="269.6" y="1308" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="1326.5" fill="#fff">O6</text>
+<text class="mm-label" x="279.6" y="1341.5" fill="#fff">.Data.6</text>
+<rect x="269.6" y="1378" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="1396.5" fill="#fff">O7</text>
+<text class="mm-label" x="279.6" y="1411.5" fill="#fff">.Data.7</text>
+<rect x="269.6" y="1448" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="1466.5" fill="#fff">O8</text>
+<text class="mm-label" x="279.6" y="1481.5" fill="#fff">.Data.8</text>
+<rect x="269.6" y="1518" width="72.4" height="44" rx="6" fill="#1565c0" stroke="#42a5f5" stroke-width="1.4"/>
+<text class="mm-label" x="279.6" y="1536.5" fill="#fff">O9</text>
+<text class="mm-label" x="279.6" y="1551.5" fill="#fff">.Data.9</text>
+</svg>

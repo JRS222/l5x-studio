@@ -1,0 +1,58 @@
+flowchart LR
+  classDef module fill:#0d47a1,stroke:#64b5f6,color:#fff,stroke-width:2px
+  classDef used fill:#1b5e20,stroke:#66bb6a,color:#fff
+  classDef mapped fill:#1565c0,stroke:#42a5f5,color:#fff
+  classDef unused fill:#263238,stroke:#455a64,color:#90a4ae
+  classDef tag fill:#4a148c,stroke:#ba68c8,color:#fff
+  classDef routine fill:#e65100,stroke:#ffb74d,color:#fff
+  classDef net fill:#004d40,stroke:#26a96c,color:#fff
+  classDef hw fill:#e65100,stroke:#ffb74d,color:#fff
+  M_ZPA02["ZPA02<br/>1799ER-IQ10XOQ10/A<br/>Network I/O<br/>192.168.1.101<br/>RPI 10000 us"]:::net
+  W_IN["I.Data word<br/>10 bits · 0 used · 10 word-mapped"]:::tag
+  M_ZPA02 -->|"I.Data"| W_IN
+  T0["ENET_INPUTS"]:::tag
+  W_IN -->|"mapped"| T0
+  IN_0["I0<br/>.Data.0"]:::mapped
+  M_ZPA02 -->|"word-mapped"| IN_0
+  IN_1["I1<br/>.Data.1"]:::mapped
+  M_ZPA02 -->|"word-mapped"| IN_1
+  IN_2["I2<br/>.Data.2"]:::mapped
+  M_ZPA02 -->|"word-mapped"| IN_2
+  IN_3["I3<br/>.Data.3"]:::mapped
+  M_ZPA02 -->|"word-mapped"| IN_3
+  IN_4["I4<br/>.Data.4"]:::mapped
+  M_ZPA02 -->|"word-mapped"| IN_4
+  IN_5["I5<br/>.Data.5"]:::mapped
+  M_ZPA02 -->|"word-mapped"| IN_5
+  IN_6["I6<br/>.Data.6"]:::mapped
+  M_ZPA02 -->|"word-mapped"| IN_6
+  IN_7["I7<br/>.Data.7"]:::mapped
+  M_ZPA02 -->|"word-mapped"| IN_7
+  IN_8["I8<br/>.Data.8"]:::mapped
+  M_ZPA02 -->|"word-mapped"| IN_8
+  IN_9["I9<br/>.Data.9"]:::mapped
+  M_ZPA02 -->|"word-mapped"| IN_9
+  W_OUT["O.Data word<br/>10 bits · 0 used · 10 word-mapped"]:::tag
+  M_ZPA02 -->|"O.Data"| W_OUT
+  T1["ENET_OUTPUTS"]:::tag
+  W_OUT -->|"mapped"| T1
+  OUT_0["O0<br/>.Data.0"]:::mapped
+  M_ZPA02 -->|"word-mapped"| OUT_0
+  OUT_1["O1<br/>.Data.1"]:::mapped
+  M_ZPA02 -->|"word-mapped"| OUT_1
+  OUT_2["O2<br/>.Data.2"]:::mapped
+  M_ZPA02 -->|"word-mapped"| OUT_2
+  OUT_3["O3<br/>.Data.3"]:::mapped
+  M_ZPA02 -->|"word-mapped"| OUT_3
+  OUT_4["O4<br/>.Data.4"]:::mapped
+  M_ZPA02 -->|"word-mapped"| OUT_4
+  OUT_5["O5<br/>.Data.5"]:::mapped
+  M_ZPA02 -->|"word-mapped"| OUT_5
+  OUT_6["O6<br/>.Data.6"]:::mapped
+  M_ZPA02 -->|"word-mapped"| OUT_6
+  OUT_7["O7<br/>.Data.7"]:::mapped
+  M_ZPA02 -->|"word-mapped"| OUT_7
+  OUT_8["O8<br/>.Data.8"]:::mapped
+  M_ZPA02 -->|"word-mapped"| OUT_8
+  OUT_9["O9<br/>.Data.9"]:::mapped
+  M_ZPA02 -->|"word-mapped"| OUT_9

@@ -1,0 +1,28 @@
+flowchart LR
+  classDef controller fill:#311b92,stroke:#9575cd,color:#fff,stroke-width:2px
+  classDef bridge fill:#004d40,stroke:#26a96c,color:#fff,stroke-width:2px
+  classDef device fill:#0d47a1,stroke:#64b5f6,color:#fff
+  classDef remote fill:#37474f,stroke:#78909c,color:#fff
+  classDef tag fill:#4a148c,stroke:#ba68c8,color:#fff
+  classDef empty fill:#263238,stroke:#455a64,color:#90a4ae
+  CTRL["Local<br/>1756-L83E<br/>controller"]:::controller
+  DEV_XFER01["XFER01<br/>1799ER-IQ10XOQ10/A<br/>EtherNet/IP 192.168.1.107<br/>RPI 10000 µs<br/>2/9 points used"]:::device
+  CTRL -->|"EtherNet/IP · RPI 10000"| DEV_XFER01
+  DEV_XFER02["XFER02<br/>1799ER-IQ10XOQ10/A<br/>EtherNet/IP 192.168.1.108<br/>RPI 10000 µs<br/>2/9 points used"]:::device
+  CTRL -->|"EtherNet/IP · RPI 10000"| DEV_XFER02
+  DEV_XFER03["XFER03<br/>1799ER-IQ10XOQ10/A<br/>EtherNet/IP 192.168.1.109<br/>RPI 10000 µs<br/>2/9 points used"]:::device
+  CTRL -->|"EtherNet/IP · RPI 10000"| DEV_XFER03
+  DEV_ZPA01["ZPA01<br/>1799ER-IQ10XOQ10/A<br/>EtherNet/IP 192.168.1.100<br/>RPI 10000 µs<br/>2/9 points used"]:::device
+  CTRL -->|"EtherNet/IP · RPI 10000"| DEV_ZPA01
+  DEV_ZPA02["ZPA02<br/>1799ER-IQ10XOQ10/A<br/>EtherNet/IP 192.168.1.101<br/>RPI 10000 µs<br/>2/9 points used"]:::device
+  CTRL -->|"EtherNet/IP · RPI 10000"| DEV_ZPA02
+  DEV_ZPA03["ZPA03<br/>1799ER-IQ10XOQ10/A<br/>EtherNet/IP 192.168.1.102<br/>RPI 10000 µs<br/>2/9 points used"]:::device
+  CTRL -->|"EtherNet/IP · RPI 10000"| DEV_ZPA03
+  DEV_ZPA04["ZPA04<br/>1799ER-IQ10XOQ10/A<br/>EtherNet/IP 192.168.1.103<br/>RPI 10000 µs<br/>2/9 points used"]:::device
+  CTRL -->|"EtherNet/IP · RPI 10000"| DEV_ZPA04
+  DEV_ZPA05["ZPA05<br/>1799ER-IQ10XOQ10/A<br/>EtherNet/IP 192.168.1.104<br/>RPI 10000 µs<br/>2/9 points used"]:::device
+  CTRL -->|"EtherNet/IP · RPI 10000"| DEV_ZPA05
+  DEV_ZPA06["ZPA06<br/>1799ER-IQ10XOQ10/A<br/>EtherNet/IP 192.168.1.105<br/>RPI 10000 µs<br/>2/9 points used"]:::device
+  CTRL -->|"EtherNet/IP · RPI 10000"| DEV_ZPA06
+  DEV_ZPA07["ZPA07<br/>1799ER-IQ10XOQ10/A<br/>EtherNet/IP 192.168.1.106<br/>RPI 10000 µs<br/>2/9 points used"]:::device
+  CTRL -->|"EtherNet/IP · RPI 10000"| DEV_ZPA07

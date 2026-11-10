@@ -1,0 +1,36 @@
+Tag,DataType,Description,Address,Direction,Zone
+BELT1_Z1_SENSOR,BOOL,BELT1_Z1 sensor input (ZPA01 group NETS[1].ZPA[1]); run command BELT1_Z1_RUN at ZPA01:O.Data.0; status NETS[1].ZPA[1].ZONE_STATUS[1],ZPA01:I.Data.0,Input,1
+BELT1_Z2_SENSOR,BOOL,BELT1_Z2 sensor input (ZPA01 group NETS[1].ZPA[1]); run command BELT1_Z2_RUN at ZPA01:O.Data.1; status NETS[1].ZPA[1].ZONE_STATUS[2],ZPA01:I.Data.1,Input,2
+BELT1_Z3_SENSOR,BOOL,BELT1_Z3 sensor input (ZPA01 group NETS[1].ZPA[1]); run command BELT1_Z3_RUN at ZPA01:O.Data.2; status NETS[1].ZPA[1].ZONE_STATUS[3],ZPA01:I.Data.2,Input,3
+SPIRAL_UP_Z1_SENSOR,BOOL,SPIRAL_UP_Z1 sensor input (ZPA02 group NETS[1].ZPA[2]); run command SPIRAL_UP_Z1_RUN at ZPA02:O.Data.0; status NETS[1].ZPA[2].ZONE_STATUS[1],ZPA02:I.Data.0,Input,4
+SPIRAL_UP_Z2_SENSOR,BOOL,SPIRAL_UP_Z2 sensor input (ZPA02 group NETS[1].ZPA[2]); run command SPIRAL_UP_Z2_RUN at ZPA02:O.Data.1; status NETS[1].ZPA[2].ZONE_STATUS[2],ZPA02:I.Data.1,Input,5
+SPIRAL_UP_Z3_SENSOR,BOOL,SPIRAL_UP_Z3 sensor input (ZPA02 group NETS[1].ZPA[2]); run command SPIRAL_UP_Z3_RUN at ZPA02:O.Data.2; status NETS[1].ZPA[2].ZONE_STATUS[3],ZPA02:I.Data.2,Input,6
+SPIRAL_UP_Z4_SENSOR,BOOL,SPIRAL_UP_Z4 sensor input (ZPA02 group NETS[1].ZPA[2]); run command SPIRAL_UP_Z4_RUN at ZPA02:O.Data.3; status NETS[1].ZPA[2].ZONE_STATUS[4],ZPA02:I.Data.3,Input,7
+SPIRAL_UP_Z5_SENSOR,BOOL,SPIRAL_UP_Z5 sensor input (ZPA02 group NETS[1].ZPA[2]); run command SPIRAL_UP_Z5_RUN at ZPA02:O.Data.4; status NETS[1].ZPA[2].ZONE_STATUS[5],ZPA02:I.Data.4,Input,8
+SPIRAL_UP_Z6_SENSOR,BOOL,SPIRAL_UP_Z6 sensor input (ZPA02 group NETS[1].ZPA[2]); run command SPIRAL_UP_Z6_RUN at ZPA02:O.Data.5; status NETS[1].ZPA[2].ZONE_STATUS[6],ZPA02:I.Data.5,Input,9
+SPIRAL_UP_Z7_SENSOR,BOOL,SPIRAL_UP_Z7 sensor input (ZPA02 group NETS[1].ZPA[2]); run command SPIRAL_UP_Z7_RUN at ZPA02:O.Data.6; status NETS[1].ZPA[2].ZONE_STATUS[7],ZPA02:I.Data.6,Input,10
+SPIRAL_UP_Z8_SENSOR,BOOL,SPIRAL_UP_Z8 sensor input (ZPA02 group NETS[1].ZPA[2]); run command SPIRAL_UP_Z8_RUN at ZPA02:O.Data.7; status NETS[1].ZPA[2].ZONE_STATUS[8],ZPA02:I.Data.7,Input,11
+SPIRAL_UP_Z9_SENSOR,BOOL,SPIRAL_UP_Z9 sensor input (ZPA03 group NETS[1].ZPA[3]); run command SPIRAL_UP_Z9_RUN at ZPA03:O.Data.0; status NETS[1].ZPA[3].ZONE_STATUS[1],ZPA03:I.Data.0,Input,12
+SPIRAL_UP_Z10_SENSOR,BOOL,SPIRAL_UP_Z10 sensor input (ZPA03 group NETS[1].ZPA[3]); run command SPIRAL_UP_Z10_RUN at ZPA03:O.Data.1; status NETS[1].ZPA[3].ZONE_STATUS[2],ZPA03:I.Data.1,Input,13
+SPIRAL_UP_Z11_SENSOR,BOOL,SPIRAL_UP_Z11 sensor input (ZPA03 group NETS[1].ZPA[3]); run command SPIRAL_UP_Z11_RUN at ZPA03:O.Data.2; status NETS[1].ZPA[3].ZONE_STATUS[3],ZPA03:I.Data.2,Input,14
+SPIRAL_UP_Z12_SENSOR,BOOL,SPIRAL_UP_Z12 sensor input (ZPA03 group NETS[1].ZPA[3]); run command SPIRAL_UP_Z12_RUN at ZPA03:O.Data.3; status NETS[1].ZPA[3].ZONE_STATUS[4],ZPA03:I.Data.3,Input,15
+SPIRAL_UP_Z13_SENSOR,BOOL,SPIRAL_UP_Z13 sensor input (ZPA03 group NETS[1].ZPA[3]); run command SPIRAL_UP_Z13_RUN at ZPA03:O.Data.4; status NETS[1].ZPA[3].ZONE_STATUS[5],ZPA03:I.Data.4,Input,16
+BELT2_Z1_SENSOR,BOOL,BELT2_Z1 sensor input (ZPA04 group NETS[1].ZPA[4]); run command BELT2_Z1_RUN at ZPA04:O.Data.0; status NETS[1].ZPA[4].ZONE_STATUS[1],ZPA04:I.Data.0,Input,17
+BELT2_Z2_SENSOR,BOOL,BELT2_Z2 sensor input (ZPA04 group NETS[1].ZPA[4]); run command BELT2_Z2_RUN at ZPA04:O.Data.1; status NETS[1].ZPA[4].ZONE_STATUS[2],ZPA04:I.Data.1,Input,18
+SCAN_IN_BARCODE,STRING_20,"Scanner barcode result (SCAN_IN, zone 3) - written by the external scanner MSG/CIP interface",external scanner interface,Input,3
+SCAN_IN_GOOD_READ,BOOL,Scanner good-read pulse (SCAN_IN) - written by the external scanner MSG/CIP interface,external scanner interface,Input,3
+TRACK_TBL,TRAY_TRACK[16],"Tray tracking table (Barcode STRING_20, Zone, Seq, Valid, Timestamp)",TRACK_TBL,Internal,all
+TRACK_COUNT,DINT,Tray tracking ring-buffer sequence counter,TRACK_COUNT,Internal,all
+TRACK_RESET,BOOL,HMI / stop-reset tray table clear request,TRACK_RESET,Output,all
+BELT1_RUN_CMD,BOOL,Belt drive run request (BELT1),BELT1_RUN_CMD,Output,all
+BELT1_DRIVE_RUN,BOOL,Belt drive running feedback / command (BELT1),BELT1_DRIVE_RUN,Output,all
+BELT1_DRIVE_FAULT,BOOL,Belt drive fault feedback (BELT1),BELT1_DRIVE_FAULT,Input,all
+BELT1_DRIVE_STATUS,DINT,Belt drive status word (BELT1),BELT1_DRIVE_STATUS,Input,all
+SPIRAL_UP_RUN_CMD,BOOL,Belt drive run request (SPIRAL_UP),SPIRAL_UP_RUN_CMD,Output,all
+SPIRAL_UP_DRIVE_RUN,BOOL,Belt drive running feedback / command (SPIRAL_UP),SPIRAL_UP_DRIVE_RUN,Output,all
+SPIRAL_UP_DRIVE_FAULT,BOOL,Belt drive fault feedback (SPIRAL_UP),SPIRAL_UP_DRIVE_FAULT,Input,all
+SPIRAL_UP_DRIVE_STATUS,DINT,Belt drive status word (SPIRAL_UP),SPIRAL_UP_DRIVE_STATUS,Input,all
+BELT2_RUN_CMD,BOOL,Belt drive run request (BELT2),BELT2_RUN_CMD,Output,all
+BELT2_DRIVE_RUN,BOOL,Belt drive running feedback / command (BELT2),BELT2_DRIVE_RUN,Output,all
+BELT2_DRIVE_FAULT,BOOL,Belt drive fault feedback (BELT2),BELT2_DRIVE_FAULT,Input,all
+BELT2_DRIVE_STATUS,DINT,Belt drive status word (BELT2),BELT2_DRIVE_STATUS,Input,all

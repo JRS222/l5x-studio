@@ -1,0 +1,42 @@
+flowchart LR
+  classDef controller fill:#311b92,stroke:#9575cd,color:#fff,stroke-width:2px
+  classDef net fill:#004d40,stroke:#26a96c,color:#fff
+  classDef hw fill:#e65100,stroke:#ffb74d,color:#fff
+  classDef sub fill:#37474f,stroke:#78909c,color:#fff
+  classDef unusedM fill:#263238,stroke:#455a64,color:#90a4ae
+  M_Local["Local<br/>1756-L83E<br/>controller"]:::controller
+  M_XFER01["XFER01<br/>1799ER-IQ10XOQ10/A<br/>Network I/O<br/>192.168.1.107<br/>RPI 10000 us<br/>2/9 points used"]:::net
+  M_Local -->|"EtherNet/IP · RPI 10000 us"| M_XFER01
+  B_XFER01_INPUTS_0["XFER01_INPUTS"]:::tag
+  M_XFER01 -->|"I.Data"| B_XFER01_INPUTS_0
+  M_XFER02["XFER02<br/>1799ER-IQ10XOQ10/A<br/>Network I/O<br/>192.168.1.108<br/>RPI 10000 us<br/>2/9 points used"]:::net
+  M_Local -->|"EtherNet/IP · RPI 10000 us"| M_XFER02
+  B_XFER02_INPUTS_1["XFER02_INPUTS"]:::tag
+  M_XFER02 -->|"I.Data"| B_XFER02_INPUTS_1
+  M_XFER03["XFER03<br/>1799ER-IQ10XOQ10/A<br/>Network I/O<br/>192.168.1.109<br/>RPI 10000 us<br/>2/9 points used"]:::net
+  M_Local -->|"EtherNet/IP · RPI 10000 us"| M_XFER03
+  B_XFER03_INPUTS_2["XFER03_INPUTS"]:::tag
+  M_XFER03 -->|"I.Data"| B_XFER03_INPUTS_2
+  M_ZPA01["ZPA01<br/>1799ER-IQ10XOQ10/A<br/>Network I/O<br/>192.168.1.100<br/>RPI 10000 us<br/>2/9 points used"]:::net
+  M_Local -->|"EtherNet/IP · RPI 10000 us"| M_ZPA01
+  B_ENET_INPUTS_3["ENET_INPUTS"]:::tag
+  M_ZPA01 -->|"I.Data"| B_ENET_INPUTS_3
+  M_ZPA02["ZPA02<br/>1799ER-IQ10XOQ10/A<br/>Network I/O<br/>192.168.1.101<br/>RPI 10000 us<br/>2/9 points used"]:::net
+  M_Local -->|"EtherNet/IP · RPI 10000 us"| M_ZPA02
+  M_ZPA02 -->|"I.Data"| B_ENET_INPUTS_3
+  M_ZPA03["ZPA03<br/>1799ER-IQ10XOQ10/A<br/>Network I/O<br/>192.168.1.102<br/>RPI 10000 us<br/>2/9 points used"]:::net
+  M_Local -->|"EtherNet/IP · RPI 10000 us"| M_ZPA03
+  M_ZPA03 -->|"I.Data"| B_ENET_INPUTS_3
+  M_ZPA04["ZPA04<br/>1799ER-IQ10XOQ10/A<br/>Network I/O<br/>192.168.1.103<br/>RPI 10000 us<br/>2/9 points used"]:::net
+  M_Local -->|"EtherNet/IP · RPI 10000 us"| M_ZPA04
+  M_ZPA04 -->|"I.Data"| B_ENET_INPUTS_3
+  M_ZPA05["ZPA05<br/>1799ER-IQ10XOQ10/A<br/>Network I/O<br/>192.168.1.104<br/>RPI 10000 us<br/>2/9 points used"]:::net
+  M_Local -->|"EtherNet/IP · RPI 10000 us"| M_ZPA05
+  M_ZPA05 -->|"I.Data"| B_ENET_INPUTS_3
+  M_ZPA06["ZPA06<br/>1799ER-IQ10XOQ10/A<br/>Network I/O<br/>192.168.1.105<br/>RPI 10000 us<br/>2/9 points used"]:::net
+  M_Local -->|"EtherNet/IP · RPI 10000 us"| M_ZPA06
+  M_ZPA06 -->|"I.Data"| B_ENET_INPUTS_3
+  M_ZPA07["ZPA07<br/>1799ER-IQ10XOQ10/A<br/>Network I/O<br/>192.168.1.106<br/>RPI 10000 us<br/>2/9 points used"]:::net
+  M_Local -->|"EtherNet/IP · RPI 10000 us"| M_ZPA07
+  M_ZPA07 -->|"I.Data"| B_ENET_INPUTS_3
+  classDef tag fill:#4a148c,stroke:#ba68c8,color:#fff

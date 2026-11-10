@@ -1,0 +1,4206 @@
+{
+ "controller": "CONVEYOR_PLC",
+ "modules": [
+  {
+   "name": "Local",
+   "catalogNumber": "1756-L83E",
+   "parentModule": "Local",
+   "parentModPortId": "1",
+   "ports": [
+    {
+     "id": "1",
+     "address": "0",
+     "type": "ICP",
+     "upstream": false,
+     "hasBus": true
+    },
+    {
+     "id": "2",
+     "type": "Ethernet",
+     "upstream": false,
+     "hasBus": true
+    }
+   ],
+   "vendor": "1",
+   "productType": "14",
+   "inhibited": false,
+   "kind": "controller",
+   "kindLabel": "Controller",
+   "protocol": "Controller",
+   "slot": null,
+   "ip": null,
+   "rpi": null,
+   "connectionName": null,
+   "inputBytes": 0,
+   "outputBytes": 0,
+   "capacity": null,
+   "points": [],
+   "buffers": [],
+   "inputBits": [],
+   "outputBits": [],
+   "zoneCopy": {
+    "inputs": true,
+    "outputs": true,
+    "producers": [
+     "DEMO_CONVEYOR/ZPA_MAPPING"
+    ]
+   },
+   "tagRefs": [],
+   "summary": {
+    "usedInputBits": 0,
+    "totalInputBits": 0,
+    "usedOutputBits": 0,
+    "totalOutputBits": 0,
+    "wordMappedInputBits": 0,
+    "wordMappedOutputBits": 0,
+    "usedPoints": 0,
+    "totalPoints": 0
+   },
+   "children": [
+    "ZPA01",
+    "ZPA02",
+    "ZPA03",
+    "ZPA04",
+    "ZPA05",
+    "ZPA06",
+    "ZPA07",
+    "XFER01",
+    "XFER02",
+    "XFER03"
+   ],
+   "childModules": [
+    {
+     "name": "ZPA01",
+     "catalogNumber": "1799ER-IQ10XOQ10/A",
+     "protocol": "EtherNet/IP",
+     "kind": "network",
+     "usedPoints": 2,
+     "ip": "192.168.1.100"
+    },
+    {
+     "name": "ZPA02",
+     "catalogNumber": "1799ER-IQ10XOQ10/A",
+     "protocol": "EtherNet/IP",
+     "kind": "network",
+     "usedPoints": 2,
+     "ip": "192.168.1.101"
+    },
+    {
+     "name": "ZPA03",
+     "catalogNumber": "1799ER-IQ10XOQ10/A",
+     "protocol": "EtherNet/IP",
+     "kind": "network",
+     "usedPoints": 2,
+     "ip": "192.168.1.102"
+    },
+    {
+     "name": "ZPA04",
+     "catalogNumber": "1799ER-IQ10XOQ10/A",
+     "protocol": "EtherNet/IP",
+     "kind": "network",
+     "usedPoints": 2,
+     "ip": "192.168.1.103"
+    },
+    {
+     "name": "ZPA05",
+     "catalogNumber": "1799ER-IQ10XOQ10/A",
+     "protocol": "EtherNet/IP",
+     "kind": "network",
+     "usedPoints": 2,
+     "ip": "192.168.1.104"
+    },
+    {
+     "name": "ZPA06",
+     "catalogNumber": "1799ER-IQ10XOQ10/A",
+     "protocol": "EtherNet/IP",
+     "kind": "network",
+     "usedPoints": 2,
+     "ip": "192.168.1.105"
+    },
+    {
+     "name": "ZPA07",
+     "catalogNumber": "1799ER-IQ10XOQ10/A",
+     "protocol": "EtherNet/IP",
+     "kind": "network",
+     "usedPoints": 2,
+     "ip": "192.168.1.106"
+    },
+    {
+     "name": "XFER01",
+     "catalogNumber": "1799ER-IQ10XOQ10/A",
+     "protocol": "EtherNet/IP",
+     "kind": "network",
+     "usedPoints": 2,
+     "ip": "192.168.1.107"
+    },
+    {
+     "name": "XFER02",
+     "catalogNumber": "1799ER-IQ10XOQ10/A",
+     "protocol": "EtherNet/IP",
+     "kind": "network",
+     "usedPoints": 2,
+     "ip": "192.168.1.108"
+    },
+    {
+     "name": "XFER03",
+     "catalogNumber": "1799ER-IQ10XOQ10/A",
+     "protocol": "EtherNet/IP",
+     "kind": "network",
+     "usedPoints": 2,
+     "ip": "192.168.1.109"
+    }
+   ],
+   "busLabel": "EtherNet/IP",
+   "fieldBus": null,
+   "isBridge": false,
+   "transportLabel": "Controller (local chassis)",
+   "wordTransport": "local"
+  },
+  {
+   "name": "XFER01",
+   "catalogNumber": "1799ER-IQ10XOQ10/A",
+   "parentModule": "Local",
+   "parentModPortId": "2",
+   "ports": [
+    {
+     "id": "2",
+     "address": "192.168.1.107",
+     "type": "Ethernet",
+     "upstream": true,
+     "hasBus": false
+    }
+   ],
+   "vendor": "1",
+   "productType": "7",
+   "inhibited": false,
+   "kind": "network",
+   "kindLabel": "Network I/O",
+   "protocol": "EtherNet/IP",
+   "slot": null,
+   "ip": "192.168.1.107",
+   "rpi": "10000",
+   "connectionName": "InputOutputData",
+   "inputBytes": 6,
+   "outputBytes": 0,
+   "capacity": {
+    "inputBits": 10,
+    "outputBits": 10,
+    "source": "catalog"
+   },
+   "points": [
+    {
+     "address": "XFER01:C.FaultMode",
+     "direction": "Config",
+     "pointPath": "FaultMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER01:C.FaultValue",
+     "direction": "Config",
+     "pointPath": "FaultValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER01:C.FilterOffOn",
+     "direction": "Config",
+     "pointPath": "FilterOffOn",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER01:C.FilterOnOff",
+     "direction": "Config",
+     "pointPath": "FilterOnOff",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER01:C.ProgMode",
+     "direction": "Config",
+     "pointPath": "ProgMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER01:C.ProgValue",
+     "direction": "Config",
+     "pointPath": "ProgValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER01:I.Data",
+     "direction": "Input",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_INPUTS",
+       "scope": "module",
+       "kind": "read",
+       "address": "XFER01:I.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "XFER01_INPUTS"
+    },
+    {
+     "address": "XFER01:I.Fault",
+     "direction": "Input",
+     "pointPath": "Fault",
+     "dataType": "DINT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER01:O.Data",
+     "direction": "Output",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_OUTPUTS",
+       "scope": "module",
+       "kind": "write",
+       "address": "XFER01:O.Data",
+       "via": null
+      },
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_OUTPUTS",
+       "scope": "module",
+       "kind": "read",
+       "address": "XFER01:O.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "XFER01_OUTPUTS"
+    }
+   ],
+   "buffers": [
+    {
+     "direction": "input",
+     "member": "Data",
+     "buffer": "XFER01_INPUTS",
+     "expression": "XFER01_INPUTS",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+    },
+    {
+     "direction": "input",
+     "member": "Data",
+     "buffer": "ENET_INPUTS",
+     "expression": "ENET_INPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+    },
+    {
+     "direction": "output",
+     "member": "Data",
+     "buffer": "ENET_OUTPUTS",
+     "expression": "ENET_OUTPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+    },
+    {
+     "direction": "output",
+     "member": "Data",
+     "buffer": "XFER01_OUTPUTS",
+     "expression": "XFER01_OUTPUTS",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+    }
+   ],
+   "inputBits": [
+    {
+     "bit": 0,
+     "address": "XFER01:I.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "XFER01:I.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "XFER01:I.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "XFER01:I.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "XFER01:I.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "XFER01:I.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "XFER01:I.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "XFER01:I.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "XFER01:I.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "XFER01:I.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "outputBits": [
+    {
+     "bit": 0,
+     "address": "XFER01:O.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "XFER01:O.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "XFER01:O.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "XFER01:O.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "XFER01:O.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "XFER01:O.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "XFER01:O.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "XFER01:O.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "XFER01:O.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "XFER01:O.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "zoneCopy": {
+    "inputs": true,
+    "outputs": true,
+    "producers": [
+     "DEMO_CONVEYOR/ZPA_MAPPING"
+    ]
+   },
+   "tagRefs": [
+    {
+     "address": "XFER01:I.Data",
+     "reads": 1,
+     "writes": 0,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+     ]
+    },
+    {
+     "address": "XFER01:O.Data",
+     "reads": 1,
+     "writes": 1,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+     ]
+    }
+   ],
+   "summary": {
+    "usedInputBits": 0,
+    "totalInputBits": 10,
+    "usedOutputBits": 0,
+    "totalOutputBits": 10,
+    "wordMappedInputBits": 10,
+    "wordMappedOutputBits": 10,
+    "usedPoints": 2,
+    "totalPoints": 9
+   },
+   "children": [],
+   "childModules": [],
+   "busLabel": "EtherNet/IP",
+   "fieldBus": null,
+   "isBridge": false,
+   "transportLabel": "EtherNet/IP network I/O",
+   "wordTransport": "network word over EtherNet/IP"
+  },
+  {
+   "name": "XFER02",
+   "catalogNumber": "1799ER-IQ10XOQ10/A",
+   "parentModule": "Local",
+   "parentModPortId": "2",
+   "ports": [
+    {
+     "id": "2",
+     "address": "192.168.1.108",
+     "type": "Ethernet",
+     "upstream": true,
+     "hasBus": false
+    }
+   ],
+   "vendor": "1",
+   "productType": "7",
+   "inhibited": false,
+   "kind": "network",
+   "kindLabel": "Network I/O",
+   "protocol": "EtherNet/IP",
+   "slot": null,
+   "ip": "192.168.1.108",
+   "rpi": "10000",
+   "connectionName": "InputOutputData",
+   "inputBytes": 6,
+   "outputBytes": 0,
+   "capacity": {
+    "inputBits": 10,
+    "outputBits": 10,
+    "source": "catalog"
+   },
+   "points": [
+    {
+     "address": "XFER02:C.FaultMode",
+     "direction": "Config",
+     "pointPath": "FaultMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER02:C.FaultValue",
+     "direction": "Config",
+     "pointPath": "FaultValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER02:C.FilterOffOn",
+     "direction": "Config",
+     "pointPath": "FilterOffOn",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER02:C.FilterOnOff",
+     "direction": "Config",
+     "pointPath": "FilterOnOff",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER02:C.ProgMode",
+     "direction": "Config",
+     "pointPath": "ProgMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER02:C.ProgValue",
+     "direction": "Config",
+     "pointPath": "ProgValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER02:I.Data",
+     "direction": "Input",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_INPUTS",
+       "scope": "module",
+       "kind": "read",
+       "address": "XFER02:I.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "XFER02_INPUTS"
+    },
+    {
+     "address": "XFER02:I.Fault",
+     "direction": "Input",
+     "pointPath": "Fault",
+     "dataType": "DINT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER02:O.Data",
+     "direction": "Output",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_OUTPUTS",
+       "scope": "module",
+       "kind": "write",
+       "address": "XFER02:O.Data",
+       "via": null
+      },
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_OUTPUTS",
+       "scope": "module",
+       "kind": "read",
+       "address": "XFER02:O.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "XFER02_OUTPUTS"
+    }
+   ],
+   "buffers": [
+    {
+     "direction": "input",
+     "member": "Data",
+     "buffer": "XFER02_INPUTS",
+     "expression": "XFER02_INPUTS",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+    },
+    {
+     "direction": "input",
+     "member": "Data",
+     "buffer": "ENET_INPUTS",
+     "expression": "ENET_INPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+    },
+    {
+     "direction": "output",
+     "member": "Data",
+     "buffer": "ENET_OUTPUTS",
+     "expression": "ENET_OUTPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+    },
+    {
+     "direction": "output",
+     "member": "Data",
+     "buffer": "XFER02_OUTPUTS",
+     "expression": "XFER02_OUTPUTS",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+    }
+   ],
+   "inputBits": [
+    {
+     "bit": 0,
+     "address": "XFER02:I.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "XFER02:I.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "XFER02:I.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "XFER02:I.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "XFER02:I.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "XFER02:I.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "XFER02:I.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "XFER02:I.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "XFER02:I.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "XFER02:I.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "outputBits": [
+    {
+     "bit": 0,
+     "address": "XFER02:O.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "XFER02:O.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "XFER02:O.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "XFER02:O.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "XFER02:O.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "XFER02:O.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "XFER02:O.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "XFER02:O.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "XFER02:O.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "XFER02:O.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "zoneCopy": {
+    "inputs": true,
+    "outputs": true,
+    "producers": [
+     "DEMO_CONVEYOR/ZPA_MAPPING"
+    ]
+   },
+   "tagRefs": [
+    {
+     "address": "XFER02:I.Data",
+     "reads": 1,
+     "writes": 0,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+     ]
+    },
+    {
+     "address": "XFER02:O.Data",
+     "reads": 1,
+     "writes": 1,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+     ]
+    }
+   ],
+   "summary": {
+    "usedInputBits": 0,
+    "totalInputBits": 10,
+    "usedOutputBits": 0,
+    "totalOutputBits": 10,
+    "wordMappedInputBits": 10,
+    "wordMappedOutputBits": 10,
+    "usedPoints": 2,
+    "totalPoints": 9
+   },
+   "children": [],
+   "childModules": [],
+   "busLabel": "EtherNet/IP",
+   "fieldBus": null,
+   "isBridge": false,
+   "transportLabel": "EtherNet/IP network I/O",
+   "wordTransport": "network word over EtherNet/IP"
+  },
+  {
+   "name": "XFER03",
+   "catalogNumber": "1799ER-IQ10XOQ10/A",
+   "parentModule": "Local",
+   "parentModPortId": "2",
+   "ports": [
+    {
+     "id": "2",
+     "address": "192.168.1.109",
+     "type": "Ethernet",
+     "upstream": true,
+     "hasBus": false
+    }
+   ],
+   "vendor": "1",
+   "productType": "7",
+   "inhibited": false,
+   "kind": "network",
+   "kindLabel": "Network I/O",
+   "protocol": "EtherNet/IP",
+   "slot": null,
+   "ip": "192.168.1.109",
+   "rpi": "10000",
+   "connectionName": "InputOutputData",
+   "inputBytes": 6,
+   "outputBytes": 0,
+   "capacity": {
+    "inputBits": 10,
+    "outputBits": 10,
+    "source": "catalog"
+   },
+   "points": [
+    {
+     "address": "XFER03:C.FaultMode",
+     "direction": "Config",
+     "pointPath": "FaultMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER03:C.FaultValue",
+     "direction": "Config",
+     "pointPath": "FaultValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER03:C.FilterOffOn",
+     "direction": "Config",
+     "pointPath": "FilterOffOn",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER03:C.FilterOnOff",
+     "direction": "Config",
+     "pointPath": "FilterOnOff",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER03:C.ProgMode",
+     "direction": "Config",
+     "pointPath": "ProgMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER03:C.ProgValue",
+     "direction": "Config",
+     "pointPath": "ProgValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER03:I.Data",
+     "direction": "Input",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_INPUTS",
+       "scope": "module",
+       "kind": "read",
+       "address": "XFER03:I.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "XFER03_INPUTS"
+    },
+    {
+     "address": "XFER03:I.Fault",
+     "direction": "Input",
+     "pointPath": "Fault",
+     "dataType": "DINT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "XFER03:O.Data",
+     "direction": "Output",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_OUTPUTS",
+       "scope": "module",
+       "kind": "write",
+       "address": "XFER03:O.Data",
+       "via": null
+      },
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_OUTPUTS",
+       "scope": "module",
+       "kind": "read",
+       "address": "XFER03:O.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "XFER03_OUTPUTS"
+    }
+   ],
+   "buffers": [
+    {
+     "direction": "input",
+     "member": "Data",
+     "buffer": "XFER03_INPUTS",
+     "expression": "XFER03_INPUTS",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+    },
+    {
+     "direction": "input",
+     "member": "Data",
+     "buffer": "ENET_INPUTS",
+     "expression": "ENET_INPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+    },
+    {
+     "direction": "output",
+     "member": "Data",
+     "buffer": "ENET_OUTPUTS",
+     "expression": "ENET_OUTPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+    },
+    {
+     "direction": "output",
+     "member": "Data",
+     "buffer": "XFER03_OUTPUTS",
+     "expression": "XFER03_OUTPUTS",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+    }
+   ],
+   "inputBits": [
+    {
+     "bit": 0,
+     "address": "XFER03:I.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "XFER03:I.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "XFER03:I.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "XFER03:I.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "XFER03:I.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "XFER03:I.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "XFER03:I.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "XFER03:I.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "XFER03:I.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "XFER03:I.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "outputBits": [
+    {
+     "bit": 0,
+     "address": "XFER03:O.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "XFER03:O.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "XFER03:O.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "XFER03:O.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "XFER03:O.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "XFER03:O.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "XFER03:O.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "XFER03:O.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "XFER03:O.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "XFER03:O.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "zoneCopy": {
+    "inputs": true,
+    "outputs": true,
+    "producers": [
+     "DEMO_CONVEYOR/ZPA_MAPPING"
+    ]
+   },
+   "tagRefs": [
+    {
+     "address": "XFER03:I.Data",
+     "reads": 1,
+     "writes": 0,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+     ]
+    },
+    {
+     "address": "XFER03:O.Data",
+     "reads": 1,
+     "writes": 1,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+     ]
+    }
+   ],
+   "summary": {
+    "usedInputBits": 0,
+    "totalInputBits": 10,
+    "usedOutputBits": 0,
+    "totalOutputBits": 10,
+    "wordMappedInputBits": 10,
+    "wordMappedOutputBits": 10,
+    "usedPoints": 2,
+    "totalPoints": 9
+   },
+   "children": [],
+   "childModules": [],
+   "busLabel": "EtherNet/IP",
+   "fieldBus": null,
+   "isBridge": false,
+   "transportLabel": "EtherNet/IP network I/O",
+   "wordTransport": "network word over EtherNet/IP"
+  },
+  {
+   "name": "ZPA01",
+   "catalogNumber": "1799ER-IQ10XOQ10/A",
+   "parentModule": "Local",
+   "parentModPortId": "2",
+   "ports": [
+    {
+     "id": "2",
+     "address": "192.168.1.100",
+     "type": "Ethernet",
+     "upstream": true,
+     "hasBus": false
+    }
+   ],
+   "vendor": "1",
+   "productType": "7",
+   "inhibited": false,
+   "kind": "network",
+   "kindLabel": "Network I/O",
+   "protocol": "EtherNet/IP",
+   "slot": null,
+   "ip": "192.168.1.100",
+   "rpi": "10000",
+   "connectionName": "InputOutputData",
+   "inputBytes": 6,
+   "outputBytes": 0,
+   "capacity": {
+    "inputBits": 10,
+    "outputBits": 10,
+    "source": "catalog"
+   },
+   "points": [
+    {
+     "address": "ZPA01:C.FaultMode",
+     "direction": "Config",
+     "pointPath": "FaultMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA01:C.FaultValue",
+     "direction": "Config",
+     "pointPath": "FaultValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA01:C.FilterOffOn",
+     "direction": "Config",
+     "pointPath": "FilterOffOn",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA01:C.FilterOnOff",
+     "direction": "Config",
+     "pointPath": "FilterOnOff",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA01:C.ProgMode",
+     "direction": "Config",
+     "pointPath": "ProgMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA01:C.ProgValue",
+     "direction": "Config",
+     "pointPath": "ProgValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA01:I.Data",
+     "direction": "Input",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_INPUTS",
+       "scope": "module",
+       "kind": "read",
+       "address": "ZPA01:I.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "ENET_INPUTS"
+    },
+    {
+     "address": "ZPA01:I.Fault",
+     "direction": "Input",
+     "pointPath": "Fault",
+     "dataType": "DINT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA01:O.Data",
+     "direction": "Output",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_OUTPUTS",
+       "scope": "module",
+       "kind": "write",
+       "address": "ZPA01:O.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "ENET_OUTPUTS"
+    }
+   ],
+   "buffers": [
+    {
+     "direction": "input",
+     "member": "Data",
+     "buffer": "ENET_INPUTS",
+     "expression": "ENET_INPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+    },
+    {
+     "direction": "output",
+     "member": "Data",
+     "buffer": "ENET_OUTPUTS",
+     "expression": "ENET_OUTPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+    }
+   ],
+   "inputBits": [
+    {
+     "bit": 0,
+     "address": "ZPA01:I.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "ZPA01:I.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "ZPA01:I.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "ZPA01:I.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "ZPA01:I.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "ZPA01:I.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "ZPA01:I.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "ZPA01:I.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "ZPA01:I.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "ZPA01:I.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "outputBits": [
+    {
+     "bit": 0,
+     "address": "ZPA01:O.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "ZPA01:O.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "ZPA01:O.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "ZPA01:O.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "ZPA01:O.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "ZPA01:O.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "ZPA01:O.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "ZPA01:O.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "ZPA01:O.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "ZPA01:O.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "zoneCopy": {
+    "inputs": true,
+    "outputs": true,
+    "producers": [
+     "DEMO_CONVEYOR/ZPA_MAPPING"
+    ]
+   },
+   "tagRefs": [
+    {
+     "address": "ZPA01:I.Data",
+     "reads": 1,
+     "writes": 0,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+     ]
+    },
+    {
+     "address": "ZPA01:O.Data",
+     "reads": 0,
+     "writes": 1,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+     ]
+    }
+   ],
+   "summary": {
+    "usedInputBits": 0,
+    "totalInputBits": 10,
+    "usedOutputBits": 0,
+    "totalOutputBits": 10,
+    "wordMappedInputBits": 10,
+    "wordMappedOutputBits": 10,
+    "usedPoints": 2,
+    "totalPoints": 9
+   },
+   "children": [],
+   "childModules": [],
+   "busLabel": "EtherNet/IP",
+   "fieldBus": null,
+   "isBridge": false,
+   "transportLabel": "EtherNet/IP network I/O",
+   "wordTransport": "network word over EtherNet/IP"
+  },
+  {
+   "name": "ZPA02",
+   "catalogNumber": "1799ER-IQ10XOQ10/A",
+   "parentModule": "Local",
+   "parentModPortId": "2",
+   "ports": [
+    {
+     "id": "2",
+     "address": "192.168.1.101",
+     "type": "Ethernet",
+     "upstream": true,
+     "hasBus": false
+    }
+   ],
+   "vendor": "1",
+   "productType": "7",
+   "inhibited": false,
+   "kind": "network",
+   "kindLabel": "Network I/O",
+   "protocol": "EtherNet/IP",
+   "slot": null,
+   "ip": "192.168.1.101",
+   "rpi": "10000",
+   "connectionName": "InputOutputData",
+   "inputBytes": 6,
+   "outputBytes": 0,
+   "capacity": {
+    "inputBits": 10,
+    "outputBits": 10,
+    "source": "catalog"
+   },
+   "points": [
+    {
+     "address": "ZPA02:C.FaultMode",
+     "direction": "Config",
+     "pointPath": "FaultMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA02:C.FaultValue",
+     "direction": "Config",
+     "pointPath": "FaultValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA02:C.FilterOffOn",
+     "direction": "Config",
+     "pointPath": "FilterOffOn",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA02:C.FilterOnOff",
+     "direction": "Config",
+     "pointPath": "FilterOnOff",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA02:C.ProgMode",
+     "direction": "Config",
+     "pointPath": "ProgMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA02:C.ProgValue",
+     "direction": "Config",
+     "pointPath": "ProgValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA02:I.Data",
+     "direction": "Input",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_INPUTS",
+       "scope": "module",
+       "kind": "read",
+       "address": "ZPA02:I.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "ENET_INPUTS"
+    },
+    {
+     "address": "ZPA02:I.Fault",
+     "direction": "Input",
+     "pointPath": "Fault",
+     "dataType": "DINT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA02:O.Data",
+     "direction": "Output",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_OUTPUTS",
+       "scope": "module",
+       "kind": "write",
+       "address": "ZPA02:O.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "ENET_OUTPUTS"
+    }
+   ],
+   "buffers": [
+    {
+     "direction": "input",
+     "member": "Data",
+     "buffer": "ENET_INPUTS",
+     "expression": "ENET_INPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+    },
+    {
+     "direction": "output",
+     "member": "Data",
+     "buffer": "ENET_OUTPUTS",
+     "expression": "ENET_OUTPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+    }
+   ],
+   "inputBits": [
+    {
+     "bit": 0,
+     "address": "ZPA02:I.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "ZPA02:I.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "ZPA02:I.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "ZPA02:I.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "ZPA02:I.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "ZPA02:I.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "ZPA02:I.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "ZPA02:I.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "ZPA02:I.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "ZPA02:I.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "outputBits": [
+    {
+     "bit": 0,
+     "address": "ZPA02:O.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "ZPA02:O.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "ZPA02:O.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "ZPA02:O.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "ZPA02:O.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "ZPA02:O.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "ZPA02:O.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "ZPA02:O.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "ZPA02:O.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "ZPA02:O.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "zoneCopy": {
+    "inputs": true,
+    "outputs": true,
+    "producers": [
+     "DEMO_CONVEYOR/ZPA_MAPPING"
+    ]
+   },
+   "tagRefs": [
+    {
+     "address": "ZPA02:I.Data",
+     "reads": 1,
+     "writes": 0,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+     ]
+    },
+    {
+     "address": "ZPA02:O.Data",
+     "reads": 0,
+     "writes": 1,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+     ]
+    }
+   ],
+   "summary": {
+    "usedInputBits": 0,
+    "totalInputBits": 10,
+    "usedOutputBits": 0,
+    "totalOutputBits": 10,
+    "wordMappedInputBits": 10,
+    "wordMappedOutputBits": 10,
+    "usedPoints": 2,
+    "totalPoints": 9
+   },
+   "children": [],
+   "childModules": [],
+   "busLabel": "EtherNet/IP",
+   "fieldBus": null,
+   "isBridge": false,
+   "transportLabel": "EtherNet/IP network I/O",
+   "wordTransport": "network word over EtherNet/IP"
+  },
+  {
+   "name": "ZPA03",
+   "catalogNumber": "1799ER-IQ10XOQ10/A",
+   "parentModule": "Local",
+   "parentModPortId": "2",
+   "ports": [
+    {
+     "id": "2",
+     "address": "192.168.1.102",
+     "type": "Ethernet",
+     "upstream": true,
+     "hasBus": false
+    }
+   ],
+   "vendor": "1",
+   "productType": "7",
+   "inhibited": false,
+   "kind": "network",
+   "kindLabel": "Network I/O",
+   "protocol": "EtherNet/IP",
+   "slot": null,
+   "ip": "192.168.1.102",
+   "rpi": "10000",
+   "connectionName": "InputOutputData",
+   "inputBytes": 6,
+   "outputBytes": 0,
+   "capacity": {
+    "inputBits": 10,
+    "outputBits": 10,
+    "source": "catalog"
+   },
+   "points": [
+    {
+     "address": "ZPA03:C.FaultMode",
+     "direction": "Config",
+     "pointPath": "FaultMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA03:C.FaultValue",
+     "direction": "Config",
+     "pointPath": "FaultValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA03:C.FilterOffOn",
+     "direction": "Config",
+     "pointPath": "FilterOffOn",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA03:C.FilterOnOff",
+     "direction": "Config",
+     "pointPath": "FilterOnOff",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA03:C.ProgMode",
+     "direction": "Config",
+     "pointPath": "ProgMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA03:C.ProgValue",
+     "direction": "Config",
+     "pointPath": "ProgValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA03:I.Data",
+     "direction": "Input",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_INPUTS",
+       "scope": "module",
+       "kind": "read",
+       "address": "ZPA03:I.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "ENET_INPUTS"
+    },
+    {
+     "address": "ZPA03:I.Fault",
+     "direction": "Input",
+     "pointPath": "Fault",
+     "dataType": "DINT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA03:O.Data",
+     "direction": "Output",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_OUTPUTS",
+       "scope": "module",
+       "kind": "write",
+       "address": "ZPA03:O.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "ENET_OUTPUTS"
+    }
+   ],
+   "buffers": [
+    {
+     "direction": "input",
+     "member": "Data",
+     "buffer": "ENET_INPUTS",
+     "expression": "ENET_INPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+    },
+    {
+     "direction": "output",
+     "member": "Data",
+     "buffer": "ENET_OUTPUTS",
+     "expression": "ENET_OUTPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+    }
+   ],
+   "inputBits": [
+    {
+     "bit": 0,
+     "address": "ZPA03:I.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "ZPA03:I.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "ZPA03:I.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "ZPA03:I.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "ZPA03:I.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "ZPA03:I.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "ZPA03:I.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "ZPA03:I.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "ZPA03:I.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "ZPA03:I.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "outputBits": [
+    {
+     "bit": 0,
+     "address": "ZPA03:O.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "ZPA03:O.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "ZPA03:O.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "ZPA03:O.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "ZPA03:O.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "ZPA03:O.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "ZPA03:O.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "ZPA03:O.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "ZPA03:O.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "ZPA03:O.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "zoneCopy": {
+    "inputs": true,
+    "outputs": true,
+    "producers": [
+     "DEMO_CONVEYOR/ZPA_MAPPING"
+    ]
+   },
+   "tagRefs": [
+    {
+     "address": "ZPA03:I.Data",
+     "reads": 1,
+     "writes": 0,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+     ]
+    },
+    {
+     "address": "ZPA03:O.Data",
+     "reads": 0,
+     "writes": 1,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+     ]
+    }
+   ],
+   "summary": {
+    "usedInputBits": 0,
+    "totalInputBits": 10,
+    "usedOutputBits": 0,
+    "totalOutputBits": 10,
+    "wordMappedInputBits": 10,
+    "wordMappedOutputBits": 10,
+    "usedPoints": 2,
+    "totalPoints": 9
+   },
+   "children": [],
+   "childModules": [],
+   "busLabel": "EtherNet/IP",
+   "fieldBus": null,
+   "isBridge": false,
+   "transportLabel": "EtherNet/IP network I/O",
+   "wordTransport": "network word over EtherNet/IP"
+  },
+  {
+   "name": "ZPA04",
+   "catalogNumber": "1799ER-IQ10XOQ10/A",
+   "parentModule": "Local",
+   "parentModPortId": "2",
+   "ports": [
+    {
+     "id": "2",
+     "address": "192.168.1.103",
+     "type": "Ethernet",
+     "upstream": true,
+     "hasBus": false
+    }
+   ],
+   "vendor": "1",
+   "productType": "7",
+   "inhibited": false,
+   "kind": "network",
+   "kindLabel": "Network I/O",
+   "protocol": "EtherNet/IP",
+   "slot": null,
+   "ip": "192.168.1.103",
+   "rpi": "10000",
+   "connectionName": "InputOutputData",
+   "inputBytes": 6,
+   "outputBytes": 0,
+   "capacity": {
+    "inputBits": 10,
+    "outputBits": 10,
+    "source": "catalog"
+   },
+   "points": [
+    {
+     "address": "ZPA04:C.FaultMode",
+     "direction": "Config",
+     "pointPath": "FaultMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA04:C.FaultValue",
+     "direction": "Config",
+     "pointPath": "FaultValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA04:C.FilterOffOn",
+     "direction": "Config",
+     "pointPath": "FilterOffOn",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA04:C.FilterOnOff",
+     "direction": "Config",
+     "pointPath": "FilterOnOff",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA04:C.ProgMode",
+     "direction": "Config",
+     "pointPath": "ProgMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA04:C.ProgValue",
+     "direction": "Config",
+     "pointPath": "ProgValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA04:I.Data",
+     "direction": "Input",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_INPUTS",
+       "scope": "module",
+       "kind": "read",
+       "address": "ZPA04:I.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "ENET_INPUTS"
+    },
+    {
+     "address": "ZPA04:I.Fault",
+     "direction": "Input",
+     "pointPath": "Fault",
+     "dataType": "DINT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA04:O.Data",
+     "direction": "Output",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_OUTPUTS",
+       "scope": "module",
+       "kind": "write",
+       "address": "ZPA04:O.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "ENET_OUTPUTS"
+    }
+   ],
+   "buffers": [
+    {
+     "direction": "input",
+     "member": "Data",
+     "buffer": "ENET_INPUTS",
+     "expression": "ENET_INPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+    },
+    {
+     "direction": "output",
+     "member": "Data",
+     "buffer": "ENET_OUTPUTS",
+     "expression": "ENET_OUTPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+    }
+   ],
+   "inputBits": [
+    {
+     "bit": 0,
+     "address": "ZPA04:I.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "ZPA04:I.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "ZPA04:I.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "ZPA04:I.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "ZPA04:I.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "ZPA04:I.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "ZPA04:I.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "ZPA04:I.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "ZPA04:I.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "ZPA04:I.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "outputBits": [
+    {
+     "bit": 0,
+     "address": "ZPA04:O.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "ZPA04:O.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "ZPA04:O.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "ZPA04:O.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "ZPA04:O.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "ZPA04:O.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "ZPA04:O.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "ZPA04:O.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "ZPA04:O.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "ZPA04:O.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "zoneCopy": {
+    "inputs": true,
+    "outputs": true,
+    "producers": [
+     "DEMO_CONVEYOR/ZPA_MAPPING"
+    ]
+   },
+   "tagRefs": [
+    {
+     "address": "ZPA04:I.Data",
+     "reads": 1,
+     "writes": 0,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+     ]
+    },
+    {
+     "address": "ZPA04:O.Data",
+     "reads": 0,
+     "writes": 1,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+     ]
+    }
+   ],
+   "summary": {
+    "usedInputBits": 0,
+    "totalInputBits": 10,
+    "usedOutputBits": 0,
+    "totalOutputBits": 10,
+    "wordMappedInputBits": 10,
+    "wordMappedOutputBits": 10,
+    "usedPoints": 2,
+    "totalPoints": 9
+   },
+   "children": [],
+   "childModules": [],
+   "busLabel": "EtherNet/IP",
+   "fieldBus": null,
+   "isBridge": false,
+   "transportLabel": "EtherNet/IP network I/O",
+   "wordTransport": "network word over EtherNet/IP"
+  },
+  {
+   "name": "ZPA05",
+   "catalogNumber": "1799ER-IQ10XOQ10/A",
+   "parentModule": "Local",
+   "parentModPortId": "2",
+   "ports": [
+    {
+     "id": "2",
+     "address": "192.168.1.104",
+     "type": "Ethernet",
+     "upstream": true,
+     "hasBus": false
+    }
+   ],
+   "vendor": "1",
+   "productType": "7",
+   "inhibited": false,
+   "kind": "network",
+   "kindLabel": "Network I/O",
+   "protocol": "EtherNet/IP",
+   "slot": null,
+   "ip": "192.168.1.104",
+   "rpi": "10000",
+   "connectionName": "InputOutputData",
+   "inputBytes": 6,
+   "outputBytes": 0,
+   "capacity": {
+    "inputBits": 10,
+    "outputBits": 10,
+    "source": "catalog"
+   },
+   "points": [
+    {
+     "address": "ZPA05:C.FaultMode",
+     "direction": "Config",
+     "pointPath": "FaultMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA05:C.FaultValue",
+     "direction": "Config",
+     "pointPath": "FaultValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA05:C.FilterOffOn",
+     "direction": "Config",
+     "pointPath": "FilterOffOn",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA05:C.FilterOnOff",
+     "direction": "Config",
+     "pointPath": "FilterOnOff",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA05:C.ProgMode",
+     "direction": "Config",
+     "pointPath": "ProgMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA05:C.ProgValue",
+     "direction": "Config",
+     "pointPath": "ProgValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA05:I.Data",
+     "direction": "Input",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_INPUTS",
+       "scope": "module",
+       "kind": "read",
+       "address": "ZPA05:I.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "ENET_INPUTS"
+    },
+    {
+     "address": "ZPA05:I.Fault",
+     "direction": "Input",
+     "pointPath": "Fault",
+     "dataType": "DINT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA05:O.Data",
+     "direction": "Output",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_OUTPUTS",
+       "scope": "module",
+       "kind": "write",
+       "address": "ZPA05:O.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "ENET_OUTPUTS"
+    }
+   ],
+   "buffers": [
+    {
+     "direction": "input",
+     "member": "Data",
+     "buffer": "ENET_INPUTS",
+     "expression": "ENET_INPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+    },
+    {
+     "direction": "output",
+     "member": "Data",
+     "buffer": "ENET_OUTPUTS",
+     "expression": "ENET_OUTPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+    }
+   ],
+   "inputBits": [
+    {
+     "bit": 0,
+     "address": "ZPA05:I.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "ZPA05:I.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "ZPA05:I.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "ZPA05:I.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "ZPA05:I.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "ZPA05:I.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "ZPA05:I.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "ZPA05:I.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "ZPA05:I.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "ZPA05:I.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "outputBits": [
+    {
+     "bit": 0,
+     "address": "ZPA05:O.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "ZPA05:O.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "ZPA05:O.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "ZPA05:O.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "ZPA05:O.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "ZPA05:O.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "ZPA05:O.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "ZPA05:O.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "ZPA05:O.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "ZPA05:O.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "zoneCopy": {
+    "inputs": true,
+    "outputs": true,
+    "producers": [
+     "DEMO_CONVEYOR/ZPA_MAPPING"
+    ]
+   },
+   "tagRefs": [
+    {
+     "address": "ZPA05:I.Data",
+     "reads": 1,
+     "writes": 0,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+     ]
+    },
+    {
+     "address": "ZPA05:O.Data",
+     "reads": 0,
+     "writes": 1,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+     ]
+    }
+   ],
+   "summary": {
+    "usedInputBits": 0,
+    "totalInputBits": 10,
+    "usedOutputBits": 0,
+    "totalOutputBits": 10,
+    "wordMappedInputBits": 10,
+    "wordMappedOutputBits": 10,
+    "usedPoints": 2,
+    "totalPoints": 9
+   },
+   "children": [],
+   "childModules": [],
+   "busLabel": "EtherNet/IP",
+   "fieldBus": null,
+   "isBridge": false,
+   "transportLabel": "EtherNet/IP network I/O",
+   "wordTransport": "network word over EtherNet/IP"
+  },
+  {
+   "name": "ZPA06",
+   "catalogNumber": "1799ER-IQ10XOQ10/A",
+   "parentModule": "Local",
+   "parentModPortId": "2",
+   "ports": [
+    {
+     "id": "2",
+     "address": "192.168.1.105",
+     "type": "Ethernet",
+     "upstream": true,
+     "hasBus": false
+    }
+   ],
+   "vendor": "1",
+   "productType": "7",
+   "inhibited": false,
+   "kind": "network",
+   "kindLabel": "Network I/O",
+   "protocol": "EtherNet/IP",
+   "slot": null,
+   "ip": "192.168.1.105",
+   "rpi": "10000",
+   "connectionName": "InputOutputData",
+   "inputBytes": 6,
+   "outputBytes": 0,
+   "capacity": {
+    "inputBits": 10,
+    "outputBits": 10,
+    "source": "catalog"
+   },
+   "points": [
+    {
+     "address": "ZPA06:C.FaultMode",
+     "direction": "Config",
+     "pointPath": "FaultMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA06:C.FaultValue",
+     "direction": "Config",
+     "pointPath": "FaultValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA06:C.FilterOffOn",
+     "direction": "Config",
+     "pointPath": "FilterOffOn",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA06:C.FilterOnOff",
+     "direction": "Config",
+     "pointPath": "FilterOnOff",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA06:C.ProgMode",
+     "direction": "Config",
+     "pointPath": "ProgMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA06:C.ProgValue",
+     "direction": "Config",
+     "pointPath": "ProgValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA06:I.Data",
+     "direction": "Input",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_INPUTS",
+       "scope": "module",
+       "kind": "read",
+       "address": "ZPA06:I.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "ENET_INPUTS"
+    },
+    {
+     "address": "ZPA06:I.Fault",
+     "direction": "Input",
+     "pointPath": "Fault",
+     "dataType": "DINT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA06:O.Data",
+     "direction": "Output",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_OUTPUTS",
+       "scope": "module",
+       "kind": "write",
+       "address": "ZPA06:O.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "ENET_OUTPUTS"
+    }
+   ],
+   "buffers": [
+    {
+     "direction": "input",
+     "member": "Data",
+     "buffer": "ENET_INPUTS",
+     "expression": "ENET_INPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+    },
+    {
+     "direction": "output",
+     "member": "Data",
+     "buffer": "ENET_OUTPUTS",
+     "expression": "ENET_OUTPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+    }
+   ],
+   "inputBits": [
+    {
+     "bit": 0,
+     "address": "ZPA06:I.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "ZPA06:I.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "ZPA06:I.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "ZPA06:I.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "ZPA06:I.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "ZPA06:I.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "ZPA06:I.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "ZPA06:I.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "ZPA06:I.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "ZPA06:I.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "outputBits": [
+    {
+     "bit": 0,
+     "address": "ZPA06:O.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "ZPA06:O.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "ZPA06:O.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "ZPA06:O.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "ZPA06:O.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "ZPA06:O.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "ZPA06:O.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "ZPA06:O.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "ZPA06:O.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "ZPA06:O.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "zoneCopy": {
+    "inputs": true,
+    "outputs": true,
+    "producers": [
+     "DEMO_CONVEYOR/ZPA_MAPPING"
+    ]
+   },
+   "tagRefs": [
+    {
+     "address": "ZPA06:I.Data",
+     "reads": 1,
+     "writes": 0,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+     ]
+    },
+    {
+     "address": "ZPA06:O.Data",
+     "reads": 0,
+     "writes": 1,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+     ]
+    }
+   ],
+   "summary": {
+    "usedInputBits": 0,
+    "totalInputBits": 10,
+    "usedOutputBits": 0,
+    "totalOutputBits": 10,
+    "wordMappedInputBits": 10,
+    "wordMappedOutputBits": 10,
+    "usedPoints": 2,
+    "totalPoints": 9
+   },
+   "children": [],
+   "childModules": [],
+   "busLabel": "EtherNet/IP",
+   "fieldBus": null,
+   "isBridge": false,
+   "transportLabel": "EtherNet/IP network I/O",
+   "wordTransport": "network word over EtherNet/IP"
+  },
+  {
+   "name": "ZPA07",
+   "catalogNumber": "1799ER-IQ10XOQ10/A",
+   "parentModule": "Local",
+   "parentModPortId": "2",
+   "ports": [
+    {
+     "id": "2",
+     "address": "192.168.1.106",
+     "type": "Ethernet",
+     "upstream": true,
+     "hasBus": false
+    }
+   ],
+   "vendor": "1",
+   "productType": "7",
+   "inhibited": false,
+   "kind": "network",
+   "kindLabel": "Network I/O",
+   "protocol": "EtherNet/IP",
+   "slot": null,
+   "ip": "192.168.1.106",
+   "rpi": "10000",
+   "connectionName": "InputOutputData",
+   "inputBytes": 6,
+   "outputBytes": 0,
+   "capacity": {
+    "inputBits": 10,
+    "outputBits": 10,
+    "source": "catalog"
+   },
+   "points": [
+    {
+     "address": "ZPA07:C.FaultMode",
+     "direction": "Config",
+     "pointPath": "FaultMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA07:C.FaultValue",
+     "direction": "Config",
+     "pointPath": "FaultValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA07:C.FilterOffOn",
+     "direction": "Config",
+     "pointPath": "FilterOffOn",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA07:C.FilterOnOff",
+     "direction": "Config",
+     "pointPath": "FilterOnOff",
+     "dataType": "INT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA07:C.ProgMode",
+     "direction": "Config",
+     "pointPath": "ProgMode",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA07:C.ProgValue",
+     "direction": "Config",
+     "pointPath": "ProgValue",
+     "dataType": "BOOL",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA07:I.Data",
+     "direction": "Input",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_INPUTS",
+       "scope": "module",
+       "kind": "read",
+       "address": "ZPA07:I.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "ENET_INPUTS"
+    },
+    {
+     "address": "ZPA07:I.Fault",
+     "direction": "Input",
+     "pointPath": "Fault",
+     "dataType": "DINT",
+     "used": false,
+     "references": [],
+     "bufferTag": ""
+    },
+    {
+     "address": "ZPA07:O.Data",
+     "direction": "Output",
+     "pointPath": "Data",
+     "dataType": "INT",
+     "used": true,
+     "references": [
+      {
+       "program": "IO_MASTER_MAPPER",
+       "routine": "IO_ENET_OUTPUTS",
+       "scope": "module",
+       "kind": "write",
+       "address": "ZPA07:O.Data",
+       "via": null
+      }
+     ],
+     "bufferTag": "ENET_OUTPUTS"
+    }
+   ],
+   "buffers": [
+    {
+     "direction": "input",
+     "member": "Data",
+     "buffer": "ENET_INPUTS",
+     "expression": "ENET_INPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+    },
+    {
+     "direction": "output",
+     "member": "Data",
+     "buffer": "ENET_OUTPUTS",
+     "expression": "ENET_OUTPUTS[ZPA_IO_TMP]",
+     "routine": "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+    }
+   ],
+   "inputBits": [
+    {
+     "bit": 0,
+     "address": "ZPA07:I.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "ZPA07:I.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "ZPA07:I.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "ZPA07:I.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "ZPA07:I.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "ZPA07:I.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "ZPA07:I.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "ZPA07:I.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "ZPA07:I.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "ZPA07:I.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "outputBits": [
+    {
+     "bit": 0,
+     "address": "ZPA07:O.Data.0",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 1,
+     "address": "ZPA07:O.Data.1",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 2,
+     "address": "ZPA07:O.Data.2",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 3,
+     "address": "ZPA07:O.Data.3",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 4,
+     "address": "ZPA07:O.Data.4",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 5,
+     "address": "ZPA07:O.Data.5",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 6,
+     "address": "ZPA07:O.Data.6",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 7,
+     "address": "ZPA07:O.Data.7",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 8,
+     "address": "ZPA07:O.Data.8",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    },
+    {
+     "bit": 9,
+     "address": "ZPA07:O.Data.9",
+     "used": false,
+     "wordUsed": true,
+     "how": [
+      "image word used by Data"
+     ],
+     "references": []
+    }
+   ],
+   "zoneCopy": {
+    "inputs": true,
+    "outputs": true,
+    "producers": [
+     "DEMO_CONVEYOR/ZPA_MAPPING"
+    ]
+   },
+   "tagRefs": [
+    {
+     "address": "ZPA07:I.Data",
+     "reads": 1,
+     "writes": 0,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_INPUTS"
+     ]
+    },
+    {
+     "address": "ZPA07:O.Data",
+     "reads": 0,
+     "writes": 1,
+     "routines": [
+      "IO_MASTER_MAPPER/IO_ENET_OUTPUTS"
+     ]
+    }
+   ],
+   "summary": {
+    "usedInputBits": 0,
+    "totalInputBits": 10,
+    "usedOutputBits": 0,
+    "totalOutputBits": 10,
+    "wordMappedInputBits": 10,
+    "wordMappedOutputBits": 10,
+    "usedPoints": 2,
+    "totalPoints": 9
+   },
+   "children": [],
+   "childModules": [],
+   "busLabel": "EtherNet/IP",
+   "fieldBus": null,
+   "isBridge": false,
+   "transportLabel": "EtherNet/IP network I/O",
+   "wordTransport": "network word over EtherNet/IP"
+  }
+ ],
+ "summary": {
+  "controller": "CONVEYOR_PLC",
+  "modules": 11,
+  "network": 10,
+  "hardware": 0,
+  "subdevices": 0,
+  "controllers": 1,
+  "bridges": 0,
+  "directEthernetDevices": 10,
+  "unnamedModules": 0,
+  "networks": [],
+  "usedPoints": 20,
+  "totalPoints": 90,
+  "usedInputBits": 0,
+  "usedOutputBits": 0,
+  "wordMappedInputBits": 100,
+  "wordMappedOutputBits": 100
+ },
+ "notes": [
+  "Zone sensor words are copied bit-for-bit from ENET_INPUTS into NETS[1].ZPA[n].INPUTS (DEMO_CONVEYOR/ZPA_MAPPING); module input bits 0..7 therefore feed zone scan logic.",
+  "Communication topology: 0 bridge segment(s); 10 EtherNet/IP device(s) directly on the controller."
+ ],
+ "zoneCopy": {
+  "inputs": true,
+  "outputs": true,
+  "producers": [
+   "DEMO_CONVEYOR/ZPA_MAPPING"
+  ]
+ },
+ "bufferBits": {}
+}

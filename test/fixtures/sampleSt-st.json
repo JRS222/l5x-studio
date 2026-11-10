@@ -1,0 +1,20 @@
+[
+ {
+  "program": "DivertPoints13To16",
+  "name": "MappedIO",
+  "type": "ST",
+  "text": ""
+ },
+ {
+  "program": "DivertPoints1To4",
+  "name": "MappedIO",
+  "type": "ST",
+  "text": "//Lane 1\n\n//Inputs\n\nLaneFullSensor[1] :=  Network1:I.Data[2].1;\nDivertPointSensor[1] :=  Network1:I.Data[2].0;\nOldCCSPusherRetractedSensor[1] := Network1:I.Data[2].3;\nOldCCSPusherExtendedSensor[1] := Network1:I.Data[2].2;\n\n\n//Outputs\n\n\nNetwork1:O.Data[2].10 := OldPusherExtend[1];\n\n\n//Lane 2\n\n//Inputs\n\nLaneFullSensor[2] :=  Network1:I.Data[4].1;\nDivertPointSensor[2] :=  Network1:I.Data[4].0;\nOldCCSPusherRetractedSensor[2] := Network1:I.Data[4].3;\nOldCCSPusherExtendedSensor[2] := Network1:I.Data[4].2;\n\n\n//Outputs\n\n\nNetwork1:O.Data[4].10 := OldPusherExtend[2];\n\n\n//Lane 3\n\n//Inputs\n\nLaneFullSensor[3] :=  Network1:I.Data[6].1;\nDivertPointSensor[3] :=  Network1:I.Data[6].0;\nOldCCSPusherRetractedSensor[3] := Network1:I.Data[6].3;\nOldCCSPusherExtendedSensor[3] := Network1:I.Data[6].2;\n\n\n//Outputs\n\n\nNetwork1:O.Data[6].10 := OldPusherExtend[3];\n\n//Lane 4\n\n//Inputs\n\nLaneFullSensor[4] :=  Network1:I.Data[8].1;\nDivertPointSensor[4] :=  Network1:I.Data[8].0;\nOldCCSPusherRetractedSensor[4] := Network1:I.Data[8].3;\nOldCCSPusherExtendedSensor[4] := Network1:I.Data[8].2;\n\n\n//Outputs\n\n\nNetwork1:O.Data[8].10 := OldPusherExtend[4];\n\n\n"
+ },
+ {
+  "program": "DivertPoints5To8",
+  "name": "MappedIO",
+  "type": "ST",
+  "text": "//Lane 5\n\n//Inputs\n\nLaneFullSensor[5] :=  Network1:I.Data[10].1;\nDivertPointSensor[5] :=  Network1:I.Data[10].0;\nOldCCSPusherRetractedSensor[5] := Network1:I.Data[10].3;\nOldCCSPusherExtendedSensor[5] := Network1:I.Data[10].2;\n\n\n//Outputs\n\n\nNetwork1:O.Data[10].10 := OldPusherExtend[5];\n\n//Lane 6\n\n//Inputs\n\nLaneFullSensor[6] :=  Network1:I.Data[12].1;\nDivertPointSensor[6] :=  Network1:I.Data[12].0;\nOldCCSPusherRetractedSensor[6] := Network1:I.Data[12].3;\nOldCCSPusherExtendedSensor[6] := Network1:I.Data[12].2;\n\n\n//Outputs\n\n\nNetwork1:O.Data[12].10 := OldPusherExtend[6];\n\n//Lane 7\n\n//Inputs\n\nLaneFullSensor[7] :=  Network1:I.Data[14].1;\nDivertPointSensor[7] :=  Network1:I.Data[14].0;\nOldCCSPusherRetractedSensor[7] := Network1:I.Data[14].3;\nOldCCSPusherExtendedSensor[7] := Network1:I.Data[14].2;\n\n\n//Outputs\n\n\nNetwork1:O.Data[14].10 := OldPusherExtend[7];\n\n//Lane 8\n\n//Inputs\n\nLaneFullSensor[8] :=  Network1:I.Data[16].1;\nDivertPointSensor[8] :=  Network1:I.Data[16].0;\nOldCCSPusherRetractedSensor[8] := Network1:I.Data[16].3;\nOldCCSPusherExtendedSensor[8] := Network1:I.Data[16].2;\n\n\n//Outputs\n\n\nNetwork1:O.Data[16].10 := OldPusherExtend[8];"
+ }
+]

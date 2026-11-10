@@ -1,0 +1,87 @@
+Tag,DataType,Description,Address,Direction,Zone
+SEG1_Z1_SENSOR,BOOL,SEG1_Z1 sensor input (ZPA01 group NETS[1].ZPA[1]); run command SEG1_Z1_RUN at ZPA01:O.Data.0; status NETS[1].ZPA[1].ZONE_STATUS[1],ZPA01:I.Data.0,Input,1
+SEG1_Z2_SENSOR,BOOL,SEG1_Z2 sensor input (ZPA01 group NETS[1].ZPA[1]); run command SEG1_Z2_RUN at ZPA01:O.Data.1; status NETS[1].ZPA[1].ZONE_STATUS[2],ZPA01:I.Data.1,Input,2
+SEG1_Z3_SENSOR,BOOL,SEG1_Z3 sensor input (ZPA01 group NETS[1].ZPA[1]); run command SEG1_Z3_RUN at ZPA01:O.Data.2; status NETS[1].ZPA[1].ZONE_STATUS[3],ZPA01:I.Data.2,Input,3
+SEG1_Z4_SENSOR,BOOL,SEG1_Z4 sensor input (ZPA01 group NETS[1].ZPA[1]); run command SEG1_Z4_RUN at ZPA01:O.Data.3; status NETS[1].ZPA[1].ZONE_STATUS[4],ZPA01:I.Data.3,Input,4
+SEG2_Z1_SENSOR,BOOL,SEG2_Z1 sensor input (ZPA02 group NETS[1].ZPA[2]); run command SEG2_Z1_RUN at ZPA02:O.Data.0; status NETS[1].ZPA[2].ZONE_STATUS[1],ZPA02:I.Data.0,Input,5
+SEG2_Z2_SENSOR,BOOL,SEG2_Z2 sensor input (ZPA02 group NETS[1].ZPA[2]); run command SEG2_Z2_RUN at ZPA02:O.Data.1; status NETS[1].ZPA[2].ZONE_STATUS[2],ZPA02:I.Data.1,Input,6
+SEG3_Z1_SENSOR,BOOL,SEG3_Z1 sensor input (ZPA03 group NETS[1].ZPA[3]); run command SEG3_Z1_RUN at ZPA03:O.Data.0; status NETS[1].ZPA[3].ZONE_STATUS[1],ZPA03:I.Data.0,Input,7
+SEG3_Z2_SENSOR,BOOL,SEG3_Z2 sensor input (ZPA03 group NETS[1].ZPA[3]); run command SEG3_Z2_RUN at ZPA03:O.Data.1; status NETS[1].ZPA[3].ZONE_STATUS[2],ZPA03:I.Data.1,Input,8
+SEG3_Z3_SENSOR,BOOL,SEG3_Z3 sensor input (ZPA03 group NETS[1].ZPA[3]); run command SEG3_Z3_RUN at ZPA03:O.Data.2; status NETS[1].ZPA[3].ZONE_STATUS[3],ZPA03:I.Data.2,Input,9
+SPIRAL1_Z1_SENSOR,BOOL,SPIRAL1_Z1 sensor input (ZPA04 group NETS[1].ZPA[4]); run command SPIRAL1_Z1_RUN at ZPA04:O.Data.0; status NETS[1].ZPA[4].ZONE_STATUS[1],ZPA04:I.Data.0,Input,10
+SPIRAL1_Z2_SENSOR,BOOL,SPIRAL1_Z2 sensor input (ZPA04 group NETS[1].ZPA[4]); run command SPIRAL1_Z2_RUN at ZPA04:O.Data.1; status NETS[1].ZPA[4].ZONE_STATUS[2],ZPA04:I.Data.1,Input,11
+SPIRAL1_Z3_SENSOR,BOOL,SPIRAL1_Z3 sensor input (ZPA04 group NETS[1].ZPA[4]); run command SPIRAL1_Z3_RUN at ZPA04:O.Data.2; status NETS[1].ZPA[4].ZONE_STATUS[3],ZPA04:I.Data.2,Input,12
+SPIRAL1_Z4_SENSOR,BOOL,SPIRAL1_Z4 sensor input (ZPA04 group NETS[1].ZPA[4]); run command SPIRAL1_Z4_RUN at ZPA04:O.Data.3; status NETS[1].ZPA[4].ZONE_STATUS[4],ZPA04:I.Data.3,Input,13
+SPIRAL1_Z5_SENSOR,BOOL,SPIRAL1_Z5 sensor input (ZPA04 group NETS[1].ZPA[4]); run command SPIRAL1_Z5_RUN at ZPA04:O.Data.4; status NETS[1].ZPA[4].ZONE_STATUS[5],ZPA04:I.Data.4,Input,14
+SPIRAL1_Z6_SENSOR,BOOL,SPIRAL1_Z6 sensor input (ZPA04 group NETS[1].ZPA[4]); run command SPIRAL1_Z6_RUN at ZPA04:O.Data.5; status NETS[1].ZPA[4].ZONE_STATUS[6],ZPA04:I.Data.5,Input,15
+SPIRAL1_Z7_SENSOR,BOOL,SPIRAL1_Z7 sensor input (ZPA04 group NETS[1].ZPA[4]); run command SPIRAL1_Z7_RUN at ZPA04:O.Data.6; status NETS[1].ZPA[4].ZONE_STATUS[7],ZPA04:I.Data.6,Input,16
+SPIRAL1_Z8_SENSOR,BOOL,SPIRAL1_Z8 sensor input (ZPA04 group NETS[1].ZPA[4]); run command SPIRAL1_Z8_RUN at ZPA04:O.Data.7; status NETS[1].ZPA[4].ZONE_STATUS[8],ZPA04:I.Data.7,Input,17
+SPIRAL1_Z9_SENSOR,BOOL,SPIRAL1_Z9 sensor input (ZPA05 group NETS[1].ZPA[5]); run command SPIRAL1_Z9_RUN at ZPA05:O.Data.0; status NETS[1].ZPA[5].ZONE_STATUS[1],ZPA05:I.Data.0,Input,18
+SPIRAL1_Z10_SENSOR,BOOL,SPIRAL1_Z10 sensor input (ZPA05 group NETS[1].ZPA[5]); run command SPIRAL1_Z10_RUN at ZPA05:O.Data.1; status NETS[1].ZPA[5].ZONE_STATUS[2],ZPA05:I.Data.1,Input,19
+SPIRAL1_Z11_SENSOR,BOOL,SPIRAL1_Z11 sensor input (ZPA05 group NETS[1].ZPA[5]); run command SPIRAL1_Z11_RUN at ZPA05:O.Data.2; status NETS[1].ZPA[5].ZONE_STATUS[3],ZPA05:I.Data.2,Input,20
+SPIRAL1_Z12_SENSOR,BOOL,SPIRAL1_Z12 sensor input (ZPA05 group NETS[1].ZPA[5]); run command SPIRAL1_Z12_RUN at ZPA05:O.Data.3; status NETS[1].ZPA[5].ZONE_STATUS[4],ZPA05:I.Data.3,Input,21
+SPIRAL1_Z13_SENSOR,BOOL,SPIRAL1_Z13 sensor input (ZPA05 group NETS[1].ZPA[5]); run command SPIRAL1_Z13_RUN at ZPA05:O.Data.4; status NETS[1].ZPA[5].ZONE_STATUS[5],ZPA05:I.Data.4,Input,22
+SPIRAL1_Z14_SENSOR,BOOL,SPIRAL1_Z14 sensor input (ZPA05 group NETS[1].ZPA[5]); run command SPIRAL1_Z14_RUN at ZPA05:O.Data.5; status NETS[1].ZPA[5].ZONE_STATUS[6],ZPA05:I.Data.5,Input,23
+SPIRAL1_Z15_SENSOR,BOOL,SPIRAL1_Z15 sensor input (ZPA05 group NETS[1].ZPA[5]); run command SPIRAL1_Z15_RUN at ZPA05:O.Data.6; status NETS[1].ZPA[5].ZONE_STATUS[7],ZPA05:I.Data.6,Input,24
+SPIRAL1_Z16_SENSOR,BOOL,SPIRAL1_Z16 sensor input (ZPA05 group NETS[1].ZPA[5]); run command SPIRAL1_Z16_RUN at ZPA05:O.Data.7; status NETS[1].ZPA[5].ZONE_STATUS[8],ZPA05:I.Data.7,Input,25
+SPIRAL1_Z17_SENSOR,BOOL,SPIRAL1_Z17 sensor input (ZPA06 group NETS[1].ZPA[6]); run command SPIRAL1_Z17_RUN at ZPA06:O.Data.0; status NETS[1].ZPA[6].ZONE_STATUS[1],ZPA06:I.Data.0,Input,26
+SPIRAL1_Z18_SENSOR,BOOL,SPIRAL1_Z18 sensor input (ZPA06 group NETS[1].ZPA[6]); run command SPIRAL1_Z18_RUN at ZPA06:O.Data.1; status NETS[1].ZPA[6].ZONE_STATUS[2],ZPA06:I.Data.1,Input,27
+SPIRAL1_Z19_SENSOR,BOOL,SPIRAL1_Z19 sensor input (ZPA06 group NETS[1].ZPA[6]); run command SPIRAL1_Z19_RUN at ZPA06:O.Data.2; status NETS[1].ZPA[6].ZONE_STATUS[3],ZPA06:I.Data.2,Input,28
+SPIRAL1_Z20_SENSOR,BOOL,SPIRAL1_Z20 sensor input (ZPA06 group NETS[1].ZPA[6]); run command SPIRAL1_Z20_RUN at ZPA06:O.Data.3; status NETS[1].ZPA[6].ZONE_STATUS[4],ZPA06:I.Data.3,Input,29
+SPIRAL1_Z21_SENSOR,BOOL,SPIRAL1_Z21 sensor input (ZPA06 group NETS[1].ZPA[6]); run command SPIRAL1_Z21_RUN at ZPA06:O.Data.4; status NETS[1].ZPA[6].ZONE_STATUS[5],ZPA06:I.Data.4,Input,30
+SPIRAL1_Z22_SENSOR,BOOL,SPIRAL1_Z22 sensor input (ZPA06 group NETS[1].ZPA[6]); run command SPIRAL1_Z22_RUN at ZPA06:O.Data.5; status NETS[1].ZPA[6].ZONE_STATUS[6],ZPA06:I.Data.5,Input,31
+SPIRAL1_Z23_SENSOR,BOOL,SPIRAL1_Z23 sensor input (ZPA06 group NETS[1].ZPA[6]); run command SPIRAL1_Z23_RUN at ZPA06:O.Data.6; status NETS[1].ZPA[6].ZONE_STATUS[7],ZPA06:I.Data.6,Input,32
+SPUR1_Z1_SENSOR,BOOL,SPUR1_Z1 sensor input (ZPA07 group NETS[1].ZPA[7]); run command SPUR1_Z1_RUN at ZPA07:O.Data.0; status NETS[1].ZPA[7].ZONE_STATUS[1],ZPA07:I.Data.0,Input,33
+SPUR1_Z2_SENSOR,BOOL,SPUR1_Z2 sensor input (ZPA07 group NETS[1].ZPA[7]); run command SPUR1_Z2_RUN at ZPA07:O.Data.1; status NETS[1].ZPA[7].ZONE_STATUS[2],ZPA07:I.Data.1,Input,34
+SCAN1_BARCODE,STRING_20,"Scanner barcode result (SCAN1, zone 3) - written by the external scanner MSG/CIP interface",external scanner interface,Input,3
+SCAN1_GOOD_READ,BOOL,Scanner good-read pulse (SCAN1) - written by the external scanner MSG/CIP interface,external scanner interface,Input,3
+TRACK_TBL,TRAY_TRACK[16],"Tray tracking table (Barcode STRING_20, Zone, Seq, Valid, Timestamp)",TRACK_TBL,Internal,all
+TRACK_COUNT,DINT,Tray tracking ring-buffer sequence counter,TRACK_COUNT,Internal,all
+TRACK_RESET,BOOL,HMI / stop-reset tray table clear request,TRACK_RESET,Output,all
+MERGE_MERGE1_MAIN_GRANT,BOOL,Merge MERGE1 release grant to the main upstream zone ? (priority alternate),MERGE_MERGE1_MAIN_GRANT,Internal,5
+MERGE_MERGE1_SPUR_GRANT,BOOL,Merge MERGE1 release grant to the spur last zone 34 (priority alternate),MERGE_MERGE1_SPUR_GRANT,Internal,5
+XFER01_INPUTS,DINT,Pusher / divert PUSHER1 input image word (XFER01),XFER01:I.Data,Input,8
+XFER01_OUTPUTS,DINT,Pusher / divert PUSHER1 output image word (XFER01),XFER01:O.Data,Output,8
+PUSHER1_RETRACTED_SW,BOOL,PUSHER1 input bit 0 (Pusher retracted limit switch),XFER01_INPUTS.0,Input,8
+PUSHER1_EXTENDED_SW,BOOL,PUSHER1 input bit 1 (Pusher extended limit switch),XFER01_INPUTS.1,Input,8
+PUSHER1_TRAY_PRESENT,BOOL,PUSHER1 input bit 2 (Tray at divert position),XFER01_INPUTS.2,Input,8
+PUSHER1_DOWNSTREAM_CLEAR,BOOL,PUSHER1 input bit 3 (Divert side clear),XFER01_INPUTS.3,Input,8
+PUSHER1_EXTEND_SOL,BOOL,PUSHER1 output bit 0 (Pusher extend solenoid (one-way divert)),XFER01_OUTPUTS.0,Output,8
+PUSHER1_RETRACT_SOL,BOOL,PUSHER1 output bit 1 (Pusher retract solenoid),XFER01_OUTPUTS.1,Output,8
+PUSHER1_DIVERT_ENABLE,BOOL,PUSHER1 output bit 2 (Divert enable / light),XFER01_OUTPUTS.2,Output,8
+XFER_CMD_PUSHER1,BOOL,Pusher / divert PUSHER1 route/rotate command,XFER_CMD_PUSHER1,Output,8
+XFER01_STATUS,DINT,Pusher / divert PUSHER1 status word,XFER01_STATUS,Internal,8
+XFER01_FAULT,BOOL,Pusher / divert PUSHER1 fault,XFER01_FAULT,Input,8
+XFER02_INPUTS,DINT,Rotary table ROTARY1 input image word (XFER02),XFER02:I.Data,Input,9
+XFER02_OUTPUTS,DINT,Rotary table ROTARY1 output image word (XFER02),XFER02:O.Data,Output,9
+ROTARY1_HOME_SW,BOOL,ROTARY1 input bit 0 (Rotary table home position),XFER02_INPUTS.0,Input,9
+ROTARY1_POS_90_SW,BOOL,ROTARY1 input bit 1 (Table at 90 degrees),XFER02_INPUTS.1,Input,9
+ROTARY1_POS_180_SW,BOOL,ROTARY1 input bit 2 (Table at 180 degrees),XFER02_INPUTS.2,Input,9
+ROTARY1_POS_270_SW,BOOL,ROTARY1 input bit 3 (Table at 270 degrees),XFER02_INPUTS.3,Input,9
+ROTARY1_TRAY_PRESENT,BOOL,ROTARY1 input bit 4 (Tray on table),XFER02_INPUTS.4,Input,9
+ROTARY1_INFEED_CLEAR,BOOL,ROTARY1 input bit 5 (Infeed zone clear),XFER02_INPUTS.5,Input,9
+ROTARY1_ROTATE_CW,BOOL,ROTARY1 output bit 0 (Rotate clockwise (bidirectional)),XFER02_OUTPUTS.0,Output,9
+ROTARY1_ROTATE_CCW,BOOL,ROTARY1 output bit 1 (Rotate counter-clockwise (bidirectional)),XFER02_OUTPUTS.1,Output,9
+ROTARY1_TABLE_ENABLE,BOOL,ROTARY1 output bit 2 (Table motor enable),XFER02_OUTPUTS.2,Output,9
+ROTARY1_TABLE_BRAKE,BOOL,ROTARY1 output bit 3 (Table brake release),XFER02_OUTPUTS.3,Output,9
+XFER_CMD_ROTARY1,BOOL,Rotary table ROTARY1 route/rotate command,XFER_CMD_ROTARY1,Output,9
+XFER_POS_ROTARY1,INT,Rotary table ROTARY1 current position status,XFER_POS_ROTARY1,Internal,9
+XFER_DEST_ROTARY1,INT,Rotary table ROTARY1 requested destination position,XFER_DEST_ROTARY1,Output,9
+XFER02_STATUS,DINT,Rotary table ROTARY1 status word,XFER02_STATUS,Internal,9
+XFER02_FAULT,BOOL,Rotary table ROTARY1 fault,XFER02_FAULT,Input,9
+XFER03_INPUTS,DINT,Cross-belt pop-up transfer POPUP1 input image word (XFER03),XFER03:I.Data,Input,3
+XFER03_OUTPUTS,DINT,Cross-belt pop-up transfer POPUP1 output image word (XFER03),XFER03:O.Data,Output,3
+POPUP1_POPUP_UP_SW,BOOL,POPUP1 input bit 0 (Transfer belts raised),XFER03_INPUTS.0,Input,3
+POPUP1_POPUP_DOWN_SW,BOOL,POPUP1 input bit 1 (Transfer belts lowered),XFER03_INPUTS.1,Input,3
+POPUP1_TRAY_PRESENT,BOOL,POPUP1 input bit 2 (Tray on transfer),XFER03_INPUTS.2,Input,3
+POPUP1_LEFT_CLEAR,BOOL,POPUP1 input bit 3 (Left transfer side clear),XFER03_INPUTS.3,Input,3
+POPUP1_RIGHT_CLEAR,BOOL,POPUP1 input bit 4 (Right transfer side clear),XFER03_INPUTS.4,Input,3
+POPUP1_RAISE,BOOL,POPUP1 output bit 0 (Pop-up raise),XFER03_OUTPUTS.0,Output,3
+POPUP1_LOWER,BOOL,POPUP1 output bit 1 (Pop-up lower),XFER03_OUTPUTS.1,Output,3
+POPUP1_BELT_LEFT,BOOL,POPUP1 output bit 2 (Cross belts to the left (bidirectional)),XFER03_OUTPUTS.2,Output,3
+POPUP1_BELT_RIGHT,BOOL,POPUP1 output bit 3 (Cross belts to the right (bidirectional)),XFER03_OUTPUTS.3,Output,3
+POPUP1_XFER_ENABLE,BOOL,POPUP1 output bit 4 (Transfer enable),XFER03_OUTPUTS.4,Output,3
+XFER_CMD_POPUP1_LEFT,BOOL,Pop-up POPUP1 transfer-left command,XFER_CMD_POPUP1_LEFT,Output,3
+XFER_CMD_POPUP1_RIGHT,BOOL,Pop-up POPUP1 transfer-right command,XFER_CMD_POPUP1_RIGHT,Output,3
+XFER03_STATUS,DINT,Cross-belt pop-up transfer POPUP1 status word,XFER03_STATUS,Internal,3
+XFER03_FAULT,BOOL,Cross-belt pop-up transfer POPUP1 fault,XFER03_FAULT,Input,3

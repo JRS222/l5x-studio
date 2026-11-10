@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BELT_CONVEYOR HMI</title>
+<style>html,body{margin:0;padding:0;height:100%;background:#10161c;color:#d7e2ec;font-family:Consolas,'Segoe UI',Roboto,Arial,sans-serif;}*{box-sizing:border-box;}.hmi{display:flex;flex-direction:column;height:100%;min-height:100vh;}.hmi-header{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;padding:12px 18px;background:linear-gradient(90deg,#16212b,#1d2c39);border-bottom:2px solid #2b5169;}.hmi-header h1{font-size:17px;margin:0;letter-spacing:.06em;color:#8fd0ff;font-weight:600;}.hmi-header .meta{font-size:12px;color:#93a7b8;}.hmi-header .meta b{color:#dfe9f2;font-weight:600;}.hmi-main{display:flex;flex:1;min-height:0;gap:12px;padding:12px;}.hmi-stage{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px;}.hmi-canvas-wrap{position:relative;flex:1;min-height:260px;background:#0b1116;border:1px solid #27404f;border-radius:6px;overflow:hidden;}#hmi-canvas{display:block;width:100%;height:100%;cursor:crosshair;}.hmi-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}.hmi-btn{background:#1d2c39;color:#cfe6f7;border:1px solid #35637f;border-radius:4px;padding:6px 14px;font-size:13px;font-family:inherit;cursor:pointer;letter-spacing:.04em;}.hmi-btn:hover{background:#26404f;border-color:#4d8db1;}.hmi-btn.run{border-color:#2f7d55;color:#9cf0c2;}.hmi-btn.stop{border-color:#8a4a3a;color:#ffc3ad;}.hmi-btn.reset{border-color:#6d6a3a;color:#f0e6a8;}.hmi-btn.sim{background:#233448;}.hmi-btn.active{background:#2a5c78;border-color:#67b7e0;color:#fff;}.hmi-status{margin-left:auto;font-size:12px;color:#9fb6c7;}.hmi-status b{color:#ffd166;font-weight:600;}.hmi-legend{display:flex;gap:16px;font-size:12px;color:#a9bccb;flex-wrap:wrap;padding:2px 2px;}.hmi-legend span{display:inline-flex;align-items:center;gap:6px;}.hmi-dot{width:12px;height:12px;border-radius:3px;display:inline-block;border:1px solid rgba(255,255,255,.25);}.hmi-panel{width:440px;max-width:46vw;display:flex;flex-direction:column;min-height:0;background:#121b22;border:1px solid #27404f;border-radius:6px;overflow:hidden;}.hmi-panel h2{margin:0;padding:8px 12px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#7fb6d6;background:#16232e;border-top:1px solid #223a49;border-bottom:1px solid #223a49;}.hmi-panel h2:first-child{border-top:0;}.hmi-table-host{flex:1;overflow:auto;min-height:110px;}.hmi-table-host.short{flex:0 0 auto;max-height:230px;}table{border-collapse:collapse;width:100%;font-size:11.5px;}th,td{padding:4px 8px;text-align:left;border-bottom:1px solid #1d2b36;white-space:nowrap;}th{position:sticky;top:0;background:#17252f;color:#8fb3c9;font-weight:600;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;z-index:1;}td.mono{font-family:Consolas,monospace;color:#b9d7ea;}td.zone{color:#ffd166;font-weight:600;}td.state-stopped{color:#93a7b8;} td.state-running{color:#3fd68a;}td.state-full{color:#f0c24b;} td.state-jam{color:#ff6b60;font-weight:700;}.hmi-notes{padding:7px 12px;font-size:10.5px;color:#7d94a5;border-top:1px solid #1d2b36;line-height:1.45;}.hmi-notes code{color:#9fd0ef;}.hmi-btn.dev{padding:1px 7px;font-size:10px;margin:0 2px;border-radius:3px;}td.state-idle{color:#93a7b8;} td.state-active{color:#f0c24b;font-weight:600;}td.state-fault{color:#ff6b60;font-weight:700;}@media (max-width:980px){.hmi-main{flex-direction:column;}.hmi-panel{width:auto;max-width:none;}}</style>
+</head>
+<body>
+<div class="hmi">
+  <header class="hmi-header">
+    <h1>BELT_CONVEYOR &mdash; CONVEYOR HMI</h1>
+    <div class="meta">PLC <b>BELT_PLC</b> (1756-L83E) &middot; <b>3</b> segments &middot; <b>18</b> zones &middot; <b>4</b> ZPA groups &middot; <b>4</b> I/O blocks &middot; <b>36.5 m</b> &middot; belt conveyor &middot; <b>13</b> curved zones &middot; spiral rise <b>2.70 m</b> &middot; <b>1</b> scan zone(s) &middot; tracking <b>16 trays</b></div>
+  </header>
+  <main class="hmi-main">
+    <section class="hmi-stage">
+      <div class="hmi-canvas-wrap"><canvas id="hmi-canvas" width="1100" height="460"></canvas></div>
+      <div class="hmi-controls">
+        <button class="hmi-btn run" id="btn-run" type="button">Run</button>
+        <button class="hmi-btn stop" id="btn-stop" type="button">Stop</button>
+        <button class="hmi-btn reset" id="btn-reset" type="button">Reset</button>
+        <button class="hmi-btn sim" id="btn-sim" type="button">Sim</button>
+        <span class="hmi-status" id="sim-status">conveyor <b>stopped</b> &middot; click a zone to toggle its sensor</span>
+      </div>
+      <div class="hmi-legend"><span><i class="hmi-dot" style="background:#41505f;border-color:#6b7c8d"></i>Stopped</span><span><i class="hmi-dot" style="background:#1f7a4d;border-color:#3fd68a"></i>Running</span><span><i class="hmi-dot" style="background:#a8781f;border-color:#f0c24b"></i>Full</span><span><i class="hmi-dot" style="background:#9e2f2a;border-color:#ff6b60"></i>Jam</span><span><i class="hmi-dot" style="background:#101a22;border-color:#7fd4ff"></i>Scanner</span><span><i class="hmi-dot" style="background:#2b3a47;border-color:#8fd0ff"></i>Belt</span><span><i class="hmi-dot" style="background:#1f7a4d;border-color:#3fd68a"></i>Merge grant (main)</span><span><i class="hmi-dot" style="background:#1d5c8a;border-color:#7fd4ff"></i>Merge grant (spur)</span><span><i class="hmi-dot" style="background:#8a6a1f;border-color:#f0c24b"></i>Device active</span></div>
+    </section>
+    <aside class="hmi-panel">
+      <h2>Zone tag mapping</h2>
+      <div class="hmi-table-host"><table id="tag-map">
+        <thead><tr><th>Zone</th><th>Block</th><th>PLC tag path</th><th>Input</th><th>Output</th><th>IP</th></tr></thead>
+        <tbody>
+          <tr data-zone="1"><td class="zone">BELT1_Z1</td><td class="mono">ZPA01</td><td class="mono">NETS[1].ZPA[1]</td><td class="mono">ZPA01:I.Data.0</td><td class="mono">ZPA01:O.Data.0</td><td class="mono">192.168.1.120</td></tr>
+          <tr data-zone="2"><td class="zone">BELT1_Z2</td><td class="mono">ZPA01</td><td class="mono">NETS[1].ZPA[1]</td><td class="mono">ZPA01:I.Data.1</td><td class="mono">ZPA01:O.Data.1</td><td class="mono">192.168.1.120</td></tr>
+          <tr data-zone="3"><td class="zone">BELT1_Z3</td><td class="mono">ZPA01</td><td class="mono">NETS[1].ZPA[1]</td><td class="mono">ZPA01:I.Data.2</td><td class="mono">ZPA01:O.Data.2</td><td class="mono">192.168.1.120</td></tr>
+          <tr data-zone="4"><td class="zone">SPIRAL_UP_Z1</td><td class="mono">ZPA02</td><td class="mono">NETS[1].ZPA[2]</td><td class="mono">ZPA02:I.Data.0</td><td class="mono">ZPA02:O.Data.0</td><td class="mono">192.168.1.121</td></tr>
+          <tr data-zone="5"><td class="zone">SPIRAL_UP_Z2</td><td class="mono">ZPA02</td><td class="mono">NETS[1].ZPA[2]</td><td class="mono">ZPA02:I.Data.1</td><td class="mono">ZPA02:O.Data.1</td><td class="mono">192.168.1.121</td></tr>
+          <tr data-zone="6"><td class="zone">SPIRAL_UP_Z3</td><td class="mono">ZPA02</td><td class="mono">NETS[1].ZPA[2]</td><td class="mono">ZPA02:I.Data.2</td><td class="mono">ZPA02:O.Data.2</td><td class="mono">192.168.1.121</td></tr>
+          <tr data-zone="7"><td class="zone">SPIRAL_UP_Z4</td><td class="mono">ZPA02</td><td class="mono">NETS[1].ZPA[2]</td><td class="mono">ZPA02:I.Data.3</td><td class="mono">ZPA02:O.Data.3</td><td class="mono">192.168.1.121</td></tr>
+          <tr data-zone="8"><td class="zone">SPIRAL_UP_Z5</td><td class="mono">ZPA02</td><td class="mono">NETS[1].ZPA[2]</td><td class="mono">ZPA02:I.Data.4</td><td class="mono">ZPA02:O.Data.4</td><td class="mono">192.168.1.121</td></tr>
+          <tr data-zone="9"><td class="zone">SPIRAL_UP_Z6</td><td class="mono">ZPA02</td><td class="mono">NETS[1].ZPA[2]</td><td class="mono">ZPA02:I.Data.5</td><td class="mono">ZPA02:O.Data.5</td><td class="mono">192.168.1.121</td></tr>
+          <tr data-zone="10"><td class="zone">SPIRAL_UP_Z7</td><td class="mono">ZPA02</td><td class="mono">NETS[1].ZPA[2]</td><td class="mono">ZPA02:I.Data.6</td><td class="mono">ZPA02:O.Data.6</td><td class="mono">192.168.1.121</td></tr>
+          <tr data-zone="11"><td class="zone">SPIRAL_UP_Z8</td><td class="mono">ZPA02</td><td class="mono">NETS[1].ZPA[2]</td><td class="mono">ZPA02:I.Data.7</td><td class="mono">ZPA02:O.Data.7</td><td class="mono">192.168.1.121</td></tr>
+          <tr data-zone="12"><td class="zone">SPIRAL_UP_Z9</td><td class="mono">ZPA03</td><td class="mono">NETS[1].ZPA[3]</td><td class="mono">ZPA03:I.Data.0</td><td class="mono">ZPA03:O.Data.0</td><td class="mono">192.168.1.122</td></tr>
+          <tr data-zone="13"><td class="zone">SPIRAL_UP_Z10</td><td class="mono">ZPA03</td><td class="mono">NETS[1].ZPA[3]</td><td class="mono">ZPA03:I.Data.1</td><td class="mono">ZPA03:O.Data.1</td><td class="mono">192.168.1.122</td></tr>
+          <tr data-zone="14"><td class="zone">SPIRAL_UP_Z11</td><td class="mono">ZPA03</td><td class="mono">NETS[1].ZPA[3]</td><td class="mono">ZPA03:I.Data.2</td><td class="mono">ZPA03:O.Data.2</td><td class="mono">192.168.1.122</td></tr>
+          <tr data-zone="15"><td class="zone">SPIRAL_UP_Z12</td><td class="mono">ZPA03</td><td class="mono">NETS[1].ZPA[3]</td><td class="mono">ZPA03:I.Data.3</td><td class="mono">ZPA03:O.Data.3</td><td class="mono">192.168.1.122</td></tr>
+          <tr data-zone="16"><td class="zone">SPIRAL_UP_Z13</td><td class="mono">ZPA03</td><td class="mono">NETS[1].ZPA[3]</td><td class="mono">ZPA03:I.Data.4</td><td class="mono">ZPA03:O.Data.4</td><td class="mono">192.168.1.122</td></tr>
+          <tr data-zone="17"><td class="zone">BELT2_Z1</td><td class="mono">ZPA04</td><td class="mono">NETS[1].ZPA[4]</td><td class="mono">ZPA04:I.Data.0</td><td class="mono">ZPA04:O.Data.0</td><td class="mono">192.168.1.123</td></tr>
+          <tr data-zone="18"><td class="zone">BELT2_Z2</td><td class="mono">ZPA04</td><td class="mono">NETS[1].ZPA[4]</td><td class="mono">ZPA04:I.Data.1</td><td class="mono">ZPA04:O.Data.1</td><td class="mono">192.168.1.123</td></tr>
+        </tbody></table></div>
+      <h2>Tray tracking</h2>
+      <div class="hmi-table-host short"><table id="track-table">
+        <thead><tr><th>Slot</th><th>Barcode</th><th>Zone</th><th>State</th></tr></thead>
+        <tbody id="track-body"></tbody></table></div>
+      <h2>Belt drives</h2>
+      <div class="hmi-table-host short"><table id="drive-table">
+        <thead><tr><th>Segment</th><th>Run</th><th>Fault</th><th>Status</th></tr></thead>
+        <tbody>
+        <tr><td class="mono">BELT1</td><td class="mono">BELT1_DRIVE_RUN</td><td class="mono">BELT1_DRIVE_FAULT</td><td class="mono">BELT1_DRIVE_STATUS</td></tr>
+        <tr><td class="mono">SPIRAL_UP</td><td class="mono">SPIRAL_UP_DRIVE_RUN</td><td class="mono">SPIRAL_UP_DRIVE_FAULT</td><td class="mono">SPIRAL_UP_DRIVE_STATUS</td></tr>
+        <tr><td class="mono">BELT2</td><td class="mono">BELT2_DRIVE_RUN</td><td class="mono">BELT2_DRIVE_FAULT</td><td class="mono">BELT2_DRIVE_STATUS</td></tr>
+        </tbody></table></div>
+
+
+      <div class="hmi-notes">
+        Simulator only &mdash; values are not read from the PLC. One <code>NETS[1].ZPA[g]</code> group covers up to 8 zones; zone k of the group uses input/output bit k-1 of the group's 1799ER word and <code>ZONE_STATUS[k]</code> (0 normal, 1 full, 2 jam, 20 jam acknowledged). Scanner tags <code>&lt;SCAN&gt;_BARCODE</code>/<code>&lt;SCAN&gt;_GOOD_READ</code> are populated by the external scanner MSG/CIP interface. Jam is raised after 8 s blocked.
+      </div>
+    </aside>
+  </main>
+</div>
+<script>
+var HMI_DATA = {"version":"2.1.0","designName":"BELT_CONVEYOR","controllerName":"BELT_PLC","processorType":"1756-L83E","conveyorType":"belt","segments":3,"zones":18,"groups":4,"blocks":4,"lengthM":36.49,"curvedZones":13,"spiralRiseM":2.7,"beltSegments":3,"jamSeconds":8,"bounds":{"minX":0,"minY":-0.4,"width":9.6641,"height":3.5998},"zoneStates":[{"index":1,"label":"BELT1_Z1","segment":"BELT1","segmentKind":"straight","zoneInSegment":1,"group":1,"zoneInGroup":1,"block":"ZPA01","ip":"192.168.1.120","x":1,"y":0,"angleDeg":0,"lengthM":2,"widthM":0.8,"curved":false,"conveyorType":"belt","radiusM":null,"taperStandardId":null,"spiral":null,"sensorName":"BELT1_Z1_SENSOR","motorName":"BELT1_Z1_RUN","inputAddress":"ZPA01:I.Data.0","outputAddress":"ZPA01:O.Data.0","plcPath":"NETS[1].ZPA[1]","statusPath":"NETS[1].ZPA[1].ZONE_STATUS[1]","driveLabel":"BELT1"},{"index":2,"label":"BELT1_Z2","segment":"BELT1","segmentKind":"straight","zoneInSegment":2,"group":1,"zoneInGroup":2,"block":"ZPA01","ip":"192.168.1.120","x":3,"y":0,"angleDeg":0,"lengthM":2,"widthM":0.8,"curved":false,"conveyorType":"belt","radiusM":null,"taperStandardId":null,"spiral":null,"sensorName":"BELT1_Z2_SENSOR","motorName":"BELT1_Z2_RUN","inputAddress":"ZPA01:I.Data.1","outputAddress":"ZPA01:O.Data.1","plcPath":"NETS[1].ZPA[1]","statusPath":"NETS[1].ZPA[1].ZONE_STATUS[2]","driveLabel":"BELT1"},{"index":3,"label":"BELT1_Z3","segment":"BELT1","segmentKind":"straight","zoneInSegment":3,"group":1,"zoneInGroup":3,"block":"ZPA01","ip":"192.168.1.120","x":5,"y":0,"angleDeg":0,"lengthM":2,"widthM":0.8,"curved":false,"conveyorType":"belt","radiusM":null,"taperStandardId":null,"spiral":null,"sensorName":"BELT1_Z3_SENSOR","motorName":"BELT1_Z3_RUN","inputAddress":"ZPA01:I.Data.2","outputAddress":"ZPA01:O.Data.2","plcPath":"NETS[1].ZPA[1]","statusPath":"NETS[1].ZPA[1].ZONE_STATUS[3]","driveLabel":"BELT1"},{"index":4,"label":"SPIRAL_UP_Z1","segment":"SPIRAL_UP","segmentKind":"spiral","zoneInSegment":1,"group":2,"zoneInGroup":1,"block":"ZPA02","ip":"192.168.1.121","x":6.924642476266891,"y":0.3565032973394271,"angleDeg":39.397,"lengthM":2.037,"widthM":0.8,"curved":true,"conveyorType":"belt","radiusM":1.4,"taperStandardId":null,"spiral":{"direction":"up","pitchM":0.9,"heightM":2.7,"slopeDeg":5.84,"turns":3,"z":0.1},"sensorName":"SPIRAL_UP_Z1_SENSOR","motorName":"SPIRAL_UP_Z1_RUN","inputAddress":"ZPA02:I.Data.0","outputAddress":"ZPA02:O.Data.0","plcPath":"NETS[1].ZPA[2]","statusPath":"NETS[1].ZPA[2].ZONE_STATUS[1]","driveLabel":"SPIRAL_UP"},{"index":5,"label":"SPIRAL_UP_Z2","segment":"SPIRAL_UP","segmentKind":"spiral","zoneInSegment":2,"group":2,"zoneInGroup":2,"block":"ZPA02","ip":"192.168.1.121","x":7.150690111404892,"y":2.1941274246327342,"angleDeg":129.397,"lengthM":2.037,"widthM":0.8,"curved":true,"conveyorType":"belt","radiusM":1.4,"taperStandardId":null,"spiral":{"direction":"up","pitchM":0.9,"heightM":2.7,"slopeDeg":5.84,"turns":3,"z":0.31},"sensorName":"SPIRAL_UP_Z2_SENSOR","motorName":"SPIRAL_UP_Z2_RUN","inputAddress":"ZPA02:I.Data.1","outputAddress":"ZPA02:O.Data.1","plcPath":"NETS[1].ZPA[2]","statusPath":"NETS[1].ZPA[2].ZONE_STATUS[2]","driveLabel":"SPIRAL_UP"},{"index":6,"label":"SPIRAL_UP_Z3","segment":"SPIRAL_UP","segmentKind":"spiral","zoneInSegment":3,"group":2,"zoneInGroup":3,"block":"ZPA02","ip":"192.168.1.121","x":5.352527230900117,"y":2.6337335163445665,"angleDeg":-151.885,"lengthM":2.037,"widthM":0.8,"curved":true,"conveyorType":"belt","radiusM":1.4,"taperStandardId":null,"spiral":{"direction":"up","pitchM":0.9,"heightM":2.7,"slopeDeg":5.84,"turns":3,"z":0.52},"sensorName":"SPIRAL_UP_Z3_SENSOR","motorName":"SPIRAL_UP_Z3_RUN","inputAddress":"ZPA02:I.Data.2","outputAddress":"ZPA02:O.Data.2","plcPath":"NETS[1].ZPA[2]","statusPath":"NETS[1].ZPA[2].ZONE_STATUS[3]","driveLabel":"SPIRAL_UP"},{"index":7,"label":"SPIRAL_UP_Z4","segment":"SPIRAL_UP","segmentKind":"spiral","zoneInSegment":4,"group":2,"zoneInGroup":4,"block":"ZPA02","ip":"192.168.1.121","x":4.694326047323379,"y":0.9046563032389988,"angleDeg":-73.123,"lengthM":2.037,"widthM":0.8,"curved":true,"conveyorType":"belt","radiusM":1.4,"taperStandardId":null,"spiral":{"direction":"up","pitchM":0.9,"heightM":2.7,"slopeDeg":5.84,"turns":3,"z":0.73},"sensorName":"SPIRAL_UP_Z4_SENSOR","motorName":"SPIRAL_UP_Z4_RUN","inputAddress":"ZPA02:I.Data.3","outputAddress":"ZPA02:O.Data.3","plcPath":"NETS[1].ZPA[2]","statusPath":"NETS[1].ZPA[2].ZONE_STATUS[4]","driveLabel":"SPIRAL_UP"},{"index":8,"label":"SPIRAL_UP_Z5","segment":"SPIRAL_UP","segmentKind":"spiral","zoneInSegment":5,"group":2,"zoneInGroup":5,"block":"ZPA02","ip":"192.168.1.121","x":6.333731327911044,"y":0.04529481094217826,"angleDeg":16.877,"lengthM":2.037,"widthM":0.8,"curved":true,"conveyorType":"belt","radiusM":1.4,"taperStandardId":null,"spiral":{"direction":"up","pitchM":0.9,"heightM":2.7,"slopeDeg":5.84,"turns":3,"z":0.94},"sensorName":"SPIRAL_UP_Z5_SENSOR","motorName":"SPIRAL_UP_Z5_RUN","inputAddress":"ZPA02:I.Data.4","outputAddress":"ZPA02:O.Data.4","plcPath":"NETS[1].ZPA[2]","statusPath":"NETS[1].ZPA[2].ZONE_STATUS[5]","driveLabel":"SPIRAL_UP"},{"index":9,"label":"SPIRAL_UP_Z6","segment":"SPIRAL_UP","segmentKind":"spiral","zoneInSegment":6,"group":2,"zoneInGroup":6,"block":"ZPA02","ip":"192.168.1.121","x":7.3834444713385645,"y":1.5680786199791092,"angleDeg":95.625,"lengthM":2.037,"widthM":0.8,"curved":true,"conveyorType":"belt","radiusM":1.4,"taperStandardId":null,"spiral":{"direction":"up","pitchM":0.9,"heightM":2.7,"slopeDeg":5.84,"turns":3,"z":1.14},"sensorName":"SPIRAL_UP_Z6_SENSOR","motorName":"SPIRAL_UP_Z6_RUN","inputAddress":"ZPA02:I.Data.5","outputAddress":"ZPA02:O.Data.5","plcPath":"NETS[1].ZPA[2]","statusPath":"NETS[1].ZPA[2].ZONE_STATUS[6]","driveLabel":"SPIRAL_UP"},{"index":10,"label":"SPIRAL_UP_Z7","segment":"SPIRAL_UP","segmentKind":"spiral","zoneInSegment":7,"group":2,"zoneInGroup":7,"block":"ZPA02","ip":"192.168.1.121","x":6.0000000000000115,"y":2.7999999999999985,"angleDeg":174.375,"lengthM":2.037,"widthM":0.8,"curved":true,"conveyorType":"belt","radiusM":1.4,"taperStandardId":null,"spiral":{"direction":"up","pitchM":0.9,"heightM":2.7,"slopeDeg":5.84,"turns":3,"z":1.35},"sensorName":"SPIRAL_UP_Z7_SENSOR","motorName":"SPIRAL_UP_Z7_RUN","inputAddress":"ZPA02:I.Data.6","outputAddress":"ZPA02:O.Data.6","plcPath":"NETS[1].ZPA[2]","statusPath":"NETS[1].ZPA[2].ZONE_STATUS[7]","driveLabel":"SPIRAL_UP"},{"index":11,"label":"SPIRAL_UP_Z8","segment":"SPIRAL_UP","segmentKind":"spiral","zoneInSegment":8,"group":2,"zoneInGroup":8,"block":"ZPA02","ip":"192.168.1.121","x":4.616555528661438,"y":1.5680786199791352,"angleDeg":-95.625,"lengthM":2.037,"widthM":0.8,"curved":true,"conveyorType":"belt","radiusM":1.4,"taperStandardId":null,"spiral":{"direction":"up","pitchM":0.9,"heightM":2.7,"slopeDeg":5.84,"turns":3,"z":1.56},"sensorName":"SPIRAL_UP_Z8_SENSOR","motorName":"SPIRAL_UP_Z8_RUN","inputAddress":"ZPA02:I.Data.7","outputAddress":"ZPA02:O.Data.7","plcPath":"NETS[1].ZPA[2]","statusPath":"NETS[1].ZPA[2].ZONE_STATUS[8]","driveLabel":"SPIRAL_UP"},{"index":12,"label":"SPIRAL_UP_Z9","segment":"SPIRAL_UP","segmentKind":"spiral","zoneInSegment":9,"group":3,"zoneInGroup":1,"block":"ZPA03","ip":"192.168.1.122","x":5.666266430889557,"y":0.045295490894945764,"angleDeg":-16.877,"lengthM":2.037,"widthM":0.8,"curved":true,"conveyorType":"belt","radiusM":1.4,"taperStandardId":null,"spiral":{"direction":"up","pitchM":0.9,"heightM":2.7,"slopeDeg":5.84,"turns":3,"z":1.77},"sensorName":"SPIRAL_UP_Z9_SENSOR","motorName":"SPIRAL_UP_Z9_RUN","inputAddress":"ZPA03:I.Data.0","outputAddress":"ZPA03:O.Data.0","plcPath":"NETS[1].ZPA[3]","statusPath":"NETS[1].ZPA[3].ZONE_STATUS[1]","driveLabel":"SPIRAL_UP"},{"index":13,"label":"SPIRAL_UP_Z10","segment":"SPIRAL_UP","segmentKind":"spiral","zoneInSegment":10,"group":3,"zoneInGroup":2,"block":"ZPA03","ip":"192.168.1.122","x":7.305671460314657,"y":0.9046480881387743,"angleDeg":73.123,"lengthM":2.037,"widthM":0.8,"curved":true,"conveyorType":"belt","radiusM":1.4,"taperStandardId":null,"spiral":{"direction":"up","pitchM":0.9,"heightM":2.7,"slopeDeg":5.84,"turns":3,"z":1.97},"sensorName":"SPIRAL_UP_Z10_SENSOR","motorName":"SPIRAL_UP_Z10_RUN","inputAddress":"ZPA03:I.Data.1","outputAddress":"ZPA03:O.Data.1","plcPath":"NETS[1].ZPA[3]","statusPath":"NETS[1].ZPA[3].ZONE_STATUS[2]","driveLabel":"SPIRAL_UP"},{"index":14,"label":"SPIRAL_UP_Z11","segment":"SPIRAL_UP","segmentKind":"spiral","zoneInSegment":11,"group":3,"zoneInGroup":3,"block":"ZPA03","ip":"192.168.1.122","x":6.6474775867521885,"y":2.6337309422848847,"angleDeg":151.885,"lengthM":2.037,"widthM":0.8,"curved":true,"conveyorType":"belt","radiusM":1.4,"taperStandardId":null,"spiral":{"direction":"up","pitchM":0.9,"heightM":2.7,"slopeDeg":5.84,"turns":3,"z":2.18},"sensorName":"SPIRAL_UP_Z11_SENSOR","motorName":"SPIRAL_UP_Z11_RUN","inputAddress":"ZPA03:I.Data.2","outputAddress":"ZPA03:O.Data.2","plcPath":"NETS[1].ZPA[3]","statusPath":"NETS[1].ZPA[3].ZONE_STATUS[3]","driveLabel":"SPIRAL_UP"},{"index":15,"label":"SPIRAL_UP_Z12","segment":"SPIRAL_UP","segmentKind":"spiral","zoneInSegment":12,"group":3,"zoneInGroup":4,"block":"ZPA03","ip":"192.168.1.122","x":4.849309885171937,"y":2.1941274204647994,"angleDeg":-129.397,"lengthM":2.037,"widthM":0.8,"curved":true,"conveyorType":"belt","radiusM":1.4,"taperStandardId":null,"spiral":{"direction":"up","pitchM":0.9,"heightM":2.7,"slopeDeg":5.84,"turns":3,"z":2.39},"sensorName":"SPIRAL_UP_Z12_SENSOR","motorName":"SPIRAL_UP_Z12_RUN","inputAddress":"ZPA03:I.Data.3","outputAddress":"ZPA03:O.Data.3","plcPath":"NETS[1].ZPA[3]","statusPath":"NETS[1].ZPA[3].ZONE_STATUS[4]","driveLabel":"SPIRAL_UP"},{"index":16,"label":"SPIRAL_UP_Z13","segment":"SPIRAL_UP","segmentKind":"spiral","zoneInSegment":13,"group":3,"zoneInGroup":5,"block":"ZPA03","ip":"192.168.1.122","x":5.0753575279010485,"y":0.3565032939162538,"angleDeg":-39.397,"lengthM":2.037,"widthM":0.8,"curved":true,"conveyorType":"belt","radiusM":1.4,"taperStandardId":null,"spiral":{"direction":"up","pitchM":0.9,"heightM":2.7,"slopeDeg":5.84,"turns":3,"z":2.6},"sensorName":"SPIRAL_UP_Z13_SENSOR","motorName":"SPIRAL_UP_Z13_RUN","inputAddress":"ZPA03:I.Data.4","outputAddress":"ZPA03:O.Data.4","plcPath":"NETS[1].ZPA[3]","statusPath":"NETS[1].ZPA[3].ZONE_STATUS[5]","driveLabel":"SPIRAL_UP"},{"index":17,"label":"BELT2_Z1","segment":"BELT2","segmentKind":"straight","zoneInSegment":1,"group":4,"zoneInGroup":1,"block":"ZPA04","ip":"192.168.1.123","x":6.866018750807208,"y":0.5000108261011598,"angleDeg":30.001,"lengthM":2,"widthM":0.8,"curved":false,"conveyorType":"belt","radiusM":null,"taperStandardId":null,"spiral":null,"sensorName":"BELT2_Z1_SENSOR","motorName":"BELT2_Z1_RUN","inputAddress":"ZPA04:I.Data.0","outputAddress":"ZPA04:O.Data.0","plcPath":"NETS[1].ZPA[4]","statusPath":"NETS[1].ZPA[4].ZONE_STATUS[1]","driveLabel":"BELT2"},{"index":18,"label":"BELT2_Z2","segment":"BELT2","segmentKind":"straight","zoneInSegment":2,"group":4,"zoneInGroup":2,"block":"ZPA04","ip":"192.168.1.123","x":8.598081249192793,"y":1.4999891738988407,"angleDeg":30.001,"lengthM":2,"widthM":0.8,"curved":false,"conveyorType":"belt","radiusM":null,"taperStandardId":null,"spiral":null,"sensorName":"BELT2_Z2_SENSOR","motorName":"BELT2_Z2_RUN","inputAddress":"ZPA04:I.Data.1","outputAddress":"ZPA04:O.Data.1","plcPath":"NETS[1].ZPA[4]","statusPath":"NETS[1].ZPA[4].ZONE_STATUS[2]","driveLabel":"BELT2"}],"segmentsInfo":[{"name":"BELT1","kind":"straight","conveyorType":"belt","radiusM":null,"curveDeg":0,"taperStandardId":null,"taperDeltaM":null,"spiral":null,"zoneCount":3,"lengthM":6,"zStart":0,"zEnd":0},{"name":"SPIRAL_UP","kind":"spiral","conveyorType":"belt","radiusM":1.4,"curveDeg":0,"taperStandardId":null,"taperDeltaM":null,"spiral":{"direction":"up","pitchM":0.9,"heightM":2.7,"slopeDeg":5.84,"turns":3},"zoneCount":13,"lengthM":26.485,"zStart":0,"zEnd":2.7},{"name":"BELT2","kind":"straight","conveyorType":"belt","radiusM":null,"curveDeg":0,"taperStandardId":null,"taperDeltaM":null,"spiral":null,"zoneCount":2,"lengthM":4,"zStart":2.7,"zEnd":2.7}],"scanZones":[{"name":"SCAN_IN","type":"barcode","side":"right","zoneIndex":3,"blockName":"ZPA01","x":5,"y":0,"angleDeg":0,"barcodeTag":"SCAN_IN_BARCODE","goodReadTag":"SCAN_IN_GOOD_READ"}],"tracking":{"enabled":true,"maxTrays":16,"barcodeLen":20,"zoneCount":18,"scanZones":1,"tagPrefix":"TRACK","scanZoneIndexes":[3]},"drives":[{"segment":"BELT1","runCmdTag":"BELT1_RUN_CMD","runTag":"BELT1_DRIVE_RUN","faultTag":"BELT1_DRIVE_FAULT","statusTag":"BELT1_DRIVE_STATUS"},{"segment":"SPIRAL_UP","runCmdTag":"SPIRAL_UP_RUN_CMD","runTag":"SPIRAL_UP_DRIVE_RUN","faultTag":"SPIRAL_UP_DRIVE_FAULT","statusTag":"SPIRAL_UP_DRIVE_STATUS"},{"segment":"BELT2","runCmdTag":"BELT2_RUN_CMD","runTag":"BELT2_DRIVE_RUN","faultTag":"BELT2_DRIVE_FAULT","statusTag":"BELT2_DRIVE_STATUS"}],"merges":[],"transfers":[],"palette":{"stopped":"#41505f","running":"#1f7a4d","full":"#a8781f","jam":"#9e2f2a"}};
+(function () {
+  "use strict";
+  var DATA = HMI_DATA;
+  var ZONES = DATA.zoneStates;
+  var JAM_MS = DATA.jamSeconds * 1000;
+  var COLORS = DATA.palette;
+  var STATE_NAMES = ["stopped", "running", "full", "jam"];
+  var SEGMENTS = {};
+  DATA.segmentsInfo.forEach(function (s) { SEGMENTS[s.name] = s; });
+  var SCAN_BY_ZONE = {};
+  DATA.scanZones.forEach(function (s) { if (s.zoneIndex) SCAN_BY_ZONE[s.zoneIndex] = s; });
+  var canvas = document.getElementById("hmi-canvas");
+  var ctx = canvas.getContext("2d");
+  var statusEl = document.getElementById("sim-status");
+  var simBtn = document.getElementById("btn-sim");
+  var trackBody = document.getElementById("track-body");
+  var TRACK = DATA.tracking || null;
+  var sim = { running: false, auto: false, hover: -1, now: 0, nextId: 1,
+              zones: ZONES.map(function () { return { pkg: null, state: 0, blockedMs: 0 }; }),
+              merges: DATA.merges.map(function () { return { mainGrant: false, spurGrant: false, lastMain: false, blockedMs: 0, grant: "" }; }),
+              devices: DATA.transfers.map(function () { return { state: 0, fault: 0, seqStart: 0, seq: 0 }; }),
+              trays: {}, spawnAt: 0, lastTick: 0 };
+  var view = { scale: 1, ox: 0, oy: 0, screen: [], zoneScreen: {}, transferScreen: [] };
+  function fitView() {
+    var b = DATA.bounds;
+    var pad = 30;
+    var sx = (canvas.width - pad * 2) / Math.max(0.001, b.width);
+    var sy = (canvas.height - pad * 2) / Math.max(0.001, b.height);
+    view.scale = Math.min(sx, sy);
+    view.ox = pad + (canvas.width - pad * 2 - b.width * view.scale) / 2 - b.minX * view.scale;
+    view.oy = pad + (canvas.height - pad * 2 - b.height * view.scale) / 2 - b.minY * view.scale;
+  }
+  function worldToScreen(x, y) { return { x: view.ox + x * view.scale, y: view.oy + y * view.scale }; }
+  function stateName(z) { return STATE_NAMES[sim.zones[z].state] || "stopped"; }
+  function spawnPackage(zoneIndex) {
+    var pkg = { id: sim.nextId++, barcode: null, zone: zoneIndex + 1 };
+    sim.zones[zoneIndex].pkg = pkg;
+    sim.zones[zoneIndex].state = 2;
+    return pkg;
+  }
+  function traySlot(pkg) { return TRACK ? (pkg.id % TRACK.maxTrays) : 0; }
+  function upsertTray(pkg) {
+    if (!TRACK || !pkg.barcode) return;
+    sim.trays[traySlot(pkg)] = { slot: traySlot(pkg), barcode: pkg.barcode, zone: pkg.zone, id: pkg.id };
+  }
+  function renderTracking() {
+    if (!trackBody || !TRACK) return;
+    var rows = [];
+    for (var s = 0; s < TRACK.maxTrays; s++) {
+      var t = sim.trays[s];
+      var st = t ? (sim.zones[Math.max(0, Math.min(sim.zones.length - 1, t.zone - 1))].state) : 0;
+      rows.push("<tr><td class=\"mono\">" + s + "</td><td class=\"mono\">" +
+        (t ? t.barcode : "&mdash;") + "</td><td class=\"zone\">" +
+        (t ? t.zone : "") + "</td><td class=\"state-" + STATE_NAMES[st] + "\">" +
+        (t ? STATE_NAMES[st] : "empty") + "</td></tr>");
+    }
+    trackBody.innerHTML = rows.join("");
+  }
+  function updateStatus() {
+    var jams = sim.zones.filter(function (z) { return z.state === 3; }).length;
+    var trays = 0; for (var k in sim.trays) if (sim.trays.hasOwnProperty(k)) trays++;
+    var activeDev = sim.devices.filter(function (d) { return d.state !== 0; }).length;
+    var grants = DATA.merges.map(function (m, mi) { return sim.merges[mi].grant || "-"; }).filter(function (g) { return g !== "-"; }).length;
+    statusEl.innerHTML = (sim.running ? "running" : "stopped") +
+      (sim.auto ? " \u00b7 sim auto" : "") +
+      (jams ? " \u00b7 <b>" + jams + " jam(s)</b>" : "") +
+      (TRACK ? " \u00b7 " + trays + " tracked tray(s)" : "") +
+      (DATA.merges.length ? " \u00b7 " + grants + " merge grant(s)" : "") +
+      (DATA.transfers.length ? " \u00b7 " + activeDev + " device(s) active" : "");
+  }
+  function drawBelt(zone, s, w) {
+    ctx.fillStyle = "#26333d";
+    ctx.fillRect(-s / 2, -w / 2, s, w);
+    var spacing = 14;
+    var off = (sim.now * 0.014) % spacing;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(-s / 2, -w / 2, s, w);
+    ctx.clip();
+    ctx.strokeStyle = "rgba(143,208,255,0.45)";
+    ctx.lineWidth = 2;
+    for (var x = -s / 2 - w + off; x < s / 2 + w; x += spacing) {
+      ctx.beginPath(); ctx.moveTo(x, -w / 2); ctx.lineTo(x + w, w / 2); ctx.stroke();
+    }
+    ctx.restore();
+    ctx.strokeStyle = "rgba(143,208,255,0.7)";
+    ctx.strokeRect(-s / 2, -w / 2, s, w);
+  }
+  var DEVICE_STATE_NAMES = { pusher: ["idle", "extending", "extended", "retracting"],
+    rotary_table: ["idle", "rotating", "at position", "returning"],
+    popup_transfer: ["idle", "raising", "transferring", "lowering", "fault"] };
+  function deviceStateName(d, i) { var names = DEVICE_STATE_NAMES[d.type] || ["idle", "active"]; return names[sim.devices[i].state] || "idle"; }
+  function deviceTimings(d) { if (d.type === "pusher") return [500, 1500, 500]; if (d.type === "rotary_table") return [1100, 1400, 500]; return [600, 1500, 600]; }
+  function renderDevices() {
+    for (var i = 0; i < DATA.transfers.length; i++) {
+      var el = document.getElementById("dev-state-" + i);
+      if (el) el.innerHTML = deviceStateName(DATA.transfers[i], i);
+      var fe = document.getElementById("dev-fault-" + i);
+      if (fe) fe.innerHTML = sim.devices[i].fault ? "1" : "0";
+    }
+    for (var m = 0; m < DATA.merges.length; m++) {
+      var me = document.getElementById("merge-grant-" + DATA.merges[m].name);
+      if (me) me.innerHTML = sim.merges[m].grant || "-";
+    }
+  }
+  function triggerDevice(index) {
+    var d = DATA.transfers[index]; if (!d) return;
+    var dev = sim.devices[index]; if (dev.state !== 0) return;
+    dev.state = 1; dev.seqStart = Date.now();
+    for (var c = 0; c < 4; c++) { var btn = document.getElementById("dev-" + index + "-" + c); if (btn) btn.className = "hmi-btn dev active"; }
+  }
+  function drawMergeJunctions() {
+    for (var i = 0; i < DATA.merges.length; i++) {
+      var m = DATA.merges[i]; var ms = sim.merges[i];
+      var mz = view.zoneScreen[m.mergeZone], mn = view.zoneScreen[m.mainZone], sp = view.zoneScreen[m.spurZone];
+      if (!mz) continue;
+      if (mn) { ctx.strokeStyle = ms.mainGrant ? "#3fd68a" : "rgba(90,120,140,0.7)"; ctx.lineWidth = ms.mainGrant ? 3 : 2; ctx.beginPath(); ctx.moveTo(mn.x, mn.y); ctx.lineTo(mz.x, mz.y); ctx.stroke(); }
+      if (sp) { ctx.strokeStyle = ms.spurGrant ? "#7fd4ff" : "rgba(90,120,140,0.55)"; ctx.lineWidth = ms.spurGrant ? 3 : 2; ctx.setLineDash([6, 5]); ctx.beginPath(); ctx.moveTo(sp.x, sp.y); ctx.lineTo(mz.x, mz.y); ctx.stroke(); ctx.setLineDash([]); }
+      var c = worldToScreen(m.x, m.y);
+      ctx.fillStyle = "#101a22"; ctx.strokeStyle = ms.mainGrant ? "#3fd68a" : ms.spurGrant ? "#7fd4ff" : "#8fa7b8"; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.arc(c.x, c.y, 8, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#cfe6f7"; ctx.font = "10px Consolas, monospace"; ctx.textAlign = "center";
+      ctx.fillText(m.name, c.x, c.y - 12);
+      ctx.fillStyle = "#f0c24b"; ctx.font = "9px Consolas, monospace";
+      ctx.fillText("ALT " + ms.grant, c.x, c.y + 19);
+    }
+  }
+  function drawTransfers() {
+    view.transferScreen = [];
+    for (var i = 0; i < DATA.transfers.length; i++) {
+      var d = DATA.transfers[i]; var dev = sim.devices[i];
+      var p = worldToScreen(d.x, d.y);
+      var active = dev.state !== 0; var fault = dev.fault;
+      var colour = fault ? "#ff6b60" : (active ? "#f0c24b" : "#9fb6c7");
+      view.transferScreen.push({ i: i, x: p.x, y: p.y });
+      ctx.save(); ctx.translate(p.x, p.y);
+      if (d.type === "pusher") {
+        var dir = d.side === "left" ? -1 : 1;
+        ctx.fillStyle = colour; ctx.fillRect(-8, -8, 16, 16);
+        ctx.strokeStyle = "#0b1116"; ctx.lineWidth = 1; ctx.strokeRect(-8, -8, 16, 16);
+        ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(dir * (active ? 26 : 18), 0); ctx.strokeStyle = colour; ctx.lineWidth = 3; ctx.stroke();
+      } else if (d.type === "rotary_table") {
+        ctx.beginPath(); ctx.arc(0, 0, 11, 0, Math.PI * 2); ctx.fillStyle = colour; ctx.fill();
+        ctx.strokeStyle = "#0b1116"; ctx.lineWidth = 1; ctx.stroke();
+        ctx.save(); ctx.rotate((active ? sim.now * 0.006 : 0) % (Math.PI * 2));
+        ctx.beginPath(); ctx.moveTo(-7, -3); ctx.lineTo(7, 3); ctx.moveTo(7, -3); ctx.lineTo(-7, 3); ctx.strokeStyle = "#0b1116"; ctx.lineWidth = 1.5; ctx.stroke();
+        ctx.restore();
+      } else {
+        ctx.fillStyle = colour; ctx.fillRect(-10, -8, 20, 16);
+        if (dev.state === 1 || dev.state === 2) { ctx.strokeStyle = colour; ctx.lineWidth = 2; ctx.strokeRect(-13, -11, 26, 22); }
+        ctx.strokeStyle = "#0b1116"; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(-18, 0); ctx.lineTo(-4, 0); ctx.moveTo(18, 0); ctx.lineTo(4, 0); ctx.stroke();
+      }
+      ctx.restore();
+      ctx.fillStyle = colour; ctx.font = "9px Consolas, monospace"; ctx.textAlign = "center";
+      ctx.fillText(d.name, p.x, p.y - 15);
+    }
+  }
+  function updateMergeSim(dt) {
+    for (var i = 0; i < DATA.merges.length; i++) {
+      var m = DATA.merges[i]; var ms = sim.merges[i];
+      var mainPkg = m.mainZone ? sim.zones[m.mainZone - 1].pkg : null;
+      var spurPkg = m.spurZone ? sim.zones[m.spurZone - 1].pkg : null;
+      var mergeBusy = m.mergeZone ? !!sim.zones[m.mergeZone - 1].pkg : false;
+      var mainGrant = false; var spurGrant = false;
+      if (!mergeBusy && (mainPkg || spurPkg)) {
+        if (mainPkg && spurPkg) {
+          if (m.priority === "main") mainGrant = true;
+          else if (m.priority === "spur") spurGrant = true;
+          else { if (ms.lastMain) spurGrant = true; else mainGrant = true; }
+        } else if (mainPkg) mainGrant = true; else spurGrant = true;
+      }
+      if (mainGrant) ms.lastMain = true;
+      if (spurGrant) ms.lastMain = false;
+      if (mainGrant && mainPkg) { ms.blockedMs += dt; if (ms.blockedMs > JAM_MS) { mainGrant = false; spurGrant = true; ms.blockedMs = 0; ms.lastMain = false; } }
+      else if (spurGrant && spurPkg) { ms.blockedMs += dt; if (ms.blockedMs > JAM_MS) { mainGrant = true; spurGrant = false; ms.blockedMs = 0; ms.lastMain = true; } }
+      else ms.blockedMs = 0;
+      ms.mainGrant = mainGrant; ms.spurGrant = spurGrant;
+      ms.grant = mainGrant ? "MAIN" : (spurGrant ? "SPUR" : "HOLD");
+      var mz = m.mergeZone ? sim.zones[m.mergeZone - 1] : null;
+      if (mainGrant && mainPkg && mz && !mz.pkg) { mz.pkg = mainPkg; mz.state = 2; sim.zones[m.mainZone - 1].pkg = null; mainPkg.zone = m.mergeZone; }
+      if (spurGrant && spurPkg && mz && !mz.pkg) { mz.pkg = spurPkg; mz.state = 2; sim.zones[m.spurZone - 1].pkg = null; spurPkg.zone = m.mergeZone; }
+    }
+  }
+  function updateDeviceSim() {
+    var now = Date.now();
+    for (var i = 0; i < DATA.transfers.length; i++) {
+      var d = DATA.transfers[i]; var dev = sim.devices[i];
+      if (dev.state === 0) continue;
+      var timings = deviceTimings(d);
+      var elapsed = now - dev.seqStart; var total = 0; var state = 0;
+      for (var s = 0; s < timings.length; s++) { total += timings[s]; if (elapsed < total) { state = s + 1; break; } }
+      if (elapsed >= total) {
+        dev.state = 0; dev.seqStart = 0;
+        for (var c = 0; c < 4; c++) { var b = document.getElementById("dev-" + i + "-" + c); if (b) b.className = "hmi-btn dev"; }
+      } else dev.state = state;
+    }
+  }
+  function draw() {
+    fitView();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#0b1116";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = "rgba(80,120,150,0.13)";
+    ctx.lineWidth = 1;
+    for (var gx = 0; gx < canvas.width; gx += 40) { ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, canvas.height); ctx.stroke(); }
+    for (var gy = 0; gy < canvas.height; gy += 40) { ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(canvas.width, gy); ctx.stroke(); }
+    view.screen = [];
+    for (var i = 0; i < ZONES.length; i++) {
+      var zone = ZONES[i];
+      var zs = sim.zones[i];
+      var c = worldToScreen(zone.x, zone.y);
+      var s = Math.max(6, zone.lengthM * view.scale);
+      var w = Math.max(4, zone.widthM * view.scale);
+      view.screen.push({ i: i, cx: c.x, cy: c.y, halfL: s / 2, halfW: w / 2, angle: zone.angleDeg * Math.PI / 180 });
+      view.zoneScreen[zone.index] = c;
+      ctx.save();
+      ctx.translate(c.x, c.y);
+      ctx.rotate(zone.angleDeg * Math.PI / 180);
+      if (zone.conveyorType === "belt") {
+        drawBelt(zone, s, w);
+      } else {
+        ctx.fillStyle = COLORS[stateName(i)];
+        ctx.strokeStyle = (i === sim.hover) ? "#ffffff" : "rgba(210,235,255,0.45)";
+        ctx.lineWidth = i === sim.hover ? 2 : 1;
+        ctx.fillRect(-s / 2, -w / 2, s, w);
+        ctx.strokeRect(-s / 2, -w / 2, s, w);
+        ctx.strokeStyle = "rgba(190,225,250,0.35)";
+        ctx.beginPath(); ctx.moveTo(s / 2, -w / 2); ctx.lineTo(s / 2, w / 2); ctx.stroke();
+        ctx.fillStyle = zs.state === 2 ? "#ffd166" : "#7fd4ff";
+        ctx.beginPath(); ctx.arc(-s / 2 + 3, -w / 2 + 3, 3.2, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = zs.state === 1 ? "#3fd68a" : "#5d7f96";
+        ctx.fillRect(-4, -4, 8, 8);
+      }
+      ctx.restore();
+      ctx.fillStyle = "#cfe6f7";
+      ctx.font = "11px Consolas, monospace";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(zone.label, c.x, c.y - w / 2 - 9);
+    }
+    // spiral height badges (one per spiral segment)
+    var badgeDone = {};
+    for (var b = 0; b < ZONES.length; b++) {
+      var z = ZONES[b];
+      if (!z.spiral || badgeDone[z.segment]) continue;
+      badgeDone[z.segment] = true;
+      var pc = worldToScreen(z.x, z.y);
+      ctx.fillStyle = "#101a22";
+      ctx.strokeStyle = "#f0c24b";
+      ctx.lineWidth = 1;
+      ctx.fillRect(pc.x - 58, pc.y + 16, 116, 17);
+      ctx.strokeRect(pc.x - 58, pc.y + 16, 116, 17);
+      ctx.fillStyle = "#f0c24b";
+      ctx.font = "10px Consolas, monospace";
+      ctx.fillText("SPIRAL " + z.spiral.direction + " " + z.spiral.heightM + " m", pc.x, pc.y + 25);
+    }
+    // scan-zone (barcode scanner) markers
+    for (var k = 0; k < DATA.scanZones.length; k++) {
+      var sz = DATA.scanZones[k];
+      var sp = worldToScreen(sz.x, sz.y);
+      ctx.save();
+      ctx.translate(sp.x, sp.y);
+      ctx.rotate(sz.angleDeg * Math.PI / 180);
+      ctx.fillStyle = "rgba(127,212,255,0.85)";
+      ctx.beginPath();
+      ctx.moveTo(0, -11); ctx.lineTo(9, 0); ctx.lineTo(0, 11); ctx.lineTo(-9, 0);
+      ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = "#0b1116"; ctx.lineWidth = 1; ctx.stroke();
+      ctx.restore();
+      ctx.fillStyle = "#7fd4ff";
+      ctx.font = "10px Consolas, monospace";
+      ctx.textAlign = "left";
+      ctx.fillText(sz.name, sp.x + 12, sp.y - 12);
+    }
+    // merge junctions and transfer device symbols
+    drawMergeJunctions();
+    drawTransfers();
+  }
+  function zoneAt(px, py) {
+    var pts = view.screen;
+    for (var i = pts.length - 1; i >= 0; i--) {
+      var p = pts[i];
+      var dx = px - p.cx, dy = py - p.cy;
+      var ca = Math.cos(-p.angle), sa = Math.sin(-p.angle);
+      var rx = dx * ca - dy * sa, ry = dx * sa + dy * ca;
+      if (Math.abs(rx) <= p.halfL + 2 && Math.abs(ry) <= p.halfW + 2) return p.i;
+    }
+    return -1;
+  }
+  function canvasPoint(ev) {
+    var r = canvas.getBoundingClientRect ? canvas.getBoundingClientRect() : { left: 0, top: 0, width: canvas.width, height: canvas.height };
+    var sx = canvas.width / (r.width || canvas.width);
+    var sy = canvas.height / (r.height || canvas.height);
+    return { x: (ev.clientX - r.left) * sx, y: (ev.clientY - r.top) * sy };
+  }
+  function assignBarcode(pkg, zoneIndex) {
+    var scan = SCAN_BY_ZONE[zoneIndex + 1];
+    if (!scan) return;
+    if (!pkg.barcode) pkg.barcode = (TRACK ? TRACK.tagPrefix.substring(0, 5) : "TRAY") + "-" +
+      ("0000" + pkg.id).slice(-4);
+    upsertTray(pkg);
+  }
+  canvas.addEventListener("mousemove", function (ev) {
+    var p = canvasPoint(ev);
+    var z = zoneAt(p.x, p.y);
+    if (z !== sim.hover) { sim.hover = z; canvas.style.cursor = z >= 0 ? "pointer" : "crosshair"; draw(); }
+  });
+  canvas.addEventListener("mouseleave", function () { sim.hover = -1; draw(); });
+  canvas.addEventListener("click", function (ev) {
+    var p = canvasPoint(ev);
+    var z = zoneAt(p.x, p.y);
+    if (z < 0) {
+      for (var ti = 0; ti < view.transferScreen.length; ti++) {
+        var ts = view.transferScreen[ti];
+        if (Math.abs(p.x - ts.x) <= 16 && Math.abs(p.y - ts.y) <= 16) { triggerDevice(ts.i); draw(); renderDevices(); return; }
+      }
+      return;
+    }
+    var zs = sim.zones[z];
+    if (zs.pkg) {
+      if (zs.pkg.barcode) delete sim.trays[traySlot(zs.pkg)];
+      zs.pkg = null; zs.blockedMs = 0; zs.state = sim.running ? 1 : 0;
+    } else {
+      var pkg = spawnPackage(z);
+      assignBarcode(pkg, z);
+    }
+    draw(); renderTracking(); updateStatus();
+  });
+  function tick() {
+    var now = Date.now();
+    var dt = Math.min(250, now - (sim.lastTick || now));
+    sim.lastTick = now;
+    sim.now = now;
+    if (sim.running) {
+      if (sim.auto && now >= sim.spawnAt) {
+        sim.spawnAt = now + 2600;
+        if (!sim.zones[0].pkg && sim.zones[0].state !== 3) {
+          var fresh = spawnPackage(0);
+          assignBarcode(fresh, 0);
+        }
+      }
+      for (var i = sim.zones.length - 1; i >= 0; i--) {
+        var zs = sim.zones[i];
+        var next = i + 1 < sim.zones.length ? sim.zones[i + 1] : null;
+        if (zs.state === 3) continue;
+        if (zs.pkg) {
+          var downstreamFree = !next || (!next.pkg && next.state !== 3);
+          if (downstreamFree) {
+            if (next) {
+              next.pkg = zs.pkg; zs.pkg = null; next.blockedMs = 0; next.state = 2;
+              next.pkg.zone = i + 2;
+              assignBarcode(next.pkg, i + 1);
+            } else {
+              if (zs.pkg.barcode) delete sim.trays[traySlot(zs.pkg)];
+              zs.pkg = null;
+            }
+            zs.blockedMs = 0; zs.state = 1;
+          } else {
+            zs.blockedMs += dt;
+            zs.state = zs.blockedMs >= JAM_MS ? 3 : 2;
+          }
+        } else if (zs.state !== 2) {
+          zs.state = 1;
+        }
+      }
+      updateMergeSim(dt);
+    }
+    updateDeviceSim();
+    draw(); renderTracking(); renderDevices(); updateStatus();
+  }
+  function setRunning(v) { sim.running = v; if (v) sim.lastTick = Date.now(); draw(); updateStatus(); }
+  document.getElementById("btn-run").addEventListener("click", function () { setRunning(true); });
+  document.getElementById("btn-stop").addEventListener("click", function () { setRunning(false); });
+  document.getElementById("btn-reset").addEventListener("click", function () {
+    sim.running = false; sim.auto = false;
+    simBtn.className = "hmi-btn sim";
+    for (var i = 0; i < sim.zones.length; i++) { sim.zones[i].pkg = null; sim.zones[i].blockedMs = 0; sim.zones[i].state = 0; }
+    for (var mi = 0; mi < sim.merges.length; mi++) { sim.merges[mi].mainGrant = false; sim.merges[mi].spurGrant = false; sim.merges[mi].grant = ""; sim.merges[mi].blockedMs = 0; }
+    for (var di = 0; di < sim.devices.length; di++) { sim.devices[di].state = 0; sim.devices[di].fault = 0; }
+    sim.trays = {};
+    draw(); renderTracking(); renderDevices(); updateStatus();
+  });
+  simBtn.addEventListener("click", function () {
+    sim.auto = !sim.auto; sim.spawnAt = Date.now();
+    simBtn.className = "hmi-btn sim" + (sim.auto ? " active" : "");
+    updateStatus();
+  });
+  for (var ti = 0; ti < DATA.transfers.length; ti++) {
+    for (var ci = 0; ci < DATA.transfers[ti].cmdTags.length; ci++) {
+      (function (idx) {
+        var btn = document.getElementById("dev-" + idx + "-" + ci);
+        if (btn) btn.addEventListener("click", function () { triggerDevice(idx); draw(); renderDevices(); });
+      })(ti);
+    }
+  }
+  if (window.requestAnimationFrame) {
+    (function loop() { tick(); window.requestAnimationFrame(loop); })();
+  } else { setInterval(tick, 100); }
+})();
+</script>
+</body>
+</html>

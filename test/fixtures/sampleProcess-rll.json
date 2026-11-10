@@ -1,0 +1,118 @@
+[
+ {
+  "program": "AFCS",
+  "name": "AFCS_MAIN",
+  "type": "RLL",
+  "rungs": [
+   {
+    "number": "0",
+    "type": "N",
+    "comment": "**********************************\r\nRUNG 0 TO 4 USED FOR SYSTEM UTILIZATION GUAGE\r\n**********************************",
+    "text": "XIC(AFCS[NDX].RUN_INTERLOCK)XIO(AFCS[NDX].OUT_FOR_SERVICE)TOF(AFCS_RUNNING_OFF_DELAY[NDX],?,?);"
+   },
+   {
+    "number": "1",
+    "type": "N",
+    "comment": "",
+    "text": "XIC(AFCS[NDX].RUN_INTERLOCK)XIO(AFCS[NDX].OUT_FOR_SERVICE)XIC(CONFIG_AFCS[NDX].I_AM_ON_THE_RIGHT)ADD(AFCS_COUNT_RIGHT,1,AFCS_COUNT_RIGHT);"
+   },
+   {
+    "number": "2",
+    "type": "N",
+    "comment": "",
+    "text": "XIC(AFCS[NDX].RUN_INTERLOCK)XIO(AFCS[NDX].OUT_FOR_SERVICE)XIO(CONFIG_AFCS[NDX].I_AM_ON_THE_RIGHT)ADD(AFCS_COUNT_LEFT,1,AFCS_COUNT_LEFT);"
+   },
+   {
+    "number": "3",
+    "type": "N",
+    "comment": "",
+    "text": "[XIC(AFCS_RUNNING_OFF_DELAY[NDX].DN) ,XIC(AFCS[NDX].RUN_INTERLOCK) ]XIO(AFCS[NDX].OUT_FOR_SERVICE)ADD(AFCS_COUNT_TOTAL,1,AFCS_COUNT_TOTAL);"
+   },
+   {
+    "number": "4",
+    "type": "N",
+    "comment": "",
+    "text": "XIC(AFCS[NDX].OUT_FOR_SERVICE)SUB(TRUE_NUM_OF_AFCS,1,TRUE_NUM_OF_AFCS);"
+   },
+   {
+    "number": "5",
+    "type": "N",
+    "comment": "",
+    "text": "OTU(ALREADY_IN_LIST);"
+   },
+   {
+    "number": "6",
+    "type": "N",
+    "comment": "",
+    "text": "JSR(SENSOR_LOGIC,0);"
+   },
+   {
+    "number": "7",
+    "type": "N",
+    "comment": "",
+    "text": "JSR(LOGGING,0);"
+   },
+   {
+    "number": "8",
+    "type": "N",
+    "comment": "",
+    "text": "XIC(S:FS)[OTU(FIFO_ONS1[NDX]) ,OTU(FIFO_ONS2[NDX]) ,OTU(FIFO_ONS3[NDX]) ,OTU(FIFO_ONS4[NDX]) ];"
+   },
+   {
+    "number": "9",
+    "type": "N",
+    "comment": "",
+    "text": "XIC(AFCS[NDX].CALL_FOR_MAIL)XIC(CONFIG_AFCS[NDX].I_AM_ON_THE_RIGHT)ONS(FIFO_ONS1[NDX])[FOR(FIND_OPEN_SLOT_RIGHT,CNTR,1,CONFIG.NUM_OF_AFCS,1) ,OTL(DO_FIFO_RE_ARRANGE) ];"
+   },
+   {
+    "number": "10",
+    "type": "N",
+    "comment": "",
+    "text": "XIC(AFCS[NDX].CALL_FOR_MAIL)XIO(CONFIG_AFCS[NDX].I_AM_ON_THE_RIGHT)ONS(FIFO_ONS2[NDX])[FOR(FIND_OPEN_SLOT_LEFT,CNTR,1,CONFIG.NUM_OF_AFCS,1) ,OTL(DO_FIFO_RE_ARRANGE) ];"
+   },
+   {
+    "number": "11",
+    "type": "N",
+    "comment": "",
+    "text": "XIO(AFCS[NDX].CALL_FOR_MAIL)XIC(CONFIG_AFCS[NDX].I_AM_ON_THE_RIGHT)FOR(DELETE_FROM_FIFO_RIGHT,CNTR,1,CONFIG.NUM_OF_AFCS,1);"
+   },
+   {
+    "number": "12",
+    "type": "N",
+    "comment": "",
+    "text": "XIO(AFCS[NDX].CALL_FOR_MAIL)XIO(CONFIG_AFCS[NDX].I_AM_ON_THE_RIGHT)FOR(DELETE_FROM_FIFO_LEFT,CNTR,1,CONFIG.NUM_OF_AFCS,1);"
+   },
+   {
+    "number": "13",
+    "type": "N",
+    "comment": "",
+    "text": "XIC(DO_FIFO_RE_ARRANGE)[XIC(CONFIG.USE_RANKING_FOR_PRIORITY_FIFO) FOR(FIFO_RE_ARRANGE,CNTR,CONFIG.NUM_OF_AFCS,1,-1) ,OTU(DO_FIFO_RE_ARRANGE) ];"
+   },
+   {
+    "number": "14",
+    "type": "N",
+    "comment": "",
+    "text": "XIC(S:FS)OTU(AFCS[NDX].GFX_CMD_OUT_FOR_SERVICE);"
+   },
+   {
+    "number": "15",
+    "type": "N",
+    "comment": "",
+    "text": "XIC(AFCS[NDX].GFX_CMD_OUT_FOR_SERVICE)OTE(AFCS[NDX].OUT_FOR_SERVICE);"
+   },
+   {
+    "number": "16",
+    "type": "N",
+    "comment": "",
+    "text": "XIC(AFCS[NDX].RUN_INTERLOCK_IO)XIO(AFCS[NDX].OUT_FOR_SERVICE)OTE(AFCS[NDX].RUN_INTERLOCK);"
+   },
+   {
+    "number": "17",
+    "type": "N",
+    "comment": "",
+    "text": "XIC(AFCS[NDX].RUN_INTERLOCK)XIO(AFCS[NDX].BUS_BLOCKED_DELAY_TIMER.DN)XIO(AFCS[NDX].HCS_BLOCKED_DELAY_TIMER.DN)XIO(AFCS[NDX].OUT_FOR_SERVICE)OTE(AFCS[NDX].CALL_FOR_MAIL);"
+   }
+  ],
+  "plain": null
+ }
+]

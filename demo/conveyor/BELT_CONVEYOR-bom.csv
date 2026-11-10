@@ -1,0 +1,14 @@
+Category,P/N,Description,Qty,Unit Cost,Extended,Source
+Driver cards,25-COMM-E2P,PowerFlex 525 dual EtherNet/IP communication card,3,210.00,630.00,parts-catalog
+Driver cards,25B-D2P3N104,"PowerFlex 525 AC drive, 0.75 kW (1.0 HP), 480 VAC, 3-phase, EtherNet/IP",3,520.00,1560.00,estimate
+Sensors,BANQS18VP6LPQ8,"Belt tracking (guide) photoeye, PNP, M18",6,95.00,570.00,parts-catalog
+Sensors,MATRIX-220-210-010,"2D barcode scanner, MATRIX-220-210-010, tray barcode reader",1,850.00,850.00,estimate
+Cabling,CBL-M12D-RJ45-5M,"EtherNet/IP scanner cable, M12 D-code to RJ45, 5 m",1,45.00,45.00,estimate
+Cabling,CBL-MOTOR-4C-5M,"Motor power cable, 4-core + PE, 5 m, shielded",3,45.00,135.00,estimate
+Power,MOTOR-GM-0P75KW-4P,"AC gear motor, 0.75 kW, 4-pole, 480 VAC, right-angle reducer with 120 mm head pulley, IP55",3,340.00,1020.00,estimate
+Mechanical,6001655-339,"Conveyor leg assembly, 44.5 in",28,175.00,4900.00,parts-catalog
+Mechanical,BELT-2-PLY-PVC-CLEATED-BF800,"Conveyor belt, 2-ply PVC cleated, 800 mm wide (qty = belt length in m, spirals included)",36.49,193.33,7054.61,estimate
+Mechanical,MNT-SCAN-BCR-M12,"Barcode scanner mounting kit, M12 swivel bracket, stainless",1,85.00,85.00,estimate
+Mechanical,PULLEY-HD-D120-BF800,"Head pulley, 120 mm dia x 800 mm face, crowned and lagged, 40 mm shaft",3,420.00,1260.00,estimate
+Mechanical,PULLEY-TL-D120-BF800,"Tail pulley, 120 mm dia x 800 mm face, crowned, take-up mounted, 40 mm shaft",3,310.00,930.00,estimate
+Mechanical,TENSIONER-BELT-BF800,"Belt take-up tensioner assembly, 800 mm, screw type",3,240.00,720.00,estimate

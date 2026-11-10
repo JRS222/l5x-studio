@@ -1,0 +1,104 @@
+{
+  "version": 2,
+  "name": "BELT_CONVEYOR",
+  "controller": {
+    "name": "BELT_PLC",
+    "processorType": "1756-L83E",
+    "majorRev": 32,
+    "minorRev": 14
+  },
+  "network": {
+    "name": "Network1",
+    "baseIp": "192.168.1.120",
+    "portId": 2
+  },
+  "conveyorType": "belt",
+  "defaults": {
+    "widthM": 0.6,
+    "zoneLengthM": 1,
+    "rollerPitchM": 0.1,
+    "motorSeries": "RD48",
+    "driverCard": "C100Z-35",
+    "driverFamily": "infinidrive",
+    "sensorType": "Photoeye PNP",
+    "sensorPn": "",
+    "ioBlockCatalog": "1799ER-IQ10XOQ10/A",
+    "jointRadiusM": null,
+    "belt": {
+      "type": "2-ply PVC cleated",
+      "widthM": 0.6,
+      "pulleyDiameterM": 0.12,
+      "motorKw": 0.75,
+      "drive": "PowerFlex 525",
+      "speedMps": 0.5,
+      "trackingSensors": 2
+    }
+  },
+  "segments": [
+    {
+      "id": "b1",
+      "name": "BELT1",
+      "kind": "straight",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "rotationDeg": 0,
+      "turnDeg": 0,
+      "lengthM": 6,
+      "widthM": 0.8,
+      "zones": 3,
+      "zoneLengthM": 2,
+      "motorSeries": null,
+      "driverCard": null
+    },
+    {
+      "id": "b2",
+      "name": "SPIRAL_UP",
+      "kind": "spiral",
+      "turnDeg": 0,
+      "radiusM": 1.4,
+      "widthM": 0.8,
+      "zoneLengthM": 2,
+      "spiral": {
+        "pitchM": 0.9,
+        "heightM": 2.7,
+        "direction": "up"
+      },
+      "motorSeries": null,
+      "driverCard": null
+    },
+    {
+      "id": "b3",
+      "name": "BELT2",
+      "kind": "straight",
+      "turnDeg": 30,
+      "lengthM": 4,
+      "widthM": 0.8,
+      "zones": 2,
+      "zoneLengthM": 2,
+      "motorSeries": null,
+      "driverCard": null
+    }
+  ],
+  "merges": [],
+  "transfers": [],
+  "scanZones": [
+    {
+      "id": "scan1",
+      "name": "SCAN_IN",
+      "segmentId": "b1",
+      "offsetM": 5,
+      "type": "barcode",
+      "side": "right",
+      "tagName": null
+    }
+  ],
+  "tracking": {
+    "enabled": true,
+    "maxTrays": 16,
+    "barcodeLen": 20,
+    "trayLengthM": 0.6,
+    "trayGapM": 0.3,
+    "tagPrefix": "TRACK"
+  }
+}

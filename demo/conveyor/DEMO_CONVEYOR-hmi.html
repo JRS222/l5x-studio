@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DEMO_CONVEYOR HMI</title>
+<style>html,body{margin:0;padding:0;height:100%;background:#10161c;color:#d7e2ec;font-family:Consolas,'Segoe UI',Roboto,Arial,sans-serif;}*{box-sizing:border-box;}.hmi{display:flex;flex-direction:column;height:100%;min-height:100vh;}.hmi-header{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;padding:12px 18px;background:linear-gradient(90deg,#16212b,#1d2c39);border-bottom:2px solid #2b5169;}.hmi-header h1{font-size:17px;margin:0;letter-spacing:.06em;color:#8fd0ff;font-weight:600;}.hmi-header .meta{font-size:12px;color:#93a7b8;}.hmi-header .meta b{color:#dfe9f2;font-weight:600;}.hmi-main{display:flex;flex:1;min-height:0;gap:12px;padding:12px;}.hmi-stage{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px;}.hmi-canvas-wrap{position:relative;flex:1;min-height:260px;background:#0b1116;border:1px solid #27404f;border-radius:6px;overflow:hidden;}#hmi-canvas{display:block;width:100%;height:100%;cursor:crosshair;}.hmi-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}.hmi-btn{background:#1d2c39;color:#cfe6f7;border:1px solid #35637f;border-radius:4px;padding:6px 14px;font-size:13px;font-family:inherit;cursor:pointer;letter-spacing:.04em;}.hmi-btn:hover{background:#26404f;border-color:#4d8db1;}.hmi-btn.run{border-color:#2f7d55;color:#9cf0c2;}.hmi-btn.stop{border-color:#8a4a3a;color:#ffc3ad;}.hmi-btn.reset{border-color:#6d6a3a;color:#f0e6a8;}.hmi-btn.sim{background:#233448;}.hmi-btn.active{background:#2a5c78;border-color:#67b7e0;color:#fff;}.hmi-status{margin-left:auto;font-size:12px;color:#9fb6c7;}.hmi-status b{color:#ffd166;font-weight:600;}.hmi-legend{display:flex;gap:16px;font-size:12px;color:#a9bccb;flex-wrap:wrap;padding:2px 2px;}.hmi-legend span{display:inline-flex;align-items:center;gap:6px;}.hmi-dot{width:12px;height:12px;border-radius:3px;display:inline-block;border:1px solid rgba(255,255,255,.25);}.hmi-panel{width:440px;max-width:46vw;display:flex;flex-direction:column;min-height:0;background:#121b22;border:1px solid #27404f;border-radius:6px;overflow:hidden;}.hmi-panel h2{margin:0;padding:8px 12px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#7fb6d6;background:#16232e;border-top:1px solid #223a49;border-bottom:1px solid #223a49;}.hmi-panel h2:first-child{border-top:0;}.hmi-table-host{flex:1;overflow:auto;min-height:110px;}.hmi-table-host.short{flex:0 0 auto;max-height:230px;}table{border-collapse:collapse;width:100%;font-size:11.5px;}th,td{padding:4px 8px;text-align:left;border-bottom:1px solid #1d2b36;white-space:nowrap;}th{position:sticky;top:0;background:#17252f;color:#8fb3c9;font-weight:600;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;z-index:1;}td.mono{font-family:Consolas,monospace;color:#b9d7ea;}td.zone{color:#ffd166;font-weight:600;}td.state-stopped{color:#93a7b8;} td.state-running{color:#3fd68a;}td.state-full{color:#f0c24b;} td.state-jam{color:#ff6b60;font-weight:700;}.hmi-notes{padding:7px 12px;font-size:10.5px;color:#7d94a5;border-top:1px solid #1d2b36;line-height:1.45;}.hmi-notes code{color:#9fd0ef;}.hmi-btn.dev{padding:1px 7px;font-size:10px;margin:0 2px;border-radius:3px;}td.state-idle{color:#93a7b8;} td.state-active{color:#f0c24b;font-weight:600;}td.state-fault{color:#ff6b60;font-weight:700;}@media (max-width:980px){.hmi-main{flex-direction:column;}.hmi-panel{width:auto;max-width:none;}}</style>
+</head>
+<body>
+<div class="hmi">
+  <header class="hmi-header">
+    <h1>DEMO_CONVEYOR &mdash; CONVEYOR HMI</h1>
+    <div class="meta">PLC <b>CONVEYOR_PLC</b> (1756-L83E) &middot; <b>5</b> segments &middot; <b>34</b> zones &middot; <b>7</b> ZPA groups &middot; <b>10</b> I/O blocks &middot; <b>35.2 m</b> &middot; roller conveyor &middot; <b>25</b> curved zones &middot; spiral rise <b>2.40 m</b> &middot; <b>1</b> scan zone(s) &middot; <b>1</b> merge(s) &middot; <b>3</b> transfer device(s) &middot; tracking <b>16 trays</b></div>
+  </header>
+  <main class="hmi-main">
+    <section class="hmi-stage">
+      <div class="hmi-canvas-wrap"><canvas id="hmi-canvas" width="1100" height="460"></canvas></div>
+      <div class="hmi-controls">
+        <button class="hmi-btn run" id="btn-run" type="button">Run</button>
+        <button class="hmi-btn stop" id="btn-stop" type="button">Stop</button>
+        <button class="hmi-btn reset" id="btn-reset" type="button">Reset</button>
+        <button class="hmi-btn sim" id="btn-sim" type="button">Sim</button>
+        <span class="hmi-status" id="sim-status">conveyor <b>stopped</b> &middot; click a zone to toggle its sensor</span>
+      </div>
+      <div class="hmi-legend"><span><i class="hmi-dot" style="background:#41505f;border-color:#6b7c8d"></i>Stopped</span><span><i class="hmi-dot" style="background:#1f7a4d;border-color:#3fd68a"></i>Running</span><span><i class="hmi-dot" style="background:#a8781f;border-color:#f0c24b"></i>Full</span><span><i class="hmi-dot" style="background:#9e2f2a;border-color:#ff6b60"></i>Jam</span><span><i class="hmi-dot" style="background:#101a22;border-color:#7fd4ff"></i>Scanner</span><span><i class="hmi-dot" style="background:#2b3a47;border-color:#8fd0ff"></i>Belt</span><span><i class="hmi-dot" style="background:#1f7a4d;border-color:#3fd68a"></i>Merge grant (main)</span><span><i class="hmi-dot" style="background:#1d5c8a;border-color:#7fd4ff"></i>Merge grant (spur)</span><span><i class="hmi-dot" style="background:#8a6a1f;border-color:#f0c24b"></i>Device active</span></div>
+    </section>
+    <aside class="hmi-panel">
+      <h2>Zone tag mapping</h2>
+      <div class="hmi-table-host"><table id="tag-map">
+        <thead><tr><th>Zone</th><th>Block</th><th>PLC tag path</th><th>Input</th><th>Output</th><th>IP</th></tr></thead>
+        <tbody>
+          <tr data-zone="1"><td class="zone">SEG1_Z1</td><td class="mono">ZPA01</td><td class="mono">NETS[1].ZPA[1]</td><td class="mono">ZPA01:I.Data.0</td><td class="mono">ZPA01:O.Data.0</td><td class="mono">192.168.1.100</td></tr>
+          <tr data-zone="2"><td class="zone">SEG1_Z2</td><td class="mono">ZPA01</td><td class="mono">NETS[1].ZPA[1]</td><td class="mono">ZPA01:I.Data.1</td><td class="mono">ZPA01:O.Data.1</td><td class="mono">192.168.1.100</td></tr>
+          <tr data-zone="3"><td class="zone">SEG1_Z3</td><td class="mono">ZPA01</td><td class="mono">NETS[1].ZPA[1]</td><td class="mono">ZPA01:I.Data.2</td><td class="mono">ZPA01:O.Data.2</td><td class="mono">192.168.1.100</td></tr>
+          <tr data-zone="4"><td class="zone">SEG1_Z4</td><td class="mono">ZPA01</td><td class="mono">NETS[1].ZPA[1]</td><td class="mono">ZPA01:I.Data.3</td><td class="mono">ZPA01:O.Data.3</td><td class="mono">192.168.1.100</td></tr>
+          <tr data-zone="5"><td class="zone">SEG2_Z1</td><td class="mono">ZPA02</td><td class="mono">NETS[1].ZPA[2]</td><td class="mono">ZPA02:I.Data.0</td><td class="mono">ZPA02:O.Data.0</td><td class="mono">192.168.1.101</td></tr>
+          <tr data-zone="6"><td class="zone">SEG2_Z2</td><td class="mono">ZPA02</td><td class="mono">NETS[1].ZPA[2]</td><td class="mono">ZPA02:I.Data.1</td><td class="mono">ZPA02:O.Data.1</td><td class="mono">192.168.1.101</td></tr>
+          <tr data-zone="7"><td class="zone">SEG3_Z1</td><td class="mono">ZPA03</td><td class="mono">NETS[1].ZPA[3]</td><td class="mono">ZPA03:I.Data.0</td><td class="mono">ZPA03:O.Data.0</td><td class="mono">192.168.1.102</td></tr>
+          <tr data-zone="8"><td class="zone">SEG3_Z2</td><td class="mono">ZPA03</td><td class="mono">NETS[1].ZPA[3]</td><td class="mono">ZPA03:I.Data.1</td><td class="mono">ZPA03:O.Data.1</td><td class="mono">192.168.1.102</td></tr>
+          <tr data-zone="9"><td class="zone">SEG3_Z3</td><td class="mono">ZPA03</td><td class="mono">NETS[1].ZPA[3]</td><td class="mono">ZPA03:I.Data.2</td><td class="mono">ZPA03:O.Data.2</td><td class="mono">192.168.1.102</td></tr>
+          <tr data-zone="10"><td class="zone">SPIRAL1_Z1</td><td class="mono">ZPA04</td><td class="mono">NETS[1].ZPA[4]</td><td class="mono">ZPA04:I.Data.0</td><td class="mono">ZPA04:O.Data.0</td><td class="mono">192.168.1.103</td></tr>
+          <tr data-zone="11"><td class="zone">SPIRAL1_Z2</td><td class="mono">ZPA04</td><td class="mono">NETS[1].ZPA[4]</td><td class="mono">ZPA04:I.Data.1</td><td class="mono">ZPA04:O.Data.1</td><td class="mono">192.168.1.103</td></tr>
+          <tr data-zone="12"><td class="zone">SPIRAL1_Z3</td><td class="mono">ZPA04</td><td class="mono">NETS[1].ZPA[4]</td><td class="mono">ZPA04:I.Data.2</td><td class="mono">ZPA04:O.Data.2</td><td class="mono">192.168.1.103</td></tr>
+          <tr data-zone="13"><td class="zone">SPIRAL1_Z4</td><td class="mono">ZPA04</td><td class="mono">NETS[1].ZPA[4]</td><td class="mono">ZPA04:I.Data.3</td><td class="mono">ZPA04:O.Data.3</td><td class="mono">192.168.1.103</td></tr>
+          <tr data-zone="14"><td class="zone">SPIRAL1_Z5</td><td class="mono">ZPA04</td><td class="mono">NETS[1].ZPA[4]</td><td class="mono">ZPA04:I.Data.4</td><td class="mono">ZPA04:O.Data.4</td><td class="mono">192.168.1.103</td></tr>
+          <tr data-zone="15"><td class="zone">SPIRAL1_Z6</td><td class="mono">ZPA04</td><td class="mono">NETS[1].ZPA[4]</td><td class="mono">ZPA04:I.Data.5</td><td class="mono">ZPA04:O.Data.5</td><td class="mono">192.168.1.103</td></tr>
+          <tr data-zone="16"><td class="zone">SPIRAL1_Z7</td><td class="mono">ZPA04</td><td class="mono">NETS[1].ZPA[4]</td><td class="mono">ZPA04:I.Data.6</td><td class="mono">ZPA04:O.Data.6</td><td class="mono">192.168.1.103</td></tr>
+          <tr data-zone="17"><td class="zone">SPIRAL1_Z8</td><td class="mono">ZPA04</td><td class="mono">NETS[1].ZPA[4]</td><td class="mono">ZPA04:I.Data.7</td><td class="mono">ZPA04:O.Data.7</td><td class="mono">192.168.1.103</td></tr>
+          <tr data-zone="18"><td class="zone">SPIRAL1_Z9</td><td class="mono">ZPA05</td><td class="mono">NETS[1].ZPA[5]</td><td class="mono">ZPA05:I.Data.0</td><td class="mono">ZPA05:O.Data.0</td><td class="mono">192.168.1.104</td></tr>
+          <tr data-zone="19"><td class="zone">SPIRAL1_Z10</td><td class="mono">ZPA05</td><td class="mono">NETS[1].ZPA[5]</td><td class="mono">ZPA05:I.Data.1</td><td class="mono">ZPA05:O.Data.1</td><td class="mono">192.168.1.104</td></tr>
+          <tr data-zone="20"><td class="zone">SPIRAL1_Z11</td><td class="mono">ZPA05</td><td class="mono">NETS[1].ZPA[5]</td><td class="mono">ZPA05:I.Data.2</td><td class="mono">ZPA05:O.Data.2</td><td class="mono">192.168.1.104</td></tr>
+          <tr data-zone="21"><td class="zone">SPIRAL1_Z12</td><td class="mono">ZPA05</td><td class="mono">NETS[1].ZPA[5]</td><td class="mono">ZPA05:I.Data.3</td><td class="mono">ZPA05:O.Data.3</td><td class="mono">192.168.1.104</td></tr>
+          <tr data-zone="22"><td class="zone">SPIRAL1_Z13</td><td class="mono">ZPA05</td><td class="mono">NETS[1].ZPA[5]</td><td class="mono">ZPA05:I.Data.4</td><td class="mono">ZPA05:O.Data.4</td><td class="mono">192.168.1.104</td></tr>
+          <tr data-zone="23"><td class="zone">SPIRAL1_Z14</td><td class="mono">ZPA05</td><td class="mono">NETS[1].ZPA[5]</td><td class="mono">ZPA05:I.Data.5</td><td class="mono">ZPA05:O.Data.5</td><td class="mono">192.168.1.104</td></tr>
+          <tr data-zone="24"><td class="zone">SPIRAL1_Z15</td><td class="mono">ZPA05</td><td class="mono">NETS[1].ZPA[5]</td><td class="mono">ZPA05:I.Data.6</td><td class="mono">ZPA05:O.Data.6</td><td class="mono">192.168.1.104</td></tr>
+          <tr data-zone="25"><td class="zone">SPIRAL1_Z16</td><td class="mono">ZPA05</td><td class="mono">NETS[1].ZPA[5]</td><td class="mono">ZPA05:I.Data.7</td><td class="mono">ZPA05:O.Data.7</td><td class="mono">192.168.1.104</td></tr>
+          <tr data-zone="26"><td class="zone">SPIRAL1_Z17</td><td class="mono">ZPA06</td><td class="mono">NETS[1].ZPA[6]</td><td class="mono">ZPA06:I.Data.0</td><td class="mono">ZPA06:O.Data.0</td><td class="mono">192.168.1.105</td></tr>
+          <tr data-zone="27"><td class="zone">SPIRAL1_Z18</td><td class="mono">ZPA06</td><td class="mono">NETS[1].ZPA[6]</td><td class="mono">ZPA06:I.Data.1</td><td class="mono">ZPA06:O.Data.1</td><td class="mono">192.168.1.105</td></tr>
+          <tr data-zone="28"><td class="zone">SPIRAL1_Z19</td><td class="mono">ZPA06</td><td class="mono">NETS[1].ZPA[6]</td><td class="mono">ZPA06:I.Data.2</td><td class="mono">ZPA06:O.Data.2</td><td class="mono">192.168.1.105</td></tr>
+          <tr data-zone="29"><td class="zone">SPIRAL1_Z20</td><td class="mono">ZPA06</td><td class="mono">NETS[1].ZPA[6]</td><td class="mono">ZPA06:I.Data.3</td><td class="mono">ZPA06:O.Data.3</td><td class="mono">192.168.1.105</td></tr>
+          <tr data-zone="30"><td class="zone">SPIRAL1_Z21</td><td class="mono">ZPA06</td><td class="mono">NETS[1].ZPA[6]</td><td class="mono">ZPA06:I.Data.4</td><td class="mono">ZPA06:O.Data.4</td><td class="mono">192.168.1.105</td></tr>
+          <tr data-zone="31"><td class="zone">SPIRAL1_Z22</td><td class="mono">ZPA06</td><td class="mono">NETS[1].ZPA[6]</td><td class="mono">ZPA06:I.Data.5</td><td class="mono">ZPA06:O.Data.5</td><td class="mono">192.168.1.105</td></tr>
+          <tr data-zone="32"><td class="zone">SPIRAL1_Z23</td><td class="mono">ZPA06</td><td class="mono">NETS[1].ZPA[6]</td><td class="mono">ZPA06:I.Data.6</td><td class="mono">ZPA06:O.Data.6</td><td class="mono">192.168.1.105</td></tr>
+          <tr data-zone="33"><td class="zone">SPUR1_Z1</td><td class="mono">ZPA07</td><td class="mono">NETS[1].ZPA[7]</td><td class="mono">ZPA07:I.Data.0</td><td class="mono">ZPA07:O.Data.0</td><td class="mono">192.168.1.106</td></tr>
+          <tr data-zone="34"><td class="zone">SPUR1_Z2</td><td class="mono">ZPA07</td><td class="mono">NETS[1].ZPA[7]</td><td class="mono">ZPA07:I.Data.1</td><td class="mono">ZPA07:O.Data.1</td><td class="mono">192.168.1.106</td></tr>
+        </tbody></table></div>
+      <h2>Tray tracking</h2>
+      <div class="hmi-table-host short"><table id="track-table">
+        <thead><tr><th>Slot</th><th>Barcode</th><th>Zone</th><th>State</th></tr></thead>
+        <tbody id="track-body"></tbody></table></div>
+
+      <h2>Merge junctions</h2>
+      <div class="hmi-table-host short"><table id="merge-table">
+        <thead><tr><th>Merge</th><th>Priority</th><th>Merge zone</th><th>Main upstream</th><th>Spur zone</th><th>Grant</th></tr></thead>
+        <tbody>
+        <tr><td class="mono">MERGE1</td><td class="mono">alternate</td><td class="mono">5</td><td class="mono"></td><td class="mono">34</td><td class="mono" id="merge-grant-MERGE1">-</td></tr>
+        </tbody></table></div>
+      <h2>Transfer devices</h2>
+      <div class="hmi-table-host short"><table id="device-table">
+        <thead><tr><th>Name</th><th>Type</th><th>Block</th><th>IP</th><th>State</th><th>Fault</th><th>Command</th></tr></thead>
+        <tbody>
+        <tr><td class="mono">PUSHER1</td><td class="mono">Pusher / divert</td><td class="mono">XFER01</td><td class="mono">192.168.1.107</td><td class="mono" id="dev-state-0">idle</td><td class="mono" id="dev-fault-0">0</td><td><button class="hmi-btn dev" type="button" id="dev-0-0" title="XFER_CMD_PUSHER1">Divert</button></td></tr>
+        <tr><td class="mono">ROTARY1</td><td class="mono">Rotary table</td><td class="mono">XFER02</td><td class="mono">192.168.1.108</td><td class="mono" id="dev-state-1">idle</td><td class="mono" id="dev-fault-1">0</td><td><button class="hmi-btn dev" type="button" id="dev-1-0" title="XFER_CMD_ROTARY1">Rotate</button></td></tr>
+        <tr><td class="mono">POPUP1</td><td class="mono">Cross-belt pop-up transfer</td><td class="mono">XFER03</td><td class="mono">192.168.1.109</td><td class="mono" id="dev-state-2">idle</td><td class="mono" id="dev-fault-2">0</td><td><button class="hmi-btn dev" type="button" id="dev-2-0" title="XFER_CMD_POPUP1_LEFT">Left</button> <button class="hmi-btn dev" type="button" id="dev-2-1" title="XFER_CMD_POPUP1_RIGHT">Right</button></td></tr>
+        </tbody></table></div>
+      <div class="hmi-notes">
+        Simulator only &mdash; values are not read from the PLC. One <code>NETS[1].ZPA[g]</code> group covers up to 8 zones; zone k of the group uses input/output bit k-1 of the group's 1799ER word and <code>ZONE_STATUS[k]</code> (0 normal, 1 full, 2 jam, 20 jam acknowledged). Scanner tags <code>&lt;SCAN&gt;_BARCODE</code>/<code>&lt;SCAN&gt;_GOOD_READ</code> are populated by the external scanner MSG/CIP interface. Jam is raised after 8 s blocked.
+      </div>
+    </aside>
+  </main>
+</div>
+<script>
+var HMI_DATA = {"version":"2.1.0","designName":"DEMO_CONVEYOR","controllerName":"CONVEYOR_PLC","processorType":"1756-L83E","conveyorType":"roller","segments":5,"zones":34,"groups":7,"blocks":10,"lengthM":35.17,"curvedZones":25,"spiralRiseM":2.4,"beltSegments":0,"jamSeconds":8,"bounds":{"minX":0,"minY":-0.3,"width":6.048,"height":6.5478},"zoneStates":[{"index":1,"label":"SEG1_Z1","segment":"SEG1","segmentKind":"straight","zoneInSegment":1,"group":1,"zoneInGroup":1,"block":"ZPA01","ip":"192.168.1.100","x":0.5,"y":0,"angleDeg":0,"lengthM":1,"widthM":0.6,"curved":false,"conveyorType":"roller","radiusM":null,"taperStandardId":null,"spiral":null,"sensorName":"SEG1_Z1_SENSOR","motorName":"SEG1_Z1_RUN","inputAddress":"ZPA01:I.Data.0","outputAddress":"ZPA01:O.Data.0","plcPath":"NETS[1].ZPA[1]","statusPath":"NETS[1].ZPA[1].ZONE_STATUS[1]","driveLabel":null},{"index":2,"label":"SEG1_Z2","segment":"SEG1","segmentKind":"straight","zoneInSegment":2,"group":1,"zoneInGroup":2,"block":"ZPA01","ip":"192.168.1.100","x":1.5,"y":0,"angleDeg":0,"lengthM":1,"widthM":0.6,"curved":false,"conveyorType":"roller","radiusM":null,"taperStandardId":null,"spiral":null,"sensorName":"SEG1_Z2_SENSOR","motorName":"SEG1_Z2_RUN","inputAddress":"ZPA01:I.Data.1","outputAddress":"ZPA01:O.Data.1","plcPath":"NETS[1].ZPA[1]","statusPath":"NETS[1].ZPA[1].ZONE_STATUS[2]","driveLabel":null},{"index":3,"label":"SEG1_Z3","segment":"SEG1","segmentKind":"straight","zoneInSegment":3,"group":1,"zoneInGroup":3,"block":"ZPA01","ip":"192.168.1.100","x":2.5,"y":0,"angleDeg":0,"lengthM":1,"widthM":0.6,"curved":false,"conveyorType":"roller","radiusM":null,"taperStandardId":null,"spiral":null,"sensorName":"SEG1_Z3_SENSOR","motorName":"SEG1_Z3_RUN","inputAddress":"ZPA01:I.Data.2","outputAddress":"ZPA01:O.Data.2","plcPath":"NETS[1].ZPA[1]","statusPath":"NETS[1].ZPA[1].ZONE_STATUS[3]","driveLabel":null},{"index":4,"label":"SEG1_Z4","segment":"SEG1","segmentKind":"straight","zoneInSegment":4,"group":1,"zoneInGroup":4,"block":"ZPA01","ip":"192.168.1.100","x":3.5,"y":0,"angleDeg":0,"lengthM":1,"widthM":0.6,"curved":false,"conveyorType":"roller","radiusM":null,"taperStandardId":null,"spiral":null,"sensorName":"SEG1_Z4_SENSOR","motorName":"SEG1_Z4_RUN","inputAddress":"ZPA01:I.Data.3","outputAddress":"ZPA01:O.Data.3","plcPath":"NETS[1].ZPA[1]","statusPath":"NETS[1].ZPA[1].ZONE_STATUS[4]","driveLabel":null},{"index":5,"label":"SEG2_Z1","segment":"SEG2","segmentKind":"curve","zoneInSegment":1,"group":2,"zoneInGroup":1,"block":"ZPA02","ip":"192.168.1.101","x":4.668914655303508,"y":0.1331072240428314,"angleDeg":26.24,"lengthM":1.372,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.748,"taperStandardId":"TS-20","spiral":null,"sensorName":"SEG2_Z1_SENSOR","motorName":"SEG2_Z1_RUN","inputAddress":"ZPA02:I.Data.0","outputAddress":"ZPA02:O.Data.0","plcPath":"NETS[1].ZPA[2]","statusPath":"NETS[1].ZPA[2].ZONE_STATUS[1]","driveLabel":null},{"index":6,"label":"SEG2_Z2","segment":"SEG2","segmentKind":"curve","zoneInSegment":2,"group":2,"zoneInGroup":2,"block":"ZPA02","ip":"192.168.1.101","x":5.614892775957168,"y":1.0790853446964919,"angleDeg":63.76,"lengthM":1.372,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.748,"taperStandardId":"TS-20","spiral":null,"sensorName":"SEG2_Z2_SENSOR","motorName":"SEG2_Z2_RUN","inputAddress":"ZPA02:I.Data.1","outputAddress":"ZPA02:O.Data.1","plcPath":"NETS[1].ZPA[2]","statusPath":"NETS[1].ZPA[2].ZONE_STATUS[2]","driveLabel":null},{"index":7,"label":"SEG3_Z1","segment":"SEG3","segmentKind":"straight","zoneInSegment":1,"group":3,"zoneInGroup":1,"block":"ZPA03","ip":"192.168.1.102","x":5.748,"y":2.248,"angleDeg":90,"lengthM":1,"widthM":0.6,"curved":false,"conveyorType":"roller","radiusM":null,"taperStandardId":null,"spiral":null,"sensorName":"SEG3_Z1_SENSOR","motorName":"SEG3_Z1_RUN","inputAddress":"ZPA03:I.Data.0","outputAddress":"ZPA03:O.Data.0","plcPath":"NETS[1].ZPA[3]","statusPath":"NETS[1].ZPA[3].ZONE_STATUS[1]","driveLabel":null},{"index":8,"label":"SEG3_Z2","segment":"SEG3","segmentKind":"straight","zoneInSegment":2,"group":3,"zoneInGroup":2,"block":"ZPA03","ip":"192.168.1.102","x":5.748,"y":3.248,"angleDeg":90,"lengthM":1,"widthM":0.6,"curved":false,"conveyorType":"roller","radiusM":null,"taperStandardId":null,"spiral":null,"sensorName":"SEG3_Z2_SENSOR","motorName":"SEG3_Z2_RUN","inputAddress":"ZPA03:I.Data.1","outputAddress":"ZPA03:O.Data.1","plcPath":"NETS[1].ZPA[3]","statusPath":"NETS[1].ZPA[3].ZONE_STATUS[2]","driveLabel":null},{"index":9,"label":"SEG3_Z3","segment":"SEG3","segmentKind":"straight","zoneInSegment":3,"group":3,"zoneInGroup":3,"block":"ZPA03","ip":"192.168.1.102","x":5.748,"y":4.248,"angleDeg":90,"lengthM":1,"widthM":0.6,"curved":false,"conveyorType":"roller","radiusM":null,"taperStandardId":null,"spiral":null,"sensorName":"SEG3_Z3_SENSOR","motorName":"SEG3_Z3_RUN","inputAddress":"ZPA03:I.Data.2","outputAddress":"ZPA03:O.Data.2","plcPath":"NETS[1].ZPA[3]","statusPath":"NETS[1].ZPA[3].ZONE_STATUS[3]","driveLabel":null},{"index":10,"label":"SPIRAL1_Z1","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":1,"group":4,"zoneInGroup":1,"block":"ZPA04","ip":"192.168.1.103","x":5.647038560662991,"y":5.225277084422268,"angleDeg":118.123,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":0.05},"sensorName":"SPIRAL1_Z1_SENSOR","motorName":"SPIRAL1_Z1_RUN","inputAddress":"ZPA04:I.Data.0","outputAddress":"ZPA04:O.Data.0","plcPath":"NETS[1].ZPA[4]","statusPath":"NETS[1].ZPA[4].ZONE_STATUS[1]","driveLabel":null},{"index":11,"label":"SPIRAL1_Z2","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":2,"group":4,"zoneInGroup":2,"block":"ZPA04","ip":"192.168.1.103","x":4.9485084925709195,"y":5.874482144854124,"angleDeg":163.144,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":0.16},"sensorName":"SPIRAL1_Z2_SENSOR","motorName":"SPIRAL1_Z2_RUN","inputAddress":"ZPA04:I.Data.1","outputAddress":"ZPA04:O.Data.1","plcPath":"NETS[1].ZPA[4]","statusPath":"NETS[1].ZPA[4].ZONE_STATUS[2]","driveLabel":null},{"index":12,"label":"SPIRAL1_Z3","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":3,"group":4,"zoneInGroup":3,"block":"ZPA04","ip":"192.168.1.103","x":3.9985596048314114,"y":5.808470314100258,"angleDeg":-151.877,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":0.26},"sensorName":"SPIRAL1_Z3_SENSOR","motorName":"SPIRAL1_Z3_RUN","inputAddress":"ZPA04:I.Data.2","outputAddress":"ZPA04:O.Data.2","plcPath":"NETS[1].ZPA[4]","statusPath":"NETS[1].ZPA[4].ZONE_STATUS[3]","driveLabel":null},{"index":13,"label":"SPIRAL1_Z4","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":4,"group":4,"zoneInGroup":4,"block":"ZPA04","ip":"192.168.1.103","x":3.397792434977793,"y":5.0702006908138,"angleDeg":-106.856,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":0.37},"sensorName":"SPIRAL1_Z4_SENSOR","motorName":"SPIRAL1_Z4_RUN","inputAddress":"ZPA04:I.Data.3","outputAddress":"ZPA04:O.Data.3","plcPath":"NETS[1].ZPA[4]","statusPath":"NETS[1].ZPA[4].ZONE_STATUS[4]","driveLabel":null},{"index":14,"label":"SPIRAL1_Z5","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":5,"group":4,"zoneInGroup":5,"block":"ZPA04","ip":"192.168.1.103","x":3.5260979324624744,"y":4.12639629408509,"angleDeg":-61.877,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":0.47},"sensorName":"SPIRAL1_Z5_SENSOR","motorName":"SPIRAL1_Z5_RUN","inputAddress":"ZPA04:I.Data.4","outputAddress":"ZPA04:O.Data.4","plcPath":"NETS[1].ZPA[4]","statusPath":"NETS[1].ZPA[4].ZONE_STATUS[5]","driveLabel":null},{"index":15,"label":"SPIRAL1_Z6","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":6,"group":4,"zoneInGroup":6,"block":"ZPA04","ip":"192.168.1.103","x":4.304107110943319,"y":3.57406701480971,"angleDeg":-16.856,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":0.57},"sensorName":"SPIRAL1_Z6_SENSOR","motorName":"SPIRAL1_Z6_RUN","inputAddress":"ZPA04:I.Data.5","outputAddress":"ZPA04:O.Data.5","plcPath":"NETS[1].ZPA[4]","statusPath":"NETS[1].ZPA[4].ZONE_STATUS[6]","driveLabel":null},{"index":16,"label":"SPIRAL1_Z7","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":7,"group":4,"zoneInGroup":7,"block":"ZPA04","ip":"192.168.1.103","x":5.238417443871797,"y":3.769677526788005,"angleDeg":39.394,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":0.68},"sensorName":"SPIRAL1_Z7_SENSOR","motorName":"SPIRAL1_Z7_RUN","inputAddress":"ZPA04:I.Data.6","outputAddress":"ZPA04:O.Data.6","plcPath":"NETS[1].ZPA[4]","statusPath":"NETS[1].ZPA[4].ZONE_STATUS[7]","driveLabel":null},{"index":17,"label":"SPIRAL1_Z8","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":8,"group":4,"zoneInGroup":8,"block":"ZPA04","ip":"192.168.1.103","x":5.731930119727842,"y":4.585144633259217,"angleDeg":84.365,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":0.78},"sensorName":"SPIRAL1_Z8_SENSOR","motorName":"SPIRAL1_Z8_RUN","inputAddress":"ZPA04:I.Data.7","outputAddress":"ZPA04:O.Data.7","plcPath":"NETS[1].ZPA[4]","statusPath":"NETS[1].ZPA[4].ZONE_STATUS[8]","driveLabel":null},{"index":18,"label":"SPIRAL1_Z9","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":9,"group":5,"zoneInGroup":1,"block":"ZPA05","ip":"192.168.1.104","x":5.474393483927196,"y":5.501650466323079,"angleDeg":129.394,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":0.89},"sensorName":"SPIRAL1_Z9_SENSOR","motorName":"SPIRAL1_Z9_RUN","inputAddress":"ZPA05:I.Data.0","outputAddress":"ZPA05:O.Data.0","plcPath":"NETS[1].ZPA[5]","statusPath":"NETS[1].ZPA[5].ZONE_STATUS[1]","driveLabel":null},{"index":19,"label":"SPIRAL1_Z10","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":10,"group":5,"zoneInGroup":2,"block":"ZPA05","ip":"192.168.1.104","x":4.629427683370387,"y":5.939965059863922,"angleDeg":174.365,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":0.99},"sensorName":"SPIRAL1_Z10_SENSOR","motorName":"SPIRAL1_Z10_RUN","inputAddress":"ZPA05:I.Data.1","outputAddress":"ZPA05:O.Data.1","plcPath":"NETS[1].ZPA[5]","statusPath":"NETS[1].ZPA[5].ZONE_STATUS[2]","driveLabel":null},{"index":20,"label":"SPIRAL1_Z11","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":11,"group":5,"zoneInGroup":3,"block":"ZPA05","ip":"192.168.1.104","x":3.7311165112256366,"y":5.622464494642395,"angleDeg":-140.606,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":1.1},"sensorName":"SPIRAL1_Z11_SENSOR","motorName":"SPIRAL1_Z11_RUN","inputAddress":"ZPA05:I.Data.2","outputAddress":"ZPA05:O.Data.2","plcPath":"NETS[1].ZPA[5]","statusPath":"NETS[1].ZPA[5].ZONE_STATUS[3]","driveLabel":null},{"index":21,"label":"SPIRAL1_Z12","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":12,"group":5,"zoneInGroup":4,"block":"ZPA05","ip":"192.168.1.104","x":3.3480000000000008,"y":4.747999999999991,"angleDeg":-84.365,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":1.2},"sensorName":"SPIRAL1_Z12_SENSOR","motorName":"SPIRAL1_Z12_RUN","inputAddress":"ZPA05:I.Data.3","outputAddress":"ZPA05:O.Data.3","plcPath":"NETS[1].ZPA[5]","statusPath":"NETS[1].ZPA[5].ZONE_STATUS[4]","driveLabel":null},{"index":22,"label":"SPIRAL1_Z13","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":13,"group":5,"zoneInGroup":5,"block":"ZPA05","ip":"192.168.1.104","x":3.731116511225648,"y":3.873535505357595,"angleDeg":-39.394,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":1.3},"sensorName":"SPIRAL1_Z13_SENSOR","motorName":"SPIRAL1_Z13_RUN","inputAddress":"ZPA05:I.Data.4","outputAddress":"ZPA05:O.Data.4","plcPath":"NETS[1].ZPA[5]","statusPath":"NETS[1].ZPA[5].ZONE_STATUS[5]","driveLabel":null},{"index":23,"label":"SPIRAL1_Z14","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":14,"group":5,"zoneInGroup":6,"block":"ZPA05","ip":"192.168.1.104","x":4.629427683370403,"y":3.55603494013608,"angleDeg":5.635,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":1.41},"sensorName":"SPIRAL1_Z14_SENSOR","motorName":"SPIRAL1_Z14_RUN","inputAddress":"ZPA05:I.Data.5","outputAddress":"ZPA05:O.Data.5","plcPath":"NETS[1].ZPA[5]","statusPath":"NETS[1].ZPA[5].ZONE_STATUS[6]","driveLabel":null},{"index":24,"label":"SPIRAL1_Z15","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":15,"group":5,"zoneInGroup":7,"block":"ZPA05","ip":"192.168.1.104","x":5.474393483927204,"y":3.9943495336769312,"angleDeg":50.606,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":1.51},"sensorName":"SPIRAL1_Z15_SENSOR","motorName":"SPIRAL1_Z15_RUN","inputAddress":"ZPA05:I.Data.6","outputAddress":"ZPA05:O.Data.6","plcPath":"NETS[1].ZPA[5]","statusPath":"NETS[1].ZPA[5].ZONE_STATUS[7]","driveLabel":null},{"index":25,"label":"SPIRAL1_Z16","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":16,"group":5,"zoneInGroup":8,"block":"ZPA05","ip":"192.168.1.104","x":5.731930119727841,"y":4.910855366740797,"angleDeg":95.635,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":1.62},"sensorName":"SPIRAL1_Z16_SENSOR","motorName":"SPIRAL1_Z16_RUN","inputAddress":"ZPA05:I.Data.7","outputAddress":"ZPA05:O.Data.7","plcPath":"NETS[1].ZPA[5]","statusPath":"NETS[1].ZPA[5].ZONE_STATUS[8]","driveLabel":null},{"index":26,"label":"SPIRAL1_Z17","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":17,"group":6,"zoneInGroup":1,"block":"ZPA06","ip":"192.168.1.105","x":5.238417443871786,"y":5.7263224732120035,"angleDeg":140.606,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":1.72},"sensorName":"SPIRAL1_Z17_SENSOR","motorName":"SPIRAL1_Z17_RUN","inputAddress":"ZPA06:I.Data.0","outputAddress":"ZPA06:O.Data.0","plcPath":"NETS[1].ZPA[6]","statusPath":"NETS[1].ZPA[6].ZONE_STATUS[1]","driveLabel":null},{"index":27,"label":"SPIRAL1_Z18","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":18,"group":6,"zoneInGroup":2,"block":"ZPA06","ip":"192.168.1.105","x":4.304107110943309,"y":5.9219329851902875,"angleDeg":-163.144,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":1.83},"sensorName":"SPIRAL1_Z18_SENSOR","motorName":"SPIRAL1_Z18_RUN","inputAddress":"ZPA06:I.Data.1","outputAddress":"ZPA06:O.Data.1","plcPath":"NETS[1].ZPA[6]","statusPath":"NETS[1].ZPA[6].ZONE_STATUS[2]","driveLabel":null},{"index":28,"label":"SPIRAL1_Z19","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":19,"group":6,"zoneInGroup":3,"block":"ZPA06","ip":"192.168.1.105","x":3.5260979324624704,"y":5.369603705914902,"angleDeg":-118.123,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":1.93},"sensorName":"SPIRAL1_Z19_SENSOR","motorName":"SPIRAL1_Z19_RUN","inputAddress":"ZPA06:I.Data.2","outputAddress":"ZPA06:O.Data.2","plcPath":"NETS[1].ZPA[6]","statusPath":"NETS[1].ZPA[6].ZONE_STATUS[3]","driveLabel":null},{"index":29,"label":"SPIRAL1_Z20","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":20,"group":6,"zoneInGroup":4,"block":"ZPA06","ip":"192.168.1.105","x":3.397792434977795,"y":4.425799309186193,"angleDeg":-73.144,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":2.04},"sensorName":"SPIRAL1_Z20_SENSOR","motorName":"SPIRAL1_Z20_RUN","inputAddress":"ZPA06:I.Data.3","outputAddress":"ZPA06:O.Data.3","plcPath":"NETS[1].ZPA[6]","statusPath":"NETS[1].ZPA[6].ZONE_STATUS[4]","driveLabel":null},{"index":30,"label":"SPIRAL1_Z21","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":21,"group":6,"zoneInGroup":5,"block":"ZPA06","ip":"192.168.1.105","x":3.998559604831416,"y":3.6875296858997397,"angleDeg":-28.123,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":2.14},"sensorName":"SPIRAL1_Z21_SENSOR","motorName":"SPIRAL1_Z21_RUN","inputAddress":"ZPA06:I.Data.4","outputAddress":"ZPA06:O.Data.4","plcPath":"NETS[1].ZPA[6]","statusPath":"NETS[1].ZPA[6].ZONE_STATUS[5]","driveLabel":null},{"index":31,"label":"SPIRAL1_Z22","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":22,"group":6,"zoneInGroup":6,"block":"ZPA06","ip":"192.168.1.105","x":4.948508492570922,"y":3.621517855145877,"angleDeg":16.856,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":2.24},"sensorName":"SPIRAL1_Z22_SENSOR","motorName":"SPIRAL1_Z22_RUN","inputAddress":"ZPA06:I.Data.5","outputAddress":"ZPA06:O.Data.5","plcPath":"NETS[1].ZPA[6]","statusPath":"NETS[1].ZPA[6].ZONE_STATUS[6]","driveLabel":null},{"index":32,"label":"SPIRAL1_Z23","segment":"SPIRAL1","segmentKind":"spiral","zoneInSegment":23,"group":6,"zoneInGroup":7,"block":"ZPA06","ip":"192.168.1.105","x":5.647038560662991,"y":4.270722915577734,"angleDeg":61.877,"lengthM":0.987,"widthM":0.6,"curved":true,"conveyorType":"roller","radiusM":1.2,"taperStandardId":"TS-26","spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3,"z":2.35},"sensorName":"SPIRAL1_Z23_SENSOR","motorName":"SPIRAL1_Z23_RUN","inputAddress":"ZPA06:I.Data.6","outputAddress":"ZPA06:O.Data.6","plcPath":"NETS[1].ZPA[6]","statusPath":"NETS[1].ZPA[6].ZONE_STATUS[7]","driveLabel":null},{"index":33,"label":"SPUR1_Z1","segment":"SPUR1","segmentKind":"straight","zoneInSegment":1,"group":7,"zoneInGroup":1,"block":"ZPA07","ip":"192.168.1.106","x":3.95,"y":2.32,"angleDeg":-90,"lengthM":1.36,"widthM":0.6,"curved":false,"conveyorType":"roller","radiusM":null,"taperStandardId":null,"spiral":null,"sensorName":"SPUR1_Z1_SENSOR","motorName":"SPUR1_Z1_RUN","inputAddress":"ZPA07:I.Data.0","outputAddress":"ZPA07:O.Data.0","plcPath":"NETS[1].ZPA[7]","statusPath":"NETS[1].ZPA[7].ZONE_STATUS[1]","driveLabel":null},{"index":34,"label":"SPUR1_Z2","segment":"SPUR1","segmentKind":"straight","zoneInSegment":2,"group":7,"zoneInGroup":2,"block":"ZPA07","ip":"192.168.1.106","x":3.95,"y":0.96,"angleDeg":-90,"lengthM":1.36,"widthM":0.6,"curved":false,"conveyorType":"roller","radiusM":null,"taperStandardId":null,"spiral":null,"sensorName":"SPUR1_Z2_SENSOR","motorName":"SPUR1_Z2_RUN","inputAddress":"ZPA07:I.Data.1","outputAddress":"ZPA07:O.Data.1","plcPath":"NETS[1].ZPA[7]","statusPath":"NETS[1].ZPA[7].ZONE_STATUS[2]","driveLabel":null}],"segmentsInfo":[{"name":"SEG1","kind":"straight","conveyorType":"roller","radiusM":null,"curveDeg":0,"taperStandardId":null,"taperDeltaM":null,"spiral":null,"zoneCount":4,"lengthM":4,"zStart":0,"zEnd":0},{"name":"SEG2","kind":"curve","conveyorType":"roller","radiusM":1.748,"curveDeg":90,"taperStandardId":"TS-20","taperDeltaM":0.02,"spiral":null,"zoneCount":2,"lengthM":2.744,"zStart":0,"zEnd":0},{"name":"SEG3","kind":"straight","conveyorType":"roller","radiusM":null,"curveDeg":0,"taperStandardId":null,"taperDeltaM":null,"spiral":null,"zoneCount":3,"lengthM":3,"zStart":0,"zEnd":0},{"name":"SPIRAL1","kind":"spiral","conveyorType":"roller","radiusM":1.2,"curveDeg":0,"taperStandardId":"TS-26","taperDeltaM":0.026,"spiral":{"direction":"up","pitchM":0.8,"heightM":2.4,"slopeDeg":6.06,"turns":3},"zoneCount":23,"lengthM":22.71,"zStart":0,"zEnd":2.4},{"name":"SPUR1","kind":"straight","conveyorType":"roller","radiusM":null,"curveDeg":0,"taperStandardId":null,"taperDeltaM":null,"spiral":null,"zoneCount":2,"lengthM":2.72,"zStart":0,"zEnd":0}],"scanZones":[{"name":"SCAN1","type":"barcode","side":"right","zoneIndex":3,"blockName":"ZPA01","x":2.5,"y":0,"angleDeg":0,"barcodeTag":"SCAN1_BARCODE","goodReadTag":"SCAN1_GOOD_READ"}],"tracking":{"enabled":true,"maxTrays":16,"barcodeLen":20,"zoneCount":34,"scanZones":1,"tagPrefix":"TRACK","scanZoneIndexes":[3]},"drives":[],"merges":[{"name":"MERGE1","priority":"alternate","x":4.945,"y":0.2816,"angleDeg":33.75,"gapM":0.995,"mergeZone":5,"mainZone":null,"spurZone":34,"mergeBlock":"ZPA02","spurBlock":"ZPA07","mainGrantTag":"MERGE_MERGE1_MAIN_GRANT","spurGrantTag":"MERGE_MERGE1_SPUR_GRANT"}],"transfers":[{"name":"PUSHER1","type":"pusher","typeLabel":"Pusher / divert","x":5.748,"y":3.248,"angleDeg":90,"ioBlock":"XFER01","ip":"192.168.1.107","side":"right","bidirectional":false,"directions":["right"],"zoneIndex":8,"cmdTags":["XFER_CMD_PUSHER1"],"statusTag":"XFER01_STATUS","faultTag":"XFER01_FAULT","stateTag":"XFER01_STATE","posTag":null,"destTag":null,"inputs":[{"name":"PUSHER1_RETRACTED_SW","bit":0,"description":"Pusher retracted limit switch"},{"name":"PUSHER1_EXTENDED_SW","bit":1,"description":"Pusher extended limit switch"},{"name":"PUSHER1_TRAY_PRESENT","bit":2,"description":"Tray at divert position"},{"name":"PUSHER1_DOWNSTREAM_CLEAR","bit":3,"description":"Divert side clear"}],"outputs":[{"name":"PUSHER1_EXTEND_SOL","bit":0,"description":"Pusher extend solenoid (one-way divert)"},{"name":"PUSHER1_RETRACT_SOL","bit":1,"description":"Pusher retract solenoid"},{"name":"PUSHER1_DIVERT_ENABLE","bit":2,"description":"Divert enable / light"}]},{"name":"ROTARY1","type":"rotary_table","typeLabel":"Rotary table","x":5.748,"y":4.248,"angleDeg":90,"ioBlock":"XFER02","ip":"192.168.1.108","side":"right","bidirectional":true,"directions":["left","right"],"zoneIndex":9,"cmdTags":["XFER_CMD_ROTARY1"],"statusTag":"XFER02_STATUS","faultTag":"XFER02_FAULT","stateTag":"XFER02_STATE","posTag":"XFER_POS_ROTARY1","destTag":"XFER_DEST_ROTARY1","inputs":[{"name":"ROTARY1_HOME_SW","bit":0,"description":"Rotary table home position"},{"name":"ROTARY1_POS_90_SW","bit":1,"description":"Table at 90 degrees"},{"name":"ROTARY1_POS_180_SW","bit":2,"description":"Table at 180 degrees"},{"name":"ROTARY1_POS_270_SW","bit":3,"description":"Table at 270 degrees"},{"name":"ROTARY1_TRAY_PRESENT","bit":4,"description":"Tray on table"},{"name":"ROTARY1_INFEED_CLEAR","bit":5,"description":"Infeed zone clear"}],"outputs":[{"name":"ROTARY1_ROTATE_CW","bit":0,"description":"Rotate clockwise (bidirectional)"},{"name":"ROTARY1_ROTATE_CCW","bit":1,"description":"Rotate counter-clockwise (bidirectional)"},{"name":"ROTARY1_TABLE_ENABLE","bit":2,"description":"Table motor enable"},{"name":"ROTARY1_TABLE_BRAKE","bit":3,"description":"Table brake release"}]},{"name":"POPUP1","type":"popup_transfer","typeLabel":"Cross-belt pop-up transfer","x":3,"y":0,"angleDeg":0,"ioBlock":"XFER03","ip":"192.168.1.109","side":"right","bidirectional":true,"directions":["left","right"],"zoneIndex":3,"cmdTags":["XFER_CMD_POPUP1_LEFT","XFER_CMD_POPUP1_RIGHT"],"statusTag":"XFER03_STATUS","faultTag":"XFER03_FAULT","stateTag":"XFER03_STATE","posTag":null,"destTag":null,"inputs":[{"name":"POPUP1_POPUP_UP_SW","bit":0,"description":"Transfer belts raised"},{"name":"POPUP1_POPUP_DOWN_SW","bit":1,"description":"Transfer belts lowered"},{"name":"POPUP1_TRAY_PRESENT","bit":2,"description":"Tray on transfer"},{"name":"POPUP1_LEFT_CLEAR","bit":3,"description":"Left transfer side clear"},{"name":"POPUP1_RIGHT_CLEAR","bit":4,"description":"Right transfer side clear"}],"outputs":[{"name":"POPUP1_RAISE","bit":0,"description":"Pop-up raise"},{"name":"POPUP1_LOWER","bit":1,"description":"Pop-up lower"},{"name":"POPUP1_BELT_LEFT","bit":2,"description":"Cross belts to the left (bidirectional)"},{"name":"POPUP1_BELT_RIGHT","bit":3,"description":"Cross belts to the right (bidirectional)"},{"name":"POPUP1_XFER_ENABLE","bit":4,"description":"Transfer enable"}]}],"palette":{"stopped":"#41505f","running":"#1f7a4d","full":"#a8781f","jam":"#9e2f2a"}};
+(function () {
+  "use strict";
+  var DATA = HMI_DATA;
+  var ZONES = DATA.zoneStates;
+  var JAM_MS = DATA.jamSeconds * 1000;
+  var COLORS = DATA.palette;
+  var STATE_NAMES = ["stopped", "running", "full", "jam"];
+  var SEGMENTS = {};
+  DATA.segmentsInfo.forEach(function (s) { SEGMENTS[s.name] = s; });
+  var SCAN_BY_ZONE = {};
+  DATA.scanZones.forEach(function (s) { if (s.zoneIndex) SCAN_BY_ZONE[s.zoneIndex] = s; });
+  var canvas = document.getElementById("hmi-canvas");
+  var ctx = canvas.getContext("2d");
+  var statusEl = document.getElementById("sim-status");
+  var simBtn = document.getElementById("btn-sim");
+  var trackBody = document.getElementById("track-body");
+  var TRACK = DATA.tracking || null;
+  var sim = { running: false, auto: false, hover: -1, now: 0, nextId: 1,
+              zones: ZONES.map(function () { return { pkg: null, state: 0, blockedMs: 0 }; }),
+              merges: DATA.merges.map(function () { return { mainGrant: false, spurGrant: false, lastMain: false, blockedMs: 0, grant: "" }; }),
+              devices: DATA.transfers.map(function () { return { state: 0, fault: 0, seqStart: 0, seq: 0 }; }),
+              trays: {}, spawnAt: 0, lastTick: 0 };
+  var view = { scale: 1, ox: 0, oy: 0, screen: [], zoneScreen: {}, transferScreen: [] };
+  function fitView() {
+    var b = DATA.bounds;
+    var pad = 30;
+    var sx = (canvas.width - pad * 2) / Math.max(0.001, b.width);
+    var sy = (canvas.height - pad * 2) / Math.max(0.001, b.height);
+    view.scale = Math.min(sx, sy);
+    view.ox = pad + (canvas.width - pad * 2 - b.width * view.scale) / 2 - b.minX * view.scale;
+    view.oy = pad + (canvas.height - pad * 2 - b.height * view.scale) / 2 - b.minY * view.scale;
+  }
+  function worldToScreen(x, y) { return { x: view.ox + x * view.scale, y: view.oy + y * view.scale }; }
+  function stateName(z) { return STATE_NAMES[sim.zones[z].state] || "stopped"; }
+  function spawnPackage(zoneIndex) {
+    var pkg = { id: sim.nextId++, barcode: null, zone: zoneIndex + 1 };
+    sim.zones[zoneIndex].pkg = pkg;
+    sim.zones[zoneIndex].state = 2;
+    return pkg;
+  }
+  function traySlot(pkg) { return TRACK ? (pkg.id % TRACK.maxTrays) : 0; }
+  function upsertTray(pkg) {
+    if (!TRACK || !pkg.barcode) return;
+    sim.trays[traySlot(pkg)] = { slot: traySlot(pkg), barcode: pkg.barcode, zone: pkg.zone, id: pkg.id };
+  }
+  function renderTracking() {
+    if (!trackBody || !TRACK) return;
+    var rows = [];
+    for (var s = 0; s < TRACK.maxTrays; s++) {
+      var t = sim.trays[s];
+      var st = t ? (sim.zones[Math.max(0, Math.min(sim.zones.length - 1, t.zone - 1))].state) : 0;
+      rows.push("<tr><td class=\"mono\">" + s + "</td><td class=\"mono\">" +
+        (t ? t.barcode : "&mdash;") + "</td><td class=\"zone\">" +
+        (t ? t.zone : "") + "</td><td class=\"state-" + STATE_NAMES[st] + "\">" +
+        (t ? STATE_NAMES[st] : "empty") + "</td></tr>");
+    }
+    trackBody.innerHTML = rows.join("");
+  }
+  function updateStatus() {
+    var jams = sim.zones.filter(function (z) { return z.state === 3; }).length;
+    var trays = 0; for (var k in sim.trays) if (sim.trays.hasOwnProperty(k)) trays++;
+    var activeDev = sim.devices.filter(function (d) { return d.state !== 0; }).length;
+    var grants = DATA.merges.map(function (m, mi) { return sim.merges[mi].grant || "-"; }).filter(function (g) { return g !== "-"; }).length;
+    statusEl.innerHTML = (sim.running ? "running" : "stopped") +
+      (sim.auto ? " \u00b7 sim auto" : "") +
+      (jams ? " \u00b7 <b>" + jams + " jam(s)</b>" : "") +
+      (TRACK ? " \u00b7 " + trays + " tracked tray(s)" : "") +
+      (DATA.merges.length ? " \u00b7 " + grants + " merge grant(s)" : "") +
+      (DATA.transfers.length ? " \u00b7 " + activeDev + " device(s) active" : "");
+  }
+  function drawBelt(zone, s, w) {
+    ctx.fillStyle = "#26333d";
+    ctx.fillRect(-s / 2, -w / 2, s, w);
+    var spacing = 14;
+    var off = (sim.now * 0.014) % spacing;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(-s / 2, -w / 2, s, w);
+    ctx.clip();
+    ctx.strokeStyle = "rgba(143,208,255,0.45)";
+    ctx.lineWidth = 2;
+    for (var x = -s / 2 - w + off; x < s / 2 + w; x += spacing) {
+      ctx.beginPath(); ctx.moveTo(x, -w / 2); ctx.lineTo(x + w, w / 2); ctx.stroke();
+    }
+    ctx.restore();
+    ctx.strokeStyle = "rgba(143,208,255,0.7)";
+    ctx.strokeRect(-s / 2, -w / 2, s, w);
+  }
+  var DEVICE_STATE_NAMES = { pusher: ["idle", "extending", "extended", "retracting"],
+    rotary_table: ["idle", "rotating", "at position", "returning"],
+    popup_transfer: ["idle", "raising", "transferring", "lowering", "fault"] };
+  function deviceStateName(d, i) { var names = DEVICE_STATE_NAMES[d.type] || ["idle", "active"]; return names[sim.devices[i].state] || "idle"; }
+  function deviceTimings(d) { if (d.type === "pusher") return [500, 1500, 500]; if (d.type === "rotary_table") return [1100, 1400, 500]; return [600, 1500, 600]; }
+  function renderDevices() {
+    for (var i = 0; i < DATA.transfers.length; i++) {
+      var el = document.getElementById("dev-state-" + i);
+      if (el) el.innerHTML = deviceStateName(DATA.transfers[i], i);
+      var fe = document.getElementById("dev-fault-" + i);
+      if (fe) fe.innerHTML = sim.devices[i].fault ? "1" : "0";
+    }
+    for (var m = 0; m < DATA.merges.length; m++) {
+      var me = document.getElementById("merge-grant-" + DATA.merges[m].name);
+      if (me) me.innerHTML = sim.merges[m].grant || "-";
+    }
+  }
+  function triggerDevice(index) {
+    var d = DATA.transfers[index]; if (!d) return;
+    var dev = sim.devices[index]; if (dev.state !== 0) return;
+    dev.state = 1; dev.seqStart = Date.now();
+    for (var c = 0; c < 4; c++) { var btn = document.getElementById("dev-" + index + "-" + c); if (btn) btn.className = "hmi-btn dev active"; }
+  }
+  function drawMergeJunctions() {
+    for (var i = 0; i < DATA.merges.length; i++) {
+      var m = DATA.merges[i]; var ms = sim.merges[i];
+      var mz = view.zoneScreen[m.mergeZone], mn = view.zoneScreen[m.mainZone], sp = view.zoneScreen[m.spurZone];
+      if (!mz) continue;
+      if (mn) { ctx.strokeStyle = ms.mainGrant ? "#3fd68a" : "rgba(90,120,140,0.7)"; ctx.lineWidth = ms.mainGrant ? 3 : 2; ctx.beginPath(); ctx.moveTo(mn.x, mn.y); ctx.lineTo(mz.x, mz.y); ctx.stroke(); }
+      if (sp) { ctx.strokeStyle = ms.spurGrant ? "#7fd4ff" : "rgba(90,120,140,0.55)"; ctx.lineWidth = ms.spurGrant ? 3 : 2; ctx.setLineDash([6, 5]); ctx.beginPath(); ctx.moveTo(sp.x, sp.y); ctx.lineTo(mz.x, mz.y); ctx.stroke(); ctx.setLineDash([]); }
+      var c = worldToScreen(m.x, m.y);
+      ctx.fillStyle = "#101a22"; ctx.strokeStyle = ms.mainGrant ? "#3fd68a" : ms.spurGrant ? "#7fd4ff" : "#8fa7b8"; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.arc(c.x, c.y, 8, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#cfe6f7"; ctx.font = "10px Consolas, monospace"; ctx.textAlign = "center";
+      ctx.fillText(m.name, c.x, c.y - 12);
+      ctx.fillStyle = "#f0c24b"; ctx.font = "9px Consolas, monospace";
+      ctx.fillText("ALT " + ms.grant, c.x, c.y + 19);
+    }
+  }
+  function drawTransfers() {
+    view.transferScreen = [];
+    for (var i = 0; i < DATA.transfers.length; i++) {
+      var d = DATA.transfers[i]; var dev = sim.devices[i];
+      var p = worldToScreen(d.x, d.y);
+      var active = dev.state !== 0; var fault = dev.fault;
+      var colour = fault ? "#ff6b60" : (active ? "#f0c24b" : "#9fb6c7");
+      view.transferScreen.push({ i: i, x: p.x, y: p.y });
+      ctx.save(); ctx.translate(p.x, p.y);
+      if (d.type === "pusher") {
+        var dir = d.side === "left" ? -1 : 1;
+        ctx.fillStyle = colour; ctx.fillRect(-8, -8, 16, 16);
+        ctx.strokeStyle = "#0b1116"; ctx.lineWidth = 1; ctx.strokeRect(-8, -8, 16, 16);
+        ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(dir * (active ? 26 : 18), 0); ctx.strokeStyle = colour; ctx.lineWidth = 3; ctx.stroke();
+      } else if (d.type === "rotary_table") {
+        ctx.beginPath(); ctx.arc(0, 0, 11, 0, Math.PI * 2); ctx.fillStyle = colour; ctx.fill();
+        ctx.strokeStyle = "#0b1116"; ctx.lineWidth = 1; ctx.stroke();
+        ctx.save(); ctx.rotate((active ? sim.now * 0.006 : 0) % (Math.PI * 2));
+        ctx.beginPath(); ctx.moveTo(-7, -3); ctx.lineTo(7, 3); ctx.moveTo(7, -3); ctx.lineTo(-7, 3); ctx.strokeStyle = "#0b1116"; ctx.lineWidth = 1.5; ctx.stroke();
+        ctx.restore();
+      } else {
+        ctx.fillStyle = colour; ctx.fillRect(-10, -8, 20, 16);
+        if (dev.state === 1 || dev.state === 2) { ctx.strokeStyle = colour; ctx.lineWidth = 2; ctx.strokeRect(-13, -11, 26, 22); }
+        ctx.strokeStyle = "#0b1116"; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(-18, 0); ctx.lineTo(-4, 0); ctx.moveTo(18, 0); ctx.lineTo(4, 0); ctx.stroke();
+      }
+      ctx.restore();
+      ctx.fillStyle = colour; ctx.font = "9px Consolas, monospace"; ctx.textAlign = "center";
+      ctx.fillText(d.name, p.x, p.y - 15);
+    }
+  }
+  function updateMergeSim(dt) {
+    for (var i = 0; i < DATA.merges.length; i++) {
+      var m = DATA.merges[i]; var ms = sim.merges[i];
+      var mainPkg = m.mainZone ? sim.zones[m.mainZone - 1].pkg : null;
+      var spurPkg = m.spurZone ? sim.zones[m.spurZone - 1].pkg : null;
+      var mergeBusy = m.mergeZone ? !!sim.zones[m.mergeZone - 1].pkg : false;
+      var mainGrant = false; var spurGrant = false;
+      if (!mergeBusy && (mainPkg || spurPkg)) {
+        if (mainPkg && spurPkg) {
+          if (m.priority === "main") mainGrant = true;
+          else if (m.priority === "spur") spurGrant = true;
+          else { if (ms.lastMain) spurGrant = true; else mainGrant = true; }
+        } else if (mainPkg) mainGrant = true; else spurGrant = true;
+      }
+      if (mainGrant) ms.lastMain = true;
+      if (spurGrant) ms.lastMain = false;
+      if (mainGrant && mainPkg) { ms.blockedMs += dt; if (ms.blockedMs > JAM_MS) { mainGrant = false; spurGrant = true; ms.blockedMs = 0; ms.lastMain = false; } }
+      else if (spurGrant && spurPkg) { ms.blockedMs += dt; if (ms.blockedMs > JAM_MS) { mainGrant = true; spurGrant = false; ms.blockedMs = 0; ms.lastMain = true; } }
+      else ms.blockedMs = 0;
+      ms.mainGrant = mainGrant; ms.spurGrant = spurGrant;
+      ms.grant = mainGrant ? "MAIN" : (spurGrant ? "SPUR" : "HOLD");
+      var mz = m.mergeZone ? sim.zones[m.mergeZone - 1] : null;
+      if (mainGrant && mainPkg && mz && !mz.pkg) { mz.pkg = mainPkg; mz.state = 2; sim.zones[m.mainZone - 1].pkg = null; mainPkg.zone = m.mergeZone; }
+      if (spurGrant && spurPkg && mz && !mz.pkg) { mz.pkg = spurPkg; mz.state = 2; sim.zones[m.spurZone - 1].pkg = null; spurPkg.zone = m.mergeZone; }
+    }
+  }
+  function updateDeviceSim() {
+    var now = Date.now();
+    for (var i = 0; i < DATA.transfers.length; i++) {
+      var d = DATA.transfers[i]; var dev = sim.devices[i];
+      if (dev.state === 0) continue;
+      var timings = deviceTimings(d);
+      var elapsed = now - dev.seqStart; var total = 0; var state = 0;
+      for (var s = 0; s < timings.length; s++) { total += timings[s]; if (elapsed < total) { state = s + 1; break; } }
+      if (elapsed >= total) {
+        dev.state = 0; dev.seqStart = 0;
+        for (var c = 0; c < 4; c++) { var b = document.getElementById("dev-" + i + "-" + c); if (b) b.className = "hmi-btn dev"; }
+      } else dev.state = state;
+    }
+  }
+  function draw() {
+    fitView();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#0b1116";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = "rgba(80,120,150,0.13)";
+    ctx.lineWidth = 1;
+    for (var gx = 0; gx < canvas.width; gx += 40) { ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, canvas.height); ctx.stroke(); }
+    for (var gy = 0; gy < canvas.height; gy += 40) { ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(canvas.width, gy); ctx.stroke(); }
+    view.screen = [];
+    for (var i = 0; i < ZONES.length; i++) {
+      var zone = ZONES[i];
+      var zs = sim.zones[i];
+      var c = worldToScreen(zone.x, zone.y);
+      var s = Math.max(6, zone.lengthM * view.scale);
+      var w = Math.max(4, zone.widthM * view.scale);
+      view.screen.push({ i: i, cx: c.x, cy: c.y, halfL: s / 2, halfW: w / 2, angle: zone.angleDeg * Math.PI / 180 });
+      view.zoneScreen[zone.index] = c;
+      ctx.save();
+      ctx.translate(c.x, c.y);
+      ctx.rotate(zone.angleDeg * Math.PI / 180);
+      if (zone.conveyorType === "belt") {
+        drawBelt(zone, s, w);
+      } else {
+        ctx.fillStyle = COLORS[stateName(i)];
+        ctx.strokeStyle = (i === sim.hover) ? "#ffffff" : "rgba(210,235,255,0.45)";
+        ctx.lineWidth = i === sim.hover ? 2 : 1;
+        ctx.fillRect(-s / 2, -w / 2, s, w);
+        ctx.strokeRect(-s / 2, -w / 2, s, w);
+        ctx.strokeStyle = "rgba(190,225,250,0.35)";
+        ctx.beginPath(); ctx.moveTo(s / 2, -w / 2); ctx.lineTo(s / 2, w / 2); ctx.stroke();
+        ctx.fillStyle = zs.state === 2 ? "#ffd166" : "#7fd4ff";
+        ctx.beginPath(); ctx.arc(-s / 2 + 3, -w / 2 + 3, 3.2, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = zs.state === 1 ? "#3fd68a" : "#5d7f96";
+        ctx.fillRect(-4, -4, 8, 8);
+      }
+      ctx.restore();
+      ctx.fillStyle = "#cfe6f7";
+      ctx.font = "11px Consolas, monospace";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(zone.label, c.x, c.y - w / 2 - 9);
+    }
+    // spiral height badges (one per spiral segment)
+    var badgeDone = {};
+    for (var b = 0; b < ZONES.length; b++) {
+      var z = ZONES[b];
+      if (!z.spiral || badgeDone[z.segment]) continue;
+      badgeDone[z.segment] = true;
+      var pc = worldToScreen(z.x, z.y);
+      ctx.fillStyle = "#101a22";
+      ctx.strokeStyle = "#f0c24b";
+      ctx.lineWidth = 1;
+      ctx.fillRect(pc.x - 58, pc.y + 16, 116, 17);
+      ctx.strokeRect(pc.x - 58, pc.y + 16, 116, 17);
+      ctx.fillStyle = "#f0c24b";
+      ctx.font = "10px Consolas, monospace";
+      ctx.fillText("SPIRAL " + z.spiral.direction + " " + z.spiral.heightM + " m", pc.x, pc.y + 25);
+    }
+    // scan-zone (barcode scanner) markers
+    for (var k = 0; k < DATA.scanZones.length; k++) {
+      var sz = DATA.scanZones[k];
+      var sp = worldToScreen(sz.x, sz.y);
+      ctx.save();
+      ctx.translate(sp.x, sp.y);
+      ctx.rotate(sz.angleDeg * Math.PI / 180);
+      ctx.fillStyle = "rgba(127,212,255,0.85)";
+      ctx.beginPath();
+      ctx.moveTo(0, -11); ctx.lineTo(9, 0); ctx.lineTo(0, 11); ctx.lineTo(-9, 0);
+      ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = "#0b1116"; ctx.lineWidth = 1; ctx.stroke();
+      ctx.restore();
+      ctx.fillStyle = "#7fd4ff";
+      ctx.font = "10px Consolas, monospace";
+      ctx.textAlign = "left";
+      ctx.fillText(sz.name, sp.x + 12, sp.y - 12);
+    }
+    // merge junctions and transfer device symbols
+    drawMergeJunctions();
+    drawTransfers();
+  }
+  function zoneAt(px, py) {
+    var pts = view.screen;
+    for (var i = pts.length - 1; i >= 0; i--) {
+      var p = pts[i];
+      var dx = px - p.cx, dy = py - p.cy;
+      var ca = Math.cos(-p.angle), sa = Math.sin(-p.angle);
+      var rx = dx * ca - dy * sa, ry = dx * sa + dy * ca;
+      if (Math.abs(rx) <= p.halfL + 2 && Math.abs(ry) <= p.halfW + 2) return p.i;
+    }
+    return -1;
+  }
+  function canvasPoint(ev) {
+    var r = canvas.getBoundingClientRect ? canvas.getBoundingClientRect() : { left: 0, top: 0, width: canvas.width, height: canvas.height };
+    var sx = canvas.width / (r.width || canvas.width);
+    var sy = canvas.height / (r.height || canvas.height);
+    return { x: (ev.clientX - r.left) * sx, y: (ev.clientY - r.top) * sy };
+  }
+  function assignBarcode(pkg, zoneIndex) {
+    var scan = SCAN_BY_ZONE[zoneIndex + 1];
+    if (!scan) return;
+    if (!pkg.barcode) pkg.barcode = (TRACK ? TRACK.tagPrefix.substring(0, 5) : "TRAY") + "-" +
+      ("0000" + pkg.id).slice(-4);
+    upsertTray(pkg);
+  }
+  canvas.addEventListener("mousemove", function (ev) {
+    var p = canvasPoint(ev);
+    var z = zoneAt(p.x, p.y);
+    if (z !== sim.hover) { sim.hover = z; canvas.style.cursor = z >= 0 ? "pointer" : "crosshair"; draw(); }
+  });
+  canvas.addEventListener("mouseleave", function () { sim.hover = -1; draw(); });
+  canvas.addEventListener("click", function (ev) {
+    var p = canvasPoint(ev);
+    var z = zoneAt(p.x, p.y);
+    if (z < 0) {
+      for (var ti = 0; ti < view.transferScreen.length; ti++) {
+        var ts = view.transferScreen[ti];
+        if (Math.abs(p.x - ts.x) <= 16 && Math.abs(p.y - ts.y) <= 16) { triggerDevice(ts.i); draw(); renderDevices(); return; }
+      }
+      return;
+    }
+    var zs = sim.zones[z];
+    if (zs.pkg) {
+      if (zs.pkg.barcode) delete sim.trays[traySlot(zs.pkg)];
+      zs.pkg = null; zs.blockedMs = 0; zs.state = sim.running ? 1 : 0;
+    } else {
+      var pkg = spawnPackage(z);
+      assignBarcode(pkg, z);
+    }
+    draw(); renderTracking(); updateStatus();
+  });
+  function tick() {
+    var now = Date.now();
+    var dt = Math.min(250, now - (sim.lastTick || now));
+    sim.lastTick = now;
+    sim.now = now;
+    if (sim.running) {
+      if (sim.auto && now >= sim.spawnAt) {
+        sim.spawnAt = now + 2600;
+        if (!sim.zones[0].pkg && sim.zones[0].state !== 3) {
+          var fresh = spawnPackage(0);
+          assignBarcode(fresh, 0);
+        }
+      }
+      for (var i = sim.zones.length - 1; i >= 0; i--) {
+        var zs = sim.zones[i];
+        var next = i + 1 < sim.zones.length ? sim.zones[i + 1] : null;
+        if (zs.state === 3) continue;
+        if (zs.pkg) {
+          var downstreamFree = !next || (!next.pkg && next.state !== 3);
+          if (downstreamFree) {
+            if (next) {
+              next.pkg = zs.pkg; zs.pkg = null; next.blockedMs = 0; next.state = 2;
+              next.pkg.zone = i + 2;
+              assignBarcode(next.pkg, i + 1);
+            } else {
+              if (zs.pkg.barcode) delete sim.trays[traySlot(zs.pkg)];
+              zs.pkg = null;
+            }
+            zs.blockedMs = 0; zs.state = 1;
+          } else {
+            zs.blockedMs += dt;
+            zs.state = zs.blockedMs >= JAM_MS ? 3 : 2;
+          }
+        } else if (zs.state !== 2) {
+          zs.state = 1;
+        }
+      }
+      updateMergeSim(dt);
+    }
+    updateDeviceSim();
+    draw(); renderTracking(); renderDevices(); updateStatus();
+  }
+  function setRunning(v) { sim.running = v; if (v) sim.lastTick = Date.now(); draw(); updateStatus(); }
+  document.getElementById("btn-run").addEventListener("click", function () { setRunning(true); });
+  document.getElementById("btn-stop").addEventListener("click", function () { setRunning(false); });
+  document.getElementById("btn-reset").addEventListener("click", function () {
+    sim.running = false; sim.auto = false;
+    simBtn.className = "hmi-btn sim";
+    for (var i = 0; i < sim.zones.length; i++) { sim.zones[i].pkg = null; sim.zones[i].blockedMs = 0; sim.zones[i].state = 0; }
+    for (var mi = 0; mi < sim.merges.length; mi++) { sim.merges[mi].mainGrant = false; sim.merges[mi].spurGrant = false; sim.merges[mi].grant = ""; sim.merges[mi].blockedMs = 0; }
+    for (var di = 0; di < sim.devices.length; di++) { sim.devices[di].state = 0; sim.devices[di].fault = 0; }
+    sim.trays = {};
+    draw(); renderTracking(); renderDevices(); updateStatus();
+  });
+  simBtn.addEventListener("click", function () {
+    sim.auto = !sim.auto; sim.spawnAt = Date.now();
+    simBtn.className = "hmi-btn sim" + (sim.auto ? " active" : "");
+    updateStatus();
+  });
+  for (var ti = 0; ti < DATA.transfers.length; ti++) {
+    for (var ci = 0; ci < DATA.transfers[ti].cmdTags.length; ci++) {
+      (function (idx) {
+        var btn = document.getElementById("dev-" + idx + "-" + ci);
+        if (btn) btn.addEventListener("click", function () { triggerDevice(idx); draw(); renderDevices(); });
+      })(ti);
+    }
+  }
+  if (window.requestAnimationFrame) {
+    (function loop() { tick(); window.requestAnimationFrame(loop); })();
+  } else { setInterval(tick, 100); }
+})();
+</script>
+</body>
+</html>
